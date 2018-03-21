@@ -1,0 +1,140 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+}
+h1{
+  margin: 10px;
+  font-size: 1.4em;
+}
+
+h2 {
+  margin: 10px;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+h3 {
+  margin: 10px;
+  font-size: 1em;
+    font-weight: normal;
+}
+
+h4{
+    margin: 10px;
+  font-size: 1.2em;
+  font-weight: normal;
+  text-align: center;
+}
+p1 {
+  font-size: 0.85em;
+  margin: 10px;
+  text-align: left;
+}
+
+p {
+  font-size: 0.85em;
+  margin: 10px;
+  text-align: left;
+}
+
+#left {
+    text-align: left;
+      font-size: 1em;
+      margin: 10px;
+}
+
+#filters{
+  text-indent: 10px; 
+}
+
+#filter1{
+  font-weight: bold;
+}
+#filter2{
+  font-weight: bold;
+  background-color: #8dd3c7;
+}#filter3{
+  font-weight: bold;
+  background-color: #ffffb3;
+}#filter4{
+  font-weight: bold;
+  background-color: #bebada;
+}#filter5{
+  font-weight: bold;
+  background-color: #fb8072;
+}#filter6{
+  font-weight: bold;
+  background-color: #80b1d3;
+}
+#filter7{
+  font-weight: bold;
+  background-color: #fdb462;
+}
+/**
+* Create a position for the map
+* on the page */
+#myMap {
+  position: absolute;
+  /*top: 40px;*/
+  bottom: 20px;
+  left: 20px;
+  /*right: 40px;*/
+  width: 100%;
+  height: 100%;
+}
+
+/**
+* Set rules for how the map overlays
+* (info box and legend) will be displayed
+* on the page. */
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 20px;
+ 
+  font-family: 'Roboto', sans-serif;
+  overflow: auto;
+  border-radius: 3px;
+  /*text-align: left;*/
+}
+
+#features {
+  top: 0;
+  left:60px;
+  width: 325px;
+  height: 120px;
+  margin: 20px;
+  line-height: 16px;
+  padding: 10px;
+  text-align: right;
+}
+
+#legend {
+  top:0;
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 22px;
+  height: 300px;
+  margin-bottom: 40px;
+  width: 325px;
+  text-align: left;
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+}
+
+
+#filters{
+  margin: 10px;
+}

@@ -1,0 +1,30 @@
+	1. Microbial reaction: Visualize the cell division rates of e. coli in different substrates or hypothesized tumor growth rates. 
+	- https://www.synapse.org/#!Synapse:syn1936427  | http://dmoserv3.bco-dmo.org/jg/serv/BCO-DMO/HiCO2_AdaptCyano/cell_physio_size.html0%7Bdir=dmoserv3.whoi.edu/jg/dir/BCO-DMO/HiCO2_AdaptCyano/,info=dmoserv3.bco-dmo.org/jg/info/BCO-DMO/HiCO2_AdaptCyano/physiology_cell_size%7D
+	
+	2. Screen time: Looks for daily and weekly trends in phone and copmuter usage. 
+	- personal Rescue Time Productivity Loggings app data.
+	
+	3. Wind potentials: Use windspeed and direction to estimate corridors of high wind potential for energy turbines. 
+	- ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.dailyavgs/surface/
+	
+	4. Shipping routes: Map shipping routes using real-time data. 
+	- http://www.marinetraffic.com/en/ais-api-services/detail/ps02/vessel-positions
+	
+	5. American sentiment against Muslims: Using heat map over time. Compare  
+	- http://www.pewforum.org/dataset/2011-muslim-american-survey/
+	
+	6. Movement of guns : Using ATF data to map where guns move to and from. 
+	- https://www.atf.gov/resource-center/data-statistics
+	
+	7. Mapping out the stems of a song: Convert audio waveforms to data sets and plot the instruments and vocals of a song into a chart. 
+	- 
+	
+	8. Visualizing exponentiality: Use a multitude of retinal variables including movement scale and position to demonstrate the powerful effects of exponentiality and explore the real world examples of exponential growth.
+	-
+	
+	9. Pulse of the city: Map noise ordinance call and police responses over time to look for daily and weekly patterns in volume and police response rate. 
+	- https://www.kaggle.com/somesnm/partynyc
+	
+	10. Air quality trends: Use an exagerrated simulation of air quality in New York City to demonstrate changes over time and under different weather conditions.
+	 - https://data.cityofnewyork.us/Environment/Air-Quality/c3uy-2p5r/data
+
