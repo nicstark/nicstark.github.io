@@ -357,6 +357,7 @@ function preload() {
            var key = zipcode;
            objZip[key] = typeSorted;
            yearZip[key] = yearSorted;
+           console.log(yearSorted);
            var subSort = $.each(yearSorted, function(key, value){
             if (key==2010) {
        subsubSort2010=_.groupBy(value, "complaintCode")
@@ -382,7 +383,7 @@ function preload() {
      }
  })
 
-         console.log(subsubSort2010);
+         console.log(subsubSort2011);
          console.log(subsubSort2014);
          console.log(subsubSort2017);
 
