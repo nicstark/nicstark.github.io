@@ -997,17 +997,17 @@ fill('#fdb462')
      }
 
      fill('#fdb462')
-    rect(20+windowWidth/divisions, windowHeight-20, windowWidth/divisions,(-1*(otherValue2011/scale)))
+    rect(20+(windowWidth/divisions), windowHeight-20, windowWidth/divisions,(-1*(otherValue2011/scale)))
  fill('#80b1d3')
- rect(20+windowWidth/divisions, ((windowHeight-20)-(otherValue2011/scale)), windowWidth/divisions, (-1*(barkValue2011/scale)))
+ rect(20+(windowWidth/divisions), ((windowHeight-20)-(otherValue2011/scale)), windowWidth/divisions, (-1*(barkValue2011/scale)))
   fill('#fb8072')
- rect(20+windowWidth/divisions, ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)), windowWidth/divisions, (-1*(constructionValue2011/scale)))
+ rect(20+(windowWidth/divisions), ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)), windowWidth/divisions, (-1*(constructionValue2011/scale)))
    fill('#bebada')
- rect(20+windowWidth/divisions, ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)), windowWidth/divisions, (-1*(talkValue2011/scale)))
+ rect(20+(windowWidth/divisions), ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)), windowWidth/divisions, (-1*(talkValue2011/scale)))
     fill('#ffffb3')
- rect(20+windowWidth/divisions, ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)-(talkValue2011/scale)), windowWidth/divisions, (-1*(bangValue2011/scale)))
+ rect(20+(windowWidth/divisions), ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)-(talkValue2011/scale)), windowWidth/divisions, (-1*(bangValue2011/scale)))
      fill('#8dd3c7')
- rect(20+windowWidth/divisions, ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)-(talkValue2011/scale)-(bangValue2011/scale)), windowWidth/divisions, (-1*(partyValue2011/scale)));
+ rect(20+(windowWidth/divisions), ((windowHeight-20)-(otherValue2011/scale)-(barkValue2011/scale)-(constructionValue2011/scale)-(talkValue2011/scale)-(bangValue2011/scale)), windowWidth/divisions, (-1*(partyValue2011/scale)));
 fill('#fdb462')
     rect(20+(windowWidth/divisions)*2, windowHeight-20, windowWidth/divisions,(-1*(otherValue2012/scale)))
  fill('#80b1d3')
