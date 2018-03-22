@@ -84,7 +84,7 @@ var barkValue2018 = 0;
 var bangValue2018 = 0;
 var otherValue2018 = 0;
 var talkValue2018 = 0;
-var toggleWave = 0;
+var toggleWave = 1;
 var loading = 0;
 var place = 0;
 var lastFeatureId;
