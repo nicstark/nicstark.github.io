@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="liquidFillGauge.js" language="JavaScript"></script>
+    <style>
+        .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+
+        .axis line,
+        .axis path {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+
+        .arrow {
+          stroke: #000;
+          stroke-width: 1.5px;
+        }
+
+        .outer,
+        .inner {
+          shape-rendering: crispEdges;
+        }
+
+        .outer {
+          fill: none;
+          stroke: #000;
+        }
+
+        .inner {
+          fill: #ccc;
+          stroke: #000;
+          stroke-dasharray: 3, 4;
+        }
+}
+    </style>
+</head>
+<body>
+
+<script language="JavaScript">
+
+
+    //AXIS STUFF
+
+    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+
+    var width = window.innerWidth -100 - margin.left - margin.right,
+        height = window.innerHeight - 100 - margin.top - margin.bottom;
+    // var width = window.innerWidth;
+    // var height = window.innerHeight- 200;
+    var x = d3.scale.identity()
+       .domain([0, 100]);
+
+    var y = d3.scale.identity()
+        .domain([0, 100]);
+
+    var x = d3.scale.linear()
+        .range([0, width]);
+
+    var y = d3.scale.linear()
+        .range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("top");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+    var defs = svg.append("defs");
+
+
+
+svg.append("rect")
+    .attr("class", "outer")
+    .attr("width", innerWidth)
+    .attr("height", innerHeight);
+
+var g = svg.append("g")
+
+// g.append("rect")
+//     .attr("class", "inner")
+//     .attr("width", width)
+//     .attr("height", height);
+
+g.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+g.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(" + width + ", 0)")
+    .call(yAxis);
+
+svg.selectAll("line.horizontalGrid").data(y.ticks(10)).enter()
+    .append("line")
+        .attr(
+        {
+            "class":"horizontalGrid",
+            "x1" : margin.left,
+            "x2" : width,
+            "y1" : function(d){ return y(d);},
+            "y2" : function(d){ return y(d);},
+            "fill" : "none",
+            "shape-rendering" : "crispEdges",
+            "stroke" : "lightgrey",
+            "stroke-width" : "1px"
+        });
+
+
+        // DATA
+
+    var percentA = 75;
+    var percentB = 100- percentA;
+    var moe = 5
+    var gauge1 = loadLiquidFillGauge("fillgauge1", percentA, moe, 1);
+    var gauge2 = loadLiquidFillGauge("fillgauge2", percentB, moe, 3);
+    var config1 = liquidFillGaugeDefaultSettings();
+
+ 
+  
+        // VISUALS
+
+
+    function liquidFillGaugeDefaultSettings(){
+    return {
+        minValue: 0, // The gauge minimum value.
+        maxValue: 100, // The gauge maximum value.
+        circleThickness: 0.0, // The outer circle thickness as a percentage of it's radius.
+        circleFillGap: 0.0, // The size of the gap between the outer circle and wave circle as a percentage of the outer circles radius.
+        circleColor: "#000", // The color of the outer circle.
+        waveHeight: 0.1, // The wave height as a percentage of the radius of the wave circle.
+        waveCount: 1, // The number of full waves per width of the wave circle.
+        waveRiseTime: 00, // The amount of time in milliseconds for the wave to rise from 0 to it's final height.
+        waveAnimateTime: 5000, // The amount of time in milliseconds for a full wave to enter the wave circle.
+        waveRise: false, // Control if the wave should rise from 0 to it's full height, or start at it's full height.
+        waveHeightScaling: false, // Controls wave size scaling at low and high fill percentages. When true, wave height reaches it's maximum at 50% fill, and minimum at 0% and 100% fill. This helps to prevent the wave from making the wave circle from appear totally full or empty when near it's minimum or maximum fill.
+        waveAnimate: true, // Controls if the wave scrolls or is static.
+        waveColor: "#000", // The color of the fill wave.
+        waveOffset: 0, // The amount to initially offset the wave. 0 = no offset. 1 = offset of one full wave.
+    };
+}
+
+function loadLiquidFillGauge(elementId, value, margin, pos, config) {
+    if(config == null) config = liquidFillGaugeDefaultSettings();
+
+    var container = d3.select("svg");
+    var gauge = container.append("svg")
+        .attr("id", elementId)
+       
+    // var gauge = d3.select("#" + elementId);
+    var radius = width/5;
+    var yPos = height - height*(value/100);
+    var xPos = radius*pos;
+    var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
+
+    var wavePositionScale = d3.scale.linear()
+        .range([0, 100])
+        .domain([0,height]);
+
+    var waveHeightScale;
+    if(config.waveHeightScaling){
+        waveHeightScale = d3.scale.linear()
+            .range([0,config.waveHeight,0])
+            .domain([0, 50, 100]);
+    } else {
+        waveHeightScale = d3.scale.linear()
+            .range([margin/106,margin/106])
+            .domain([0,100]);
+    }
+
+    var circleThickness = config.circleThickness * radius;
+    var circleFillGap = config.circleFillGap * radius;
+    var fillCircleMargin = circleThickness + circleFillGap;
+    var fillCircleRadius = height/2;
+    var waveHeight = fillCircleRadius*waveHeightScale(fillPercent*100);
+    var waveLength = fillCircleRadius*2/config.waveCount;
+    var waveClipCount = 1+config.waveCount;
+    var waveClipWidth = waveLength*waveClipCount;
+
+
+    // Data for building the clip wave area.
+    var data = [];
+    for(var i = 0; i <= 40*waveClipCount; i++){
+        data.push({x: i/(40*waveClipCount), y: (i/(40))});
+    }
+
+
+    // Scales for controlling the size of the clipping path.
+    var waveScaleX = d3.scale.linear()
+        .range([0,waveClipWidth])
+        .domain([0,1]);
+
+    var waveScaleY = d3.scale.linear()
+        .range([0,waveHeight])
+        .domain([0,1]);
+
+    // Scales for controlling the position of the clipping path.
+    var waveRiseScale = d3.scale.linear()
+        // The clipping area size is the height of the fill circle + the wave height, so we position the clip wave
+        // such that the it will overlap the fill circle at all when at 0%, and will totally cover the fill
+        // circle at 100%.
+        // .range([(fillCircleMargin+fillCircleRadius*2+waveHeight),(fillCircleMargin-waveHeight)])
+        .range([(fillCircleMargin+fillCircleRadius*2),(fillCircleMargin)])
+        .domain([0,1]);
+
+    var waveAnimateScale = d3.scale.linear()
+        .range([0, waveClipWidth-fillCircleRadius*2]) // Push the clip area one full wave then snap back.
+        .domain([0,1]);
+
+
+    var gaugeGroup = gauge.append("g")
+        .attr('transform','translate('+xPos+',0)');
+
+    var line = gauge.select("g")
+        .append("path")
+        .attr("d", "M 0 " + yPos  + " L " + radius + " " + yPos )
+        .style("stroke", "grey");
+
+    // The clipping wave area.
+    var clipArea = d3.svg.area()
+        .x(function(d) { return waveScaleX(d.x); } )
+        .y0(function(d) { return 3 +waveScaleY(Math.sin(Math.PI*2*config.waveOffset*-1 + Math.PI*2*(1-config.waveCount) + d.y*2*Math.PI));} )
+        // .y1(function(d) { return 1 + waveScaleY(Math.sin(Math.PI*2*config.waveOffset*-1 + Math.PI*2*(1-config.waveCount) + d.y*2*Math.PI));} )
+        .y1(function(d) { return (fillCircleRadius*2 + waveHeight); } );
+
+
+    var waveGroup = gaugeGroup.append("defs")
+        .append("clipPath")
+        .attr("id", "clipWave" + elementId);
+
+    var wave = waveGroup.append("path")
+        .datum(data)
+        .attr("d", clipArea)
+        .attr("T", 0);
+
+    // The inner circle with the clipping wave attached.
+    var fillCircleGroup = gaugeGroup.append("g")
+        .attr("clip-path", "url(#clipWave" + elementId + ")");
+
+
+    fillCircleGroup.append("rect")
+        .attr("width", radius)
+        .attr("height", height)
+        .style("fill", "#000")
+        .style("fill-opacity", 1);
+
+    // Make the wave rise. wave and waveGroup are separate so that horizontal and vertical movement can be controlled independently.
+    var waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
+    if(config.waveRise){
+        waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(0)+')')
+            .transition()
+            .duration(config.waveRiseTime)
+            .attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')')
+            .each("start", function(){ wave.attr('transform','translate(1,0)'); }); // This transform is necessary to get the clip wave positioned correctly when waveRise=true and waveAnimate=false. The wave will not position correctly without this, but it's not clear why this is actually necessary.
+    } else {
+        waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')');
+    }
+
+    if(config.waveAnimate) animateWave();
+
+    function animateWave() {
+        wave.attr('transform','translate('+waveAnimateScale(wave.attr('T'))+',0)');
+        wave.transition()
+            .duration(config.waveAnimateTime * (1-wave.attr('T')))
+            .ease('linear')
+            .attr('transform','translate('+waveAnimateScale(1)+',0)')
+            .attr('T', 1)
+
+            .each('end', function(){
+                wave.attr('T', 0);
+                animateWave(config.waveAnimateTime);
+            });
+    }
+
+
+}
+</script>
+</body>
+</html>

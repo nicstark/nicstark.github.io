@@ -1,0 +1,45 @@
+<!-- https://stackoverflow.com/questions/42583857/api-to-convert-lat-lon-to-nyc-neighborhood -->
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8" />
+ <title>Noise Complaints NYC</title>
+ 
+ <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+ <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js'></script>
+ <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.css' rel='stylesheet' />
+ <script src="libraries/jquery.js"></script>
+ <script src="libraries/jquery.csv.js"></script>
+ <link rel="stylesheet" href="assets/style.css" type="text/css" charset="utf-8">
+ <script language="javascript" type="text/javascript" src="libraries/lodash.js"></script>
+ <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+ <script src="libraries/p5.sound.js"></script>
+ <script type="text/javascript" src='sketch.js'></script>
+
+
+
+</head>
+
+<body>
+
+<div id='myMap'></div>
+<div class='map-overlay' id='features'><h1>311 Noise Complaint Volume</h1><h4>2010-Present</h4><h3>Higher Amplitude = More Complaints</h3>
+<div id='pd'><p1>Click on a zipcode</p1></div>
+</div>
+
+<div class='map-overlay' id='legend'>
+	<h1>Filters - Press NumKey:</h1>
+	<h3>Press W to toggle waveform</h3>
+<div id='filters'>
+	<p><div id='filter1'>1: Unfiltered: All Noise Complaints</div></p>
+	<p><div id='filter2'>2: C4 Loud Music/Party</div></p>
+	<p><div id='filter3'>3: E4 Banging/Pounding</div></p>
+	<p><div id='filter4'>4: G4 Loud Talking</div></p>
+	<p><div id='filter5'>5: B4 Construction</div></p>
+	<p><div id='filter6'>6: C5 Dog Barking</div></p>
+	<p><div id='filter7'>7: E5 Other</div></p>
+</div>
+
+</body>
+</html>
