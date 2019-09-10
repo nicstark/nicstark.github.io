@@ -174,7 +174,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "10%")
     .attr('x', function(){return width*.5 - width/30 - parseFloat(d3.select(this).style('width'))})
     .attr('y', function(){return height*-.47})
-    .attr("xlink:href", "images/LOGO.svg");
+    .attr("xlink:href", "LOGO.svg");
 
   d3.selectAll(".page").append("text")
     .attr('x', function(){return width*-.5 + width/30})
@@ -1270,7 +1270,6 @@ d3.json('flare.json', (error, data) => {
       // return useActivityColor(d.name)
       if (d.name.split(" ")[0] == "ALL"){console.log("ALL0"); return useActivityColor("ALL0")}
       else{
-              console.log(d.name.split(" ")[0] + 1);
       return useActivityColor(d.name.split(" ")[0] + 1);
     }
     })
