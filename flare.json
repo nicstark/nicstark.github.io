@@ -1,0 +1,1028 @@
+{"name": "CU Boulder",
+  "date": "08/01/2018 - 04/01/2019",
+  "children":[
+    {"name": "USER BREAKDOWN", "children":[
+          {"name": "Users",
+            "children": [
+              {"name": "Students", "value": 3060, "children": [
+                {"name": "Active Students", "value":360}]
+              },
+              {"name":"Faculty", "value": 101, "children":[
+                {"name": "Active Faculty", "value": 10}]
+              }
+            ]
+          }
+        ]},
+    {"name": "TOTAL USERS", "children": [
+      {"name":"2018-08-01", "children":[
+        {"name": "Students", "value": 310, "children": [
+          {"name": "Active Students", "value":30}]},
+        {"name":"Faculty", "value": 10, "children":[
+          {"name": "Active Faculty", "value": 1}]
+    } ]},
+      {"name":"2018-09-01", "children":[
+        {"name": "Students", "value": 900, "children": [
+          {"name": "Active Students", "value":90}]},
+        {"name":"Faculty", "value": 30, "children":[
+          {"name": "Active Faculty", "value": 6}]
+    } ]},
+      {"name":"2018-10-01", "children":[
+        {"name": "Students", "value": 1200, "children": [
+          {"name": "Active Students", "value":120}]},
+        {"name":"Faculty", "value": 36, "children":[
+          {"name": "Active Faculty", "value": 6}]
+    } ]},
+      {"name":"2018-11-01", "children":[
+        {"name": "Students", "value": 1600, "children": [
+          {"name": "Active Students", "value":120}]},
+        {"name":"Faculty", "value": 44, "children":[
+          {"name": "Active Faculty", "value": 4}]
+    } ]},
+      {"name":"2018-12-01", "children":[
+        {"name": "Students", "value": 2000, "children": [
+          {"name": "Active Students", "value":200}]},
+        {"name":"Faculty", "value": 44, "children":[
+          {"name": "Active Faculty", "value": 2}]
+    } ]},
+      {"name":"2019-01-01", "children":[
+        {"name": "Students", "value": 2300, "children": [
+          {"name": "Active Students", "value":200}]},
+        {"name":"Faculty", "value": 70, "children":[
+          {"name": "Active Faculty", "value": 10}]
+    } ]},
+      {"name":"2019-02-01", "children":[
+        {"name": "Students", "value": 2800, "children": [
+          {"name": "Active Students", "value":220}]},
+        {"name":"Faculty", "value": 75, "children":[
+          {"name": "Active Faculty", "value": 10}]
+    } ]},
+      {"name":"2019-03-01", "children":[
+        {"name": "Students", "value": 2850, "children": [
+          {"name": "Active Students", "value":360}]},
+        {"name":"Faculty", "value": 77, "children":[
+          {"name": "Active Faculty", "value": 7}]
+    } ]},
+      {"name":"2019-04-01", "children":[
+        {"name": "Students", "value": 3000, "children": [
+          {"name": "Active Students", "value":300}]},
+        {"name":"Faculty", "value": 90, "children":[
+          {"name": "Active Faculty", "value": 10}]
+    } ]},
+      {"name":"2019-05-01", "children":[
+        {"name": "Students", "value": 3060, "children": [
+          {"name": "Active Students", "value":360}]},
+        {"name":"Faculty", "value": 101, "children":[
+          {"name": "Active Faculty", "value": 10}]
+    } ]}
+    ]},
+    {"name": "EARN ACTIVITY", "children": [
+      {
+       "name": "LEARNING",
+       "actions": 10244,
+       "earned" : 102440
+
+      },
+      {
+       "name": "PIPS",
+       "actions": 18210,
+       "earned" : 102440
+      },
+      {
+      "name": "FOOD CHOICES",
+      "actions": 16805,
+      "earned" : 102440
+      },
+      {
+      "name": "ENERGY",
+      "actions": 1865,
+      "earned" : 102440
+      },
+      {
+       "name": "COMMUNITY",
+       "actions": 323,
+       "earned" : 102440
+      },
+      {
+      "name": "WASTE REDUCTION",
+      "actions": 49088,
+      "earned" : 102440
+      },
+      {
+       "name": "HEALTH AND WELLNESS",
+       "actions": 37,
+       "earned" : 102440
+      },
+      {
+       "name": "TRANSPORT",
+       "children": [
+         {
+          "name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981,
+          "earned" : 102440
+         },
+         {
+          "name": "TRANSPORT - BIKING",
+          "actions": 1599,
+          "earned" : 102440
+         },
+         {
+          "name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045,
+          "earned" : 102440
+         },
+         {
+          "name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956,
+          "earned" : 102440
+         },
+         {
+          "name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {
+          "name": "TRANSPORT - CAR SHARING",
+          "actions": 984,
+          "earned" : 102440
+         }
+         ]
+      },
+      {
+       "name": "SHOP",
+       "children": [
+         {
+          "name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - FOOD & DRINK",
+          "actions": 1384,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - HOME & OFFICE",
+          "actions": 1121,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - PERSONAL CARE",
+          "actions": 1345,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - ENERGY",
+          "actions": 987,
+          "earned" : 102440
+         },
+         {
+          "name": "SHOP - GADGETS",
+          "actions": 599,
+          "earned" : 102440
+         }
+       ]
+      },
+      {
+       "name": "SUSTAINABILITY",
+       "actions": 17,
+       "earned" : 102440
+      },
+      {
+       "name": "SHARING",
+       "actions": 46,
+       "earned" : 102440
+      }
+     ]},
+    {"name": "ACTIONS TAKEN OVER TIME", "children": [
+      {"name":"2018-08-01",
+        "children":[
+        {"name": "LEARNING",
+         "actions": 0
+        },
+        {"name": "PIPS",
+         "actions": 0
+        },
+        {"name": "FOOD CHOICES",
+        "actions": 0
+        },
+        {"name": "ENERGY",
+        "actions": 0
+        },
+        {"name": "COMMUNITY",
+         "actions": 0
+        },
+        {"name": "WASTE REDUCTION",
+        "actions": 0
+        },
+        {"name": "HEALTH AND WELLNESS",
+         "actions": 0
+        },
+        {"name": "TRANSPORT",
+         "children": [
+           {"name": "TRANSPORT - PUBLIC TRANSIT",
+            "actions": 0
+           },
+           {"name": "TRANSPORT - BIKING",
+            "actions": 0
+           },
+           {"name": "TRANSPORT - RIDE SHARING",
+            "actions": 0
+           },
+           {"name": "TRANSPORT - BIKE SHARING",
+            "actions": 0
+           },
+           {"name": "TRANSPORT - EV",
+            "actions": 0
+           },
+           {"name": "TRANSPORT - CAR SHARING",
+            "actions": 0
+           }
+           ]
+        },
+        {"name": "SHOP",
+         "children": [
+           {"name": "SHOP - CLOTHING & GEAR",
+            "actions": 0
+           },
+           {"name": "SHOP - FOOD & DRINK",
+            "actions": 0
+           },
+           {"name": "SHOP - HOME & OFFICE",
+            "actions": 0
+           },
+           {"name": "SHOP - PERSONAL CARE",
+            "actions": 0
+           },
+           {"name": "SHOP - BOOKS, MUSIC, ETC",
+            "actions": 0
+           },
+           {"name": "SHOP - ENERGY",
+            "actions": 0
+           },
+           {"name": "SHOP - GADGETS",
+            "actions": 0
+           }
+         ]
+        },
+        {"name": "SUSTAINABILITY",
+         "actions": 0
+        },
+        {"name": "SHARING",
+         "actions": 0
+        }
+        ]},
+      {"name":"2018-09-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2018-10-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2018-11-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2018-12-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2019-01-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2019-02-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2019-03-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2019-04-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]},
+      {"name":"2019-05-01",
+        "children":[
+      {"name": "LEARNING",
+       "actions": 10244
+      },
+      {"name": "PIPS",
+       "actions": 18210
+      },
+      {"name": "FOOD CHOICES",
+      "actions": 16805
+      },
+      {"name": "ENERGY",
+      "actions": 1865
+      },
+      {"name": "COMMUNITY",
+       "actions": 323
+      },
+      {"name": "WASTE REDUCTION",
+      "actions": 49088
+      },
+      {"name": "HEALTH AND WELLNESS",
+       "actions": 37
+      },
+      {"name": "TRANSPORT",
+       "children": [
+         {"name": "TRANSPORT - PUBLIC TRANSIT",
+          "actions": 3981
+         },
+         {"name": "TRANSPORT - BIKING",
+          "actions": 1599
+         },
+         {"name": "TRANSPORT - RIDE SHARING",
+          "actions": 2045
+         },
+         {"name": "TRANSPORT - BIKE SHARING",
+          "actions": 1956
+         },
+         {"name": "TRANSPORT - EV",
+          "actions": 1284,
+          "earned" : 102440
+         },
+         {"name": "TRANSPORT - CAR SHARING",
+          "actions": 984
+         }
+         ]
+      },
+      {"name": "SHOP",
+       "children": [
+         {"name": "SHOP - CLOTHING & GEAR",
+          "actions": 3214
+         },
+         {"name": "SHOP - FOOD & DRINK",
+          "actions": 1384
+         },
+         {"name": "SHOP - HOME & OFFICE",
+          "actions": 1121
+         },
+         {"name": "SHOP - PERSONAL CARE",
+          "actions": 1345
+         },
+         {"name": "SHOP - BOOKS, MUSIC, ETC",
+          "actions": 1235
+         },
+         {"name": "SHOP - ENERGY",
+          "actions": 987
+         },
+         {"name": "SHOP - GADGETS",
+          "actions": 599
+         }
+       ]
+      },
+      {"name": "SUSTAINABILITY",
+       "actions": 17
+      },
+      {"name": "SHARING",
+       "actions": 46
+      }
+      ]}
+  ]},
+    {"name": "ENVIRONMENT", "children": [
+      {"name": "Carbon Saved", "value": 84655},
+      {"name": "Tree Equivalents", "value": 1881},
+      {"name": "Landfill Diversion", "value": 511}
+      ]},
+    {"name": "INVESTMENT IN EDUCATION", "children": [
+      {"name": "Commitments to PIPs for School", "value": 709},
+      {"name": "Donations to PIPs Education Fund", "value": 20068}
+      ]},
+    {"name": "LOCAL ECONOMY", "children": [
+      {"name": "Value of PIPs Redeemed Locally", "value": 11506},
+      {"name": "Spending on Food Locally", "value": 9047}
+      ]},
+    {"name": "COMMUNITY & LEARNING", "children": [
+      {"name": "Participating in Volunteer Activity", "value": 27},
+      {"name": "Participating in Campus Events", "value": 193},
+      {"name": "Participating in Applied Learning Events", "value": 93}
+      ]},
+    {"name": "HEALTH & WELLNESS", "children": [
+      {"name": "Participating in Health/Wellness Class or Program", "value": 40}
+      ]},
+    {"name": "ENVIRONMENT BREAKDOWN", "children": [
+      {"name": "BIKING", "actions": 27520, "saved": 35634},
+      {"name": "RIDING THE BUS", "actions": 17956, "saved": 21297},
+      {"name": "CARPOOLING", "actions": 2752, "saved": 14848},
+      {"name": "WATER BOTTLE REFILLING", "actions": 42205, "saved": 8617},
+      {"name": "RECYCLING", "actions": 30259, "saved": 10809}
+      ]},
+    {"name": "ALL USE ACTIVITY", "children": [
+      {"name": "GIFT YOUR PIPS", "actions": 17956, "pips": 210297},
+      {"name": "DONATE", "actions": 17956, "pips": 212097},
+      {"name": "PIPS FOR SCHOOL", "actions": 17956, "pips": 212907},
+      {"name": "SHOP", "children": [
+      {"name": "SHOP - HEALTH & WELLNESS", "actions": 2752, "pips": 148048},
+      {"name": "SHOP - FOOD & DRINK", "actions": 42205, "pips": 86107},
+      {"name": "SHOP - CLOTHING & GEAR", "actions": 30259, "pips": 108009},
+      {"name": "SHOP - HOME & OFFICE", "actions": 30259, "pips": 108090},
+      {"name": "SHOP - GADGETS & GAMES", "actions": 30259, "pips": 108090},
+      {"name": "SHOP - SMART ENERGY", "actions": 30259, "pips": 108009},
+      {"name": "SHOP - BOOKS, MUSIC, ETC", "actions": 30259, "pips": 108090},
+      {"name": "SHOP - SERVICES", "actions": 30259, "pips": 10809},
+      {"name": "SHOP - PERSONAL CARE", "actions": 30259, "pips": 108009},
+      {"name": "SHOP - MOMS & KIDS", "actions": 30259, "pips": 108009},
+      {"name": "SHOP - TRAVEL & ADVENTURE", "actions": 30259, "pips": 100809}
+      ]}
+      ]}
+  ]
+}
