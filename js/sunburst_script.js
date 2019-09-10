@@ -174,7 +174,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "10%")
     .attr('x', function(){return width*.5 - width/30 - parseFloat(d3.select(this).style('width'))})
     .attr('y', function(){return height*-.47})
-    .attr("xlink:href", "LOGO.svg");
+    .attr("xlink:href", "/images/LOGO.svg");
 
   d3.selectAll(".page").append("text")
     .attr('x', function(){return width*-.5 + width/30})
