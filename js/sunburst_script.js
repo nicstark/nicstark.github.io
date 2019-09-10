@@ -174,7 +174,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "10%")
     .attr('x', function(){return width*.5 - width/30 - parseFloat(d3.select(this).style('width'))})
     .attr('y', function(){return height*-.47})
-    .attr("xlink:href", "PIPs_Logo.svg");
+    .attr("xlink:href", "LOGO.svg");
 
   d3.selectAll(".page").append("text")
     .attr('x', function(){return width*-.5 + width/30})
@@ -320,7 +320,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "33%")
     .attr('x', function(){return parseFloat(d3.select(this).style('width'))/-2})
     .attr('y', function(){return parseFloat(d3.select(this).style('height'))/-1.5})
-    .attr("xlink:href", "PIPs_Logo.svg");
+    .attr("xlink:href", "LOGO.svg");
 
   svg1.append('text')
     .attr('y', "10%")
