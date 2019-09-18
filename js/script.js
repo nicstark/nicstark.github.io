@@ -162,7 +162,7 @@ const TotalBar = d3.select('.svg4')
 
 //-------------Read in JSON
 
-d3.json('flare.json', (error, data) => {
+d3.json('data.json', (error, data) => {
   if (error) throw error;
 
   const partner = data.name;
@@ -174,7 +174,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "10%")
     .attr('x', function(){return width*.5 - width/30 - parseFloat(d3.select(this).style('width'))})
     .attr('y', function(){return height*-.47})
-    .attr("xlink:href", "images/LOGO.svg");
+    .attr("xlink:href", "LOGO.svg");
 
   d3.selectAll(".page").append("text")
     .attr('x', function(){return width*-.5 + width/30})
@@ -293,12 +293,12 @@ d3.json('flare.json', (error, data) => {
   }
 
   function userBreakdownMouseOver(d, i) {
-    d3.selectAll("." + d.data.name.replace(/\s+/g, '')).transition()
+    d3.selectAll("." + stripPunctSpace(d.data.name)).transition()
       .style("opacity", .5);
   }
 
   function userBreakdownMouseOut(d, i) {
-    d3.selectAll("." + d.data.name.replace(/\s+/g, '')).transition()
+    d3.selectAll("." + stripPunctSpace(d.data.name)).transition()
       .style("opacity", 1);
   }
 
@@ -320,7 +320,7 @@ d3.json('flare.json', (error, data) => {
     .attr('height', "33%")
     .attr('x', function(){return parseFloat(d3.select(this).style('width'))/-2})
     .attr('y', function(){return parseFloat(d3.select(this).style('height'))/-1.5})
-    .attr("xlink:href", "images/LOGO.svg");
+    .attr("xlink:href", "LOGO.svg");
 
   svg1.append('text')
     .attr('y', "10%")
@@ -355,12 +355,20 @@ d3.json('flare.json', (error, data) => {
 
   treemap(userBreakdownData);
 
-  var userBreakDownColor = d3.scaleOrdinal().domain(userBreakdownData.children)
-    .range(["#000","#e8806c", "#d35634", "#a43034"]);
+  var sortedUserGroups = userBreakdownData.descendants().sort((a, b) => (a.value < b.value) ? 1 : (a.value === b.value) ? ((a.size < b.size) ? 1 : -1) : -1 );
+
+
+  var userBreakDownColor = d3.scaleOrdinal().domain(sortedUserGroups)
+    .range(["#000",
+    "#a43034",
+    "#d35634",
+    "#e8806c",
+    "#FFF"]);
 
   var cell = UserBreakdown
     .selectAll(".node")
-    .data(userBreakdownData.descendants())
+    .data(sortedUserGroups)
+    // .data(userBreakdownData.descendants())
     .enter().append("g")
       .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
       .attr("class", "node")
@@ -375,7 +383,7 @@ d3.json('flare.json', (error, data) => {
     .attr("height", function(d) { return d.y1 - d.y0; })
     .style("fill", function(d,i) {
       if (i == 0){return '#000'}
-      else if (d.data.name.includes('Active')) {return '#fff'}
+      // else if (d.data.name.includes('Active')) {return '#fff'}
       else {return userBreakDownColor(i); }});
 
   cell.append("clipPath")
@@ -398,8 +406,10 @@ d3.json('flare.json', (error, data) => {
     .attr("font-size", "3em")
     .style('fill', '#d35634');
 
+
   const userlegend = UserBreakdown.selectAll('g.userlegend')
-    .data(userBreakdownData.descendants());
+    .data(sortedUserGroups);
+
 
   userlegend.exit().remove();
 
@@ -407,7 +417,7 @@ d3.json('flare.json', (error, data) => {
       .append('g').attr('class', 'userlegend');
 
   var userLegendHeight = treemapSize
-  var userLegendBarHeight = userLegendHeight/userBreakdownData.descendants().length;
+  var userLegendBarHeight = userLegendHeight/sortedUserGroups.length;
 
   newUserLegend.append('rect')
     .attr("x", width/10)
@@ -418,11 +428,11 @@ d3.json('flare.json', (error, data) => {
     .attr("height", userLegendBarHeight)
     .style("fill", function(d,i) {
       if (d.data.name == 'Users'){return '#000'}
-      else if (d.data.name.includes('Active')) {return '#fff'}
+      // else if (d.data.name.includes('Active')) {return '#fff'}
       else {return userBreakDownColor(i); }})
-    .attr('class', function (d) {return d.data.name.replace(/\s+/g, '')})
-    .style('stroke', function(d){if (d.data.name.includes('Active')){return 'black'} else {'none'}})
-    .style('stroke-width', function(d){if (d.data.name.includes('Active')){return '1px'} else {'0px'}})
+    .attr('class', function (d) {return stripPunctSpace(d.data.name)})
+    .style('stroke', function(d, i){if (userBreakDownColor(i) == "#FFF"){return 'black'} else {'none'}})
+    .style('stroke-width', function(d,i ){if (userBreakDownColor(i) == "#FFF"){return '1px'} else {'0px'}})
     .on("mouseover", userBreakdownMouseOver)
     .on("mouseout", userBreakdownMouseOut);
 
@@ -438,13 +448,16 @@ d3.json('flare.json', (error, data) => {
     .attr("font-weight", "900")
     .attr("font-size", "4vmin")
     .style('fill', 'white')
-    .style('stroke', function(d){if (d.data.name.includes('Active')){return 'black'} else {'none'}})
-    .style('stroke-width', function(d){if (d.data.name.includes('Active')){return '1px'} else {'0px'}})
-    .attr('class', function (d) {return d.data.name.replace(/\s+/g, '')})
+    .style('stroke', function(d,i){if (userBreakDownColor(i) == "#FFF"){return 'black'} else {'none'}})
+    .style('stroke-width', function(d,i){if (userBreakDownColor(i) == "#FFF"){return '1px'} else {'0px'}})
+    // .style('stroke', function(d){if (d.data.name.includes('Active')){return 'black'} else {'none'}})
+    // .style('stroke-width', function(d){if (d.data.name.includes('Active')){return '1px'} else {'0px'}})
+    .attr('class', function (d) {return stripPunctSpace(d.data.name)})
     .on("mouseover", userBreakdownMouseOver)
     .on("mouseout", userBreakdownMouseOut);
 
   newUserLegend.append('title')
+
     .text(d => d.data.name + '\n' + formatNumber(d.value) );
 
   newUserLegend.attr('transform', 'translate(' + width/3 + ',' + 0 + ')');
@@ -487,11 +500,19 @@ d3.json('flare.json', (error, data) => {
     .key(function(d) { return d.date;})
     .entries(userTotalDataVerbose);
 
-  var mygroups = ["Students", "Active Students", "Faculty", "Active Faculty"] // list of group names
-  var mygroup = [0,1,2,3]
+  var userGroupNames = []
+  var userGroupOrder = []
+
+
+  for (var i = 0; i < sumstat[0].values.length; i++) {
+    userGroupNames.push(sumstat[0].values[i].name)
+    userGroupOrder.push(i)
+  }
+
+
 
   var stackedData = d3.stack()
-    .keys(mygroup)
+    .keys(userGroupOrder)
     .value(function(d, key){
       return d.values[key].value
     })
@@ -539,21 +560,21 @@ d3.json('flare.json', (error, data) => {
 
   // color palette
   var stackedColor = d3.scaleOrdinal()
-    .domain(mygroups)
+    .domain(userGroupNames)
     .range([
-      "#e8806c",
-      "#e26442",
-      "#a43034"
-    ])
+    "#a43034",
+    "#d35634",
+    "#e8806c",
+    "#FFF"]);
 
   // Show the areas
   UserTotal.selectAll("mylayers")
     .data(stackedData)
     .enter()
     .append("path")
-    .attr("class", function(d) {return '"' + mygroups[d.key] + '"'})
+    .attr("class", function(d) {return '"' + stripPunctSpace(userGroupNames[d.key]) + '"'})
     .style("fill", function(d) {
-      name = mygroups[d.key] ; if (name.includes('Active')){return "#FFF"} else {return stackedColor(name);}
+      name = userGroupNames[d.key]; return stackedColor(name);
     })
     .attr("d", d3.area()
       .x(function(d, i) { return x(new Date(d.data.key)); })
@@ -561,7 +582,7 @@ d3.json('flare.json', (error, data) => {
       .y1(function(d) { return y(d[1]); })
     )
     .append("title")
-    .text(function(d) {return mygroups[d.key]});
+    .text(function(d) {return userGroupNames[d.key]});
 
   UserTotal.selectAll("mylayers")
     .data(stackedData[stackedData.length - 1])
@@ -601,9 +622,9 @@ d3.json('flare.json', (error, data) => {
     .attr("y", height*.4) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", size)
     .attr("height", size)
-    .style("fill", function(d) { name = mygroups[d.key] ; if (name.includes('Active')){return "#FFF"} else {return stackedColor(name);} })
+    .style("fill", function(d) { name = userGroupNames[d.key] ; return stackedColor(name) })
     .style("stroke", "black")
-    .style("stroke-width", function(d) { name = mygroups[d.key] ; if (name.includes('Active')){return "2px"} else {return "0px";} });
+    .style("stroke-width", function(d) { name = userGroupNames[d.key] ; if (stackedColor(name) == "#FFF"){return "2px"} else {return "0px";} });
 
   svg3.selectAll("mylabels")
     .data(stackedData)
@@ -611,7 +632,7 @@ d3.json('flare.json', (error, data) => {
     .append("text")
     .attr("x", function(d,i){ return  stackedLegenedScale(i +1)+ (size/2) + size*i +1})
     .attr("y", height*.46)
-    .text(function(d){return mygroups[d.key]})
+    .text(function(d){return userGroupNames[d.key]})
     .attr("text-anchor", "middle")
     .style("alignment-baseline", "middle")
     .style("font-size", "1.5vw");
@@ -666,6 +687,7 @@ d3.json('flare.json', (error, data) => {
     .append('g').attr('class', 'ActionsSlice');
 
   newActionsSlice.append('title')
+
     .text(d => d.data.name + '\n' + formatNumber(d.value));
 
   newActionsSlice.append('path')
@@ -693,6 +715,7 @@ d3.json('flare.json', (error, data) => {
     .append('g').attr('class', 'EarnedSlice');
 
   newEarnedSlice.append('title')
+
     .text(d => d.data.name + '\n' + formatNumber(d.value));
 
   newEarnedSlice.append('path')
@@ -762,6 +785,7 @@ d3.json('flare.json', (error, data) => {
     .on("mouseout", handleMouseOut);
 
   newLegend.append('title')
+
     .text(d => d.name + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "Points: " + formatNumber(d.earned) );
 
   TotalBar.append('rect')
@@ -1104,7 +1128,7 @@ d3.json('flare.json', (error, data) => {
   svg6.append('text')
     .attr("class", "UseActionsLabel")
     .attr("x", TotalBarWidth/-1.5)
-    .attr("y",EnvironmentTotalBarHeight/3)
+    .attr("y",TotalBarHeight*-.1)
     .text("Use Actions Breakdown")
     .style("text-anchor", "middle")
     .attr("font-family", "Bryant Pro, sans-serif")
@@ -1115,7 +1139,7 @@ d3.json('flare.json', (error, data) => {
   svg6.append('text')
     .attr("class", "UsePIPsLabel")
     .attr("x", TotalBarWidth/1.5)
-    .attr("y",EnvironmentTotalBarHeight/3)
+    .attr("y",TotalBarHeight*-.1)
     .text("Use PIPs Breakdown")
     .style("text-anchor", "middle")
     .attr("font-family", "Bryant Pro, sans-serif")
@@ -1268,7 +1292,7 @@ d3.json('flare.json', (error, data) => {
     .attr("height", useLegendBarHeight)
     .style('fill',  d => {
       // return useActivityColor(d.name)
-      if (d.name.split(" ")[0] == "ALL"){console.log("ALL0"); return useActivityColor("ALL0")}
+      if (d.name.split(" ")[0] == "ALL"){return useActivityColor("ALL0")}
       else{
       return useActivityColor(d.name.split(" ")[0] + 1);
     }
@@ -1293,6 +1317,7 @@ d3.json('flare.json', (error, data) => {
     .on("mouseout", handleUseMouseOut);
 
   newUseLegend.append('title')
+
     .text(d => d.name + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "PIPs: " + formatNumber(d.pips) );
 
   newUseLegend.attr('transform', 'translate(' + 0 + ',' + ( height/20)  + ')');
@@ -1561,6 +1586,7 @@ d3.json('flare.json', (error, data) => {
     .on("mouseout", handleEnvironmentMouseOut);
 
   newEnvironmentBreakdownLegend.append('title')
+
     .text(d => d.name + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "Saved: " + formatNumber(d.saved) );
 
   environmentSavedBreakdownPie.attr('transform', 'translate('  + (TotalBarWidth*1 - maxRadius*.7 ) + ',' + maxRadius*.9 + ')');
