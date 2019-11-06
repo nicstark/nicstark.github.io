@@ -526,9 +526,9 @@ d3.json('data.json', (error, data) => {
 
     var userTotalDataVerbose = []
 
-    for (var i = 0; i < userTotalData.dates.length; i++) {
-      var currentDatum = userTotalData.dates[i];
-      var currentDate = new Date(userTotalData.dates[i].date.toString());
+    for (var i = 0; i < userTotalData.children.length; i++) {
+      var currentDatum = userTotalData.children[i];
+      var currentDate = new Date(userTotalData.children[i].date.toString());
 
       // Check each date entry for children + values
       if (currentDatum.categories.length > 0) {
