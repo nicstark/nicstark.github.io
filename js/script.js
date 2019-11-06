@@ -76,11 +76,7 @@ var stackedHeight = height*.65;
 var TotalBarWidth = width/2 - width/30;
 var TotalBarHeight = height/5;
 
-var EnvironmentTotalBarWidth = width/3 - width/45;
-var EnvironmentTotalBarHeight = height/5;
-var EnvironmentTotalBarY = 0;
-var EnvironmentTotalBarTextY1 = TotalBarHeight*.8;
-var EnvironmentTotalBarTextY2 = TotalBarHeight*.5;
+
 
 //-------------Read in JSON
 
@@ -914,6 +910,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
+      .attr("dominant-baseline", "center")
       .style('fill', 'white')
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut);
@@ -1487,7 +1484,19 @@ d3.json('data.json', (error, data) => {
 
   //--------------- 7 Impact - Environment
 
+
   function environment(){
+
+
+      var EnvironmentBarSections = environmentData.children.length;
+      var EnvironmentTotalBarWidth = (width/EnvironmentBarSections) - (width/22.5);
+      var EnvironmentTotalBarHeight = Math.round(height*.2);
+      var EnvironmentTotalBarY = height*-.23;
+      var EnvironmentTotalBarTextY1 = Math.round(TotalBarHeight*.8);
+      var EnvironmentTotalBarTextY2 = Math.round(TotalBarHeight*.5);
+
+
+
     const svg7 = d3.select('#page7').append('svg')
       .attr('class', "page svg7")
       .style('width', '100vw')
@@ -1515,64 +1524,123 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#efa73a');
 
 
+    var EnvironmentTotalBarScaler = d3.scaleLinear()
+      .domain([1,EnvironmentBarSections])
+      .range([width/45, (width/2)-width/45]);
+
+
+    var EnvironmentTotalBarColor = d3.scaleLinear()
+      .domain([1,EnvironmentBarSections])
+      .range([d3.rgb("#71bf93"), d3.rgb('#b1d381')]);
+
+
     EnvironmentTotalBar = d3.select('.svg7')
       .attr('width', width/2)
       .attr('height', height/2)
       .append('g');
 
-    EnvironmentTotalBar.append('rect')
-      .attr("x", width/-2 + width/30)
+
+    const environmentTotalBar = EnvironmentTotalBar.selectAll('g.environmentTotalBar')
+        .data(environmentData.children);
+    EnvironmentTotalBar.exit().remove();
+
+    const newEnvironmentTotalBar = environmentTotalBar.enter()
+      .append('g').attr('class', 'environmentTotalBar');
+
+    newEnvironmentTotalBar.append('rect')
+      .attr("x", function(d, i){return EnvironmentTotalBarScaler(i)})
       .attr("y", EnvironmentTotalBarY)
       .attr("width", EnvironmentTotalBarWidth)
-      .attr("height", TotalBarHeight)
-      .style('fill', "#71bf93");
+      .attr("height", EnvironmentTotalBarHeight)
+      .style('fill',  function(d,i) {return EnvironmentTotalBarColor(i)})
+      .attr('class', function (d) { return stripPunctSpace(d.name)});
 
-    EnvironmentTotalBar.append('text')
-      .attr("x",  width/-2 + width/30 + EnvironmentTotalBarWidth*.5 )
-      .attr("y", EnvironmentTotalBarTextY2)
-      .text(formatNumber(environmentData.children[0].value))
-      .style("text-anchor", "middle")
-      .attr("font-family", "museo-sans-rounded, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "8vmin")
-      .style('fill', 'white');
-
-    EnvironmentTotalBar.append('text')
-      .attr("x",  width/-2 + width/30 + EnvironmentTotalBarWidth*.5 )
-      .attr("y", EnvironmentTotalBarTextY1)
-      .text("lbs Carbon Saved")
+    newEnvironmentTotalBar.append('text')
+      .attr("x", function(d, i){return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2})
+      .attr("y", function(d, i) {
+        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.8;
+      })
+      .attr("dy", ".7vmin")
+      .text(d => {return d.name})
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
       .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
-    EnvironmentTotalBar.append('rect')
-      .attr("x", EnvironmentTotalBarWidth*-.5)
-      .attr("y", EnvironmentTotalBarY)
-      .attr("width", EnvironmentTotalBarWidth)
-      .attr("height", TotalBarHeight)
-      .style('fill', "#4ba26c");
-
-    EnvironmentTotalBar.append('text')
-      .attr("x", 0)
-      .attr("y", EnvironmentTotalBarTextY2)
-      .text(formatNumber(environmentData.children[1].value))
+    newEnvironmentTotalBar.append('text')
+      .attr("x", function(d, i){return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2})
+      .attr("y", function(d, i) {
+        return EnvironmentTotalBarY + EnvironmentTotalBarHeight /2;
+      })
+      .attr("dy", ".7vmin")
+      .text(d => {return formatNumber(d.value)})
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "900")
       .attr("font-size", "8vmin")
       .style('fill', 'white');
 
-    EnvironmentTotalBar.append('text')
-      .attr("x",  0  )
-      .attr("y", EnvironmentTotalBarTextY1)
-      .text("Tree Equivalents")
-      .style("text-anchor", "middle")
-      .attr("font-family", "museo-sans-rounded, sans-serif")
-      .attr("font-weight", "300")
-      .attr("font-size", "2.5vw")
-      .style('fill', 'white');
+
+
+    //
+    //
+    //
+    // EnvironmentTotalBar.append('rect')
+    //   .attr("x", EnvironmentTotalBarWidth*-1 )
+    //   .attr("y", EnvironmentTotalBarY)
+    //   .attr("width", EnvironmentTotalBarWidth)
+    //   .attr("height", EnvironmentTotalBarHeight)
+    //   .style('fill', "#71bf93");
+    //
+    //
+    //
+    // EnvironmentTotalBar.append('text')
+    //   .attr("x", EnvironmentTotalBarWidth*-1 + EnvironmentTotalBarWidth*.5 )
+    //   .attr("y", EnvironmentTotalBarTextY2)
+    //   .text(formatNumber(environmentData.children[0].value))
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "museo-sans-rounded, sans-serif")
+    //   .attr("font-weight", "900")
+    //   .attr("font-size", "8vmin")
+    //   .style('fill', 'white');
+    //
+    // EnvironmentTotalBar.append('text')
+    //   .attr("x",  EnvironmentTotalBarWidth*-1 + EnvironmentTotalBarWidth*.5 )
+    //   .attr("y", EnvironmentTotalBarTextY1)
+    //   .text("lbs Carbon Saved")
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "museo-sans-rounded, sans-serif")
+    //   .attr("font-weight", "300")
+    //   .attr("font-size", "2.5vw")
+    //   .style('fill', 'white');
+    //
+    // EnvironmentTotalBar.append('rect')
+    //   .attr("x", EnvironmentTotalBarWidth)
+    //   .attr("y", EnvironmentTotalBarY)
+    //   .attr("width", EnvironmentTotalBarWidth)
+    //   .attr("height", TotalBarHeight)
+    //   .style('fill', "#4ba26c");
+    //
+    // EnvironmentTotalBar.append('text')
+    //   .attr("x", 0)
+    //   .attr("y", EnvironmentTotalBarTextY2)
+    //   .text(formatNumber(environmentData.children[1].value))
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "museo-sans-rounded, sans-serif")
+    //   .attr("font-weight", "900")
+    //   .attr("font-size", "8vmin")
+    //   .style('fill', 'white');
+    //
+    // EnvironmentTotalBar.append('text')
+    //   .attr("x",  0  )
+    //   .attr("y", EnvironmentTotalBarTextY1)
+    //   .text("Tree Equivalents")
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "museo-sans-rounded, sans-serif")
+    //   .attr("font-weight", "300")
+    //   .attr("font-size", "2.5vw")
+    //   .style('fill', 'white');
 
     // EnvironmentTotalBar.append('rect')
     //   .attr("x", EnvironmentTotalBarWidth*.5)
@@ -1601,7 +1669,6 @@ d3.json('data.json', (error, data) => {
     //   .attr("font-size", "2.5vw")
     //   .style('fill', 'white');
 
-    EnvironmentTotalBar.attr('transform', 'translate(' + 0 + ',' + height*-.23 + ')');
 
 
     svg7.append('text')
@@ -1630,6 +1697,12 @@ d3.json('data.json', (error, data) => {
   }
 
   function environmentBreakdown(){
+
+    var EnvironmentLegendBarWidth = (width - (width/45))/3;
+    var EnvironmentTotalBarHeight = Math.round(height*.2);
+    var EnvironmentTotalBarY = 0;
+    var EnvironmentTotalBarTextY1 = Math.round(TotalBarHeight*.8);
+    var EnvironmentTotalBarTextY2 = Math.round(TotalBarHeight*.5);
 
     const EnvironmentBreakdown = d3.select('.svg7')
       .attr('width', width)
@@ -1679,11 +1752,11 @@ d3.json('data.json', (error, data) => {
     var environmentBreakdownLegendBarHeight = environmentBreakdownLegendHeight/environmentBreakdownData.children.length;
 
     newEnvironmentBreakdownLegend.append('rect')
-      .attr("x", EnvironmentTotalBarWidth*-.5)
+      .attr("x", EnvironmentLegendBarWidth*-.5)
       .attr("y", function(d, i) {
        		return (i * environmentBreakdownLegendBarHeight);
        })
-      .attr("width", EnvironmentTotalBarWidth)
+      .attr("width", EnvironmentLegendBarWidth)
       .attr("height", environmentBreakdownLegendBarHeight)
       .style('fill',  function(d,i) {return environmentBreakdownColor(i)})
       .attr('class', function (d) { return stripPunctSpace(d.category)})
