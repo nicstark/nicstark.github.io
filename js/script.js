@@ -102,6 +102,8 @@ d3.json('data.json', (error, data) => {
   //---------------Parsing Data
   cover()
 
+  var pageCounter = 1;
+
   for (var i = 0; i < data.categories.length; i++) {
     if (data.categories[i].category == "USER BREAKDOWN"){
       var userBreakdownProto = data.children[i].children[0];
@@ -166,23 +168,25 @@ d3.json('data.json', (error, data) => {
       ])
 
   if (userBreakdownData != null){
-    try {userBreakdown()} catch (err){console.log(err)}}
+    try {userBreakdown(); pageCounter +=1;} catch (err){console.log(err)}}
   if (userTotalData != null){
-    try {totalUsers()} catch (err){console.log(err)}}
+    try {totalUsers(); pageCounter +=1;} catch (err){console.log(err)}}
   if (earnActivityData != null){
-    try {earnActivity()} catch (err){console.log(err)}}
-  // if (actionsOverTimeData != null){
-  //   try {actionsOverTime()} catch (err){console.log(err)}}
+    try {earnActivity(); pageCounter +=1;} catch (err){console.log(err)}}
+  if (actionsOverTimeData != null){
+    try {actionsOverTime(); pageCounter +=1;} catch (err){console.log(err)}}
   if (useActivityData != null){
-    try {useActivity()} catch (err){console.log(err)}}
+    try {useActivity(); pageCounter +=1;} catch (err){console.log(err)}}
   if (environmentData != null){
-    try {environment()} catch (err){console.log(err)}}
+    try {environment(); pageCounter +=1;} catch (err){console.log(err)}}
   if (environmentBreakdownData != null){
-    try {environmentBreakdown()} catch (err){console.log(err)}}
+    try {environmentBreakdown();} catch (err){console.log(err)}}
   if (investmentEducationData != null || localEconomyData != null){
-    try {page8()} catch (err){console.log(err)}}
+    try {page8(); pageCounter +=1;} catch (err){console.log(err)}}
   if (communityLearningData != null || healthWellnessData != null){
-    try {page9()} catch (err){console.log(err)}}
+    try {page9(); pageCounter +=1;} catch (err){console.log(err)}}
+
+
 
 
   thanks()
@@ -221,6 +225,8 @@ d3.json('data.json', (error, data) => {
     .attr("font-size", "2vh")
     .style('fill', '#322f2b')
     .text(date);
+
+
 
   function userBreakdownMouseOver(d, i) {
     d3.selectAll("." + stripPunctSpace(d.data.name)).transition()
@@ -287,7 +293,7 @@ d3.json('data.json', (error, data) => {
     svg1.append('text')
       .attr('y', "10%")
       .style("text-anchor", "middle")
-      .attr("font-family", "bryantreg, sans-serif")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "normal")
       .attr("font-size", "4vh")
       .style('fill', 'black')
@@ -296,7 +302,7 @@ d3.json('data.json', (error, data) => {
     svg1.append('text')
       .attr('y', "15%")
       .style("text-anchor", "middle")
-      .attr("font-family", "bryantreg, sans-serif")
+      .attr("font-family", "Bryant Pro, sans-serif")
       // .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "bold")
       .attr("font-size", "4vh")
@@ -306,7 +312,7 @@ d3.json('data.json', (error, data) => {
     svg1.append('text')
       .attr('y', "20%")
       .style("text-anchor", "middle")
-      .attr("font-family", "bryantreg, sans-serif")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "2vh")
       .style('fill', 'black')
@@ -366,6 +372,7 @@ d3.json('data.json', (error, data) => {
   //----------------------- 2 User Breakdown
 
   function userBreakdown() {
+
     const svg2 = d3.select('#page2').append('svg')
       .attr('class', "page svg2")
       .style('width', '100vw')
@@ -381,6 +388,9 @@ d3.json('data.json', (error, data) => {
       .attr('width', width/2)
       .attr('height', height/2)
       .append('g');
+
+
+
 
 
     treemap(userBreakdownData);
@@ -430,7 +440,7 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("USER BREAKDOWN")
       .style("text-anchor", "start")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3em")
       .style('fill', '#d35634');
@@ -513,10 +523,21 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("TOTAL USERS")
       .style("text-anchor", "start")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3em")
       .style('fill', '#d35634');
+
+
+    svg3.append('text')
+      .attr('x',width*.48)
+      .attr('y', height*.49)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "900")
+      .attr("font-size", "2vh")
+      .style('fill', 'grey')
+      .text(pageCounter);
 
     // Extract Data from object children
 
@@ -686,7 +707,7 @@ d3.json('data.json', (error, data) => {
     //   .enter()
     //   .append("text")
     //   .attr("x", function(d,i){ return  stackedLegenedScale(i +1)+ (size/2) + size*i +1})
-    //   .attr("y", height*.46)
+    //   .attr("y", height*.47)
     //   .text(function(d){return userGroupNames[d.key]})
     //   .attr("text-anchor", "middle")
     //   .style("alignment-baseline", "middle")
@@ -705,7 +726,7 @@ d3.json('data.json', (error, data) => {
     //
     // svg3.append('text')
     //   .attr("x", function(d,i){ return  stackedLegenedScale(0 ) + width/60})
-    //   .attr("y", height*.46)
+    //   .attr("y", height*.47)
     //   .text("Total Users")
     //   .attr("text-anchor", "middle")
     //   .style("alignment-baseline", "middle")
@@ -770,6 +791,16 @@ d3.json('data.json', (error, data) => {
       .style('height', '100vh')
       .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
+    svg4.append('text')
+      .attr('x',width*.48)
+      .attr('y', height*.49)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "900")
+      .attr("font-size", "2vh")
+      .style('fill', 'grey')
+      .text(pageCounter);
+
     const ActionsTaken = d3.select('.svg4')
       .attr('width', width)
       .attr('height', height)
@@ -803,7 +834,7 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("EARN ACTIVITY")
       .style("text-anchor", "start")
-      .attr("font-family", "bryantreg, sans-serif")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "normal")
       .attr("font-size", "3vmin")
       .style('fill', '#71bf93');
@@ -904,10 +935,10 @@ d3.json('data.json', (error, data) => {
       .attr("y", function(d, i) {
         return barHeight /2 + (i * barHeight);
       })
-      .attr("dy", "0.7vmin")
+      // .attr("dy", "0.7vmin")
       .text(d => {return d.category})
       .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
       .attr("dominant-baseline", "center")
@@ -998,7 +1029,7 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("EARN ACTIVITY")
       .style("text-anchor", "start")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3vmin")
       .style('fill', '#71bf93');
@@ -1012,6 +1043,16 @@ d3.json('data.json', (error, data) => {
       .attr("font-weight", "Bold")
       .attr("font-size", "3vmin")
       .style('fill', '#71bf93');
+
+    svg5.append('text')
+      .attr('x',width*.48)
+      .attr('y', height*.49)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "900")
+      .attr("font-size", "2vh")
+      .style('fill', 'grey')
+      .text(pageCounter);
 
     function checkIfValuesExist(object) {
       if (object.hasOwnProperty("actions") && object.hasOwnProperty("name"))
@@ -1170,7 +1211,7 @@ d3.json('data.json', (error, data) => {
       .attr('class', function (d) { return stripPunctSpace(d);})
       .style("fill", "white")
       .attr("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
       .on("mouseover", actionsTakenOverTimeMouseOver)
@@ -1194,10 +1235,20 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("USE ACTIVITY")
       .style("text-anchor", "start")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3vmin")
       .style('fill', '#58bbc0');
+
+    svg6.append('text')
+      .attr('x',width*.48)
+      .attr('y', height*.49)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "900")
+      .attr("font-size", "2vh")
+      .style('fill', 'grey')
+      .text(pageCounter);
 
     UseTotalBar = d3.select('.svg6')
       .attr('width', width/2)
@@ -1352,7 +1403,7 @@ d3.json('data.json', (error, data) => {
 
 
     useActivityCell.append("rect")
-      // .attr("class", function(d) {console.log(d); return "ALLUSEACTIONS" + " "+ "useActivity " + d.data.category.split(" ")[0] + " " + stripPunctSpace(d.data.category); })
+      .attr("class", function(d) {return "ALLUSEACTIONS" + " "+ "useActivity " + d.data.category.split(" ")[0] + " " + stripPunctSpace(d.data.category); })
       .attr("width", function(d, i) {if (i == 0) {UseTreemapSize = d.x1 - d.x0};  return d.x1 - d.x0; })
       .attr("height", function(d) { return d.y1 - d.y0; })
       .style("fill", function(d,i) {
@@ -1464,10 +1515,10 @@ d3.json('data.json', (error, data) => {
       .attr("y", function(d, i) {
         return useLegendBarHeight /2 + (i * useLegendBarHeight);
       })
-      .attr("dy", ".7vmin")
+      // .attr("dy", ".7vmin")
       .text(d => {return d.category})
       .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
       .style('fill', 'white')
@@ -1508,7 +1559,7 @@ d3.json('data.json', (error, data) => {
       .attr("y", height/-3)
       .text("IMPACT")
       .style("text-anchor", "start")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3vmin")
       .style('fill', '#efa73a');
@@ -1523,6 +1574,16 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "2.5vmin")
       .style('fill', '#efa73a');
 
+    svg7.append('text')
+      .attr('x',width*.48)
+      .attr('y', height*.49)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "900")
+      .attr("font-size", "2vh")
+      .style('fill', 'grey')
+      .text(pageCounter);
+
 
     var EnvironmentTotalBarScaler = d3.scaleLinear()
       .domain([1,EnvironmentBarSections])
@@ -1531,7 +1592,7 @@ d3.json('data.json', (error, data) => {
 
     var EnvironmentTotalBarColor = d3.scaleLinear()
       .domain([1,EnvironmentBarSections])
-      .range([d3.rgb("#71bf93"), d3.rgb('#b1d381')]);
+      .range([d3.rgb("#49a26d"), d3.rgb('#b1d381')]);
 
 
     EnvironmentTotalBar = d3.select('.svg7')
@@ -1581,93 +1642,6 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "8vmin")
       .style('fill', 'white');
 
-
-
-    //
-    //
-    //
-    // EnvironmentTotalBar.append('rect')
-    //   .attr("x", EnvironmentTotalBarWidth*-1 )
-    //   .attr("y", EnvironmentTotalBarY)
-    //   .attr("width", EnvironmentTotalBarWidth)
-    //   .attr("height", EnvironmentTotalBarHeight)
-    //   .style('fill', "#71bf93");
-    //
-    //
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x", EnvironmentTotalBarWidth*-1 + EnvironmentTotalBarWidth*.5 )
-    //   .attr("y", EnvironmentTotalBarTextY2)
-    //   .text(formatNumber(environmentData.children[0].value))
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "900")
-    //   .attr("font-size", "8vmin")
-    //   .style('fill', 'white');
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x",  EnvironmentTotalBarWidth*-1 + EnvironmentTotalBarWidth*.5 )
-    //   .attr("y", EnvironmentTotalBarTextY1)
-    //   .text("lbs Carbon Saved")
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "300")
-    //   .attr("font-size", "2.5vw")
-    //   .style('fill', 'white');
-    //
-    // EnvironmentTotalBar.append('rect')
-    //   .attr("x", EnvironmentTotalBarWidth)
-    //   .attr("y", EnvironmentTotalBarY)
-    //   .attr("width", EnvironmentTotalBarWidth)
-    //   .attr("height", TotalBarHeight)
-    //   .style('fill', "#4ba26c");
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x", 0)
-    //   .attr("y", EnvironmentTotalBarTextY2)
-    //   .text(formatNumber(environmentData.children[1].value))
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "900")
-    //   .attr("font-size", "8vmin")
-    //   .style('fill', 'white');
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x",  0  )
-    //   .attr("y", EnvironmentTotalBarTextY1)
-    //   .text("Tree Equivalents")
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "300")
-    //   .attr("font-size", "2.5vw")
-    //   .style('fill', 'white');
-
-    // EnvironmentTotalBar.append('rect')
-    //   .attr("x", EnvironmentTotalBarWidth*.5)
-    //   .attr("y", EnvironmentTotalBarY)
-    //   .attr("width", EnvironmentTotalBarWidth)
-    //   .attr("height", TotalBarHeight)
-    //   .style('fill', "#b1d381");
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x",  0 + EnvironmentTotalBarWidth )
-    //   .attr("y", EnvironmentTotalBarTextY2)
-    //   .text(formatNumber(environmentData.children[2].value))
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "900")
-    //   .attr("font-size", "8vmin")
-    //   .style('fill', 'white');
-    //
-    // EnvironmentTotalBar.append('text')
-    //   .attr("x",  0 + EnvironmentTotalBarWidth )
-    //   .attr("y", EnvironmentTotalBarTextY1)
-    //   .text("lbs Landfill Diversion")
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "museo-sans-rounded, sans-serif")
-    //   .attr("font-weight", "300")
-    //   .attr("font-size", "2.5vw")
-    //   .style('fill', 'white');
 
 
 
@@ -1771,7 +1745,7 @@ d3.json('data.json', (error, data) => {
       .attr("dy", ".7vmin")
       .text(d => {return d.category})
       .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro")
+      .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
       .style('fill', 'white')
@@ -1803,10 +1777,20 @@ d3.json('data.json', (error, data) => {
         .attr("y", height/-3)
         .text("IMPACT")
         .style("text-anchor", "start")
-        .attr("font-family", "Bryant Pro")
+        .attr("font-family", "Bryant Pro, sans-serif")
         .attr("font-weight", "500")
         .attr("font-size", "3vmin")
         .style('fill', '#efa73a');
+
+      svg8.append('text')
+        .attr('x',width*.48)
+        .attr('y', height*.49)
+        .style("text-anchor", "middle")
+        .attr("font-family", "Bryant Pro, sans-serif")
+        .attr("font-weight", "900")
+        .attr("font-size", "2vh")
+        .style('fill', 'grey')
+        .text(pageCounter);
 
       if (investmentEducationData != null ){
 
@@ -1986,10 +1970,20 @@ d3.json('data.json', (error, data) => {
         .attr("y", height/-3)
         .text("IMPACT")
         .style("text-anchor", "start")
-        .attr("font-family", "Bryant Pro")
+        .attr("font-family", "Bryant Pro, sans-serif")
         .attr("font-weight", "500")
         .attr("font-size", "3vmin")
         .style('fill', '#efa73a');
+
+      svg9.append('text')
+        .attr('x',width*.48)
+        .attr('y', height*.49)
+        .style("text-anchor", "middle")
+        .attr("font-family", "Bryant Pro, sans-serif")
+        .attr("font-weight", "900")
+        .attr("font-size", "2vh")
+        .style('fill', 'grey')
+        .text(pageCounter);
 
         if (communityLearningData != null){
 
