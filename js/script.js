@@ -277,30 +277,6 @@ d3.json('data.json', (error, data) => {
   }
 
 
-    function handleMouseOver(d, i) {
-      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-        .style("opacity", .5);
-      d3.selectAll(".ActionsTakenLabel")
-        .text(formatNumber(d.actions) + " Actions Taken")
-        .style("fill", ActionsTakenColor(d.category));
-      d3.selectAll(".PointsEarnedLabel")
-        .text(formatNumber(d.earned) + " Points Earned")
-        .style("fill", ActionsTakenColor(d.category));
-    }
-
-    function handleMouseOut(d, i) {
-      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-        .style("opacity", 1);
-      d3.selectAll(".PointsEarnedLabel")
-        .text("Points Earned Breakdown")
-        .style('fill', '#4ba26c');
-      d3.selectAll(".ActionsTakenLabel")
-        .text("Actions Taken Breakdown")
-        .style('fill', '#71bf93');
-    }
-
-
-
 
   //------------------1 Cover Page
 
@@ -841,6 +817,31 @@ d3.json('data.json', (error, data) => {
         "grey"])
 
 
+    function handleMouseOver(d, i) {
+      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
+        .style("opacity", .5);
+      d3.selectAll(".ActionsTakenLabel")
+        .text(formatNumber(d.actions) + " Actions Taken")
+        .style("fill", ActionsTakenColor(d.category));
+      d3.selectAll(".PointsEarnedLabel")
+        .text(formatNumber(d.earned) + " Points Earned")
+        .style("fill", ActionsTakenColor(d.category));
+    }
+
+    function handleMouseOut(d, i) {
+      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
+        .style("opacity", 1);
+      d3.selectAll(".PointsEarnedLabel")
+        .text("Points Earned Breakdown")
+        .style('fill', '#4ba26c');
+      d3.selectAll(".ActionsTakenLabel")
+        .text("Actions Taken Breakdown")
+        .style('fill', '#71bf93');
+    }
+
+
+
+
     const svg4 = d3.select('#page4').append('svg')
       .attr('class', "page svg4")
       .style('width', '100vw')
@@ -1354,7 +1355,7 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(d.used));
       d3.selectAll(".UsePIPsCategory")
-        .text(function() {return (d.category).toLowerCase() + " PIPs Used"})
+        .text(function() {return (d.category).toLowerCase() + " Points Used"})
         .style("text-transform", "capitalize");
       d3.selectAll(".UseActionsCategory")
         .text(function() {return (d.category).toLowerCase() + " Actions"})
@@ -1373,7 +1374,7 @@ d3.json('data.json', (error, data) => {
         .text("Total Actions")
         .style("text-transform", "capitalize");
       d3.selectAll(".UsePIPsCategory")
-        .text("Total PIPs Used")
+        .text("Total Points Used")
         .style("text-transform", "capitalize");
     }
 
@@ -1386,7 +1387,7 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(d.data.used));
       d3.selectAll(".UsePIPsCategory")
-        .text(function() {return (d.data.category).toLowerCase() + " PIPs Used"})
+        .text(function() {return (d.data.category).toLowerCase() + " Points Used"})
         .style("text-transform", "capitalize");
       d3.selectAll(".UseActionsCategory")
         .text(function() {return (d.data.category).toLowerCase() + " Actions"})
@@ -1404,7 +1405,7 @@ d3.json('data.json', (error, data) => {
         .text("Total Actions")
         .style("text-transform", "capitalize");
       d3.selectAll(".UsePIPsCategory")
-        .text("Total PIPs Used")
+        .text("Total Points Used")
         .style("text-transform", "capitalize");
     }
 
