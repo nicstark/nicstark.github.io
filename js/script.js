@@ -76,6 +76,10 @@ var stackedHeight = height*.65;
 var TotalBarWidth = width/2 - width/30;
 var TotalBarHeight = height/5;
 
+const pageNumX = width*.47;
+const pageNumY = height*.495;
+const pageNumWeight = 400;
+const pageNumSize = "2vh";
 
 
 //-------------Read in JSON
@@ -530,12 +534,12 @@ d3.json('data.json', (error, data) => {
 
 
     svg3.append('text')
-      .attr('x',width*.48)
-      .attr('y', height*.49)
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "2vh")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
       .style('fill', 'grey')
       .text(pageCounter);
 
@@ -638,8 +642,11 @@ d3.json('data.json', (error, data) => {
       "#e8806c",
       "#FFF"]);
 
-
+    var tooltip = d3.select('#page3').append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
     // Show the areas
+
     UserTotal.selectAll("mylayers")
       .data(stackedData)
       .enter()
@@ -648,11 +655,13 @@ d3.json('data.json', (error, data) => {
       .style("fill", function(d) {
         name = userGroupNames[d.key]; return stackedColor(name);
       })
+
       .attr("d", d3.area()
         .x(function(d, i) { return x(new Date(d.data.key)); })
         .y0(function(d) { return y(d[0]); })
         .y1(function(d) { return y(d[1]); })
       )
+
       .append("title")
       .text(function(d) {return userGroupNames[d.key]});
 
@@ -792,12 +801,12 @@ d3.json('data.json', (error, data) => {
       .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
     svg4.append('text')
-      .attr('x',width*.48)
-      .attr('y', height*.49)
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "2vh")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
       .style('fill', 'grey')
       .text(pageCounter);
 
@@ -835,7 +844,7 @@ d3.json('data.json', (error, data) => {
       .text("EARN ACTIVITY")
       .style("text-anchor", "start")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "normal")
+      .attr("font-weight", "500")
       .attr("font-size", "3vmin")
       .style('fill', '#71bf93');
 
@@ -1045,12 +1054,12 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#71bf93');
 
     svg5.append('text')
-      .attr('x',width*.48)
-      .attr('y', height*.49)
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "2vh")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
       .style('fill', 'grey')
       .text(pageCounter);
 
@@ -1233,7 +1242,7 @@ d3.json('data.json', (error, data) => {
     svg6.append('text')
       .attr("x", width/-2 + width/30)
       .attr("y", height/-3)
-      .text("USE ACTIVITY")
+      .text("ALL USE ACTIVITY")
       .style("text-anchor", "start")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -1241,12 +1250,12 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#58bbc0');
 
     svg6.append('text')
-      .attr('x',width*.48)
-      .attr('y', height*.49)
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "2vh")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
       .style('fill', 'grey')
       .text(pageCounter);
 
@@ -1284,12 +1293,13 @@ d3.json('data.json', (error, data) => {
 
     var UseActionsTotal = UseParentCategories.map(item => item.actions).reduce((prev, next) => prev + next);
     var UsePIPsTotal = UseParentCategories.map(item => item.used).reduce((prev, next) => prev + next);
-    UseParentCategories.unshift({category: "ALL USE ACTIONS", actions: UseActionsTotal, used: UsePIPsTotal, depth: 0});
+    UseParentCategories.unshift({category: "ALL USE ACTIVITY", actions: UseActionsTotal, used: UsePIPsTotal, depth: 0});
 
 
     UseTotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2  )
       .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("class","UseActionsLabel")
       .text(formatNumber(UseActionsTotal))
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1301,7 +1311,8 @@ d3.json('data.json', (error, data) => {
     UseTotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
-      .text("Total Use Actions")
+      .attr("class", "UseActionsCategory")
+      .text("TOTAL ACTIONS")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
@@ -1312,6 +1323,7 @@ d3.json('data.json', (error, data) => {
       .attr("x",  0 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/2)
       .text(formatNumber(UsePIPsTotal))
+      .attr("class","UsePIPsLabel")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "900")
@@ -1321,34 +1333,35 @@ d3.json('data.json', (error, data) => {
     UseTotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
-      .text("Total PIPs Used")
+      .attr("class", "UsePIPsCategory")
+      .text("TOTAL PIPS USED")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
       .attr("font-size", "4vmin")
       .style('fill', 'white');
 
-    svg6.append('text')
-      .attr("class", "UseActionsLabel")
-      .attr("x", TotalBarWidth/-1.5)
-      .attr("y",TotalBarHeight*-.1)
-      .text("Use Actions Breakdown")
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "2.5vw")
-      .style('fill', '#58bbc0');
-
-    svg6.append('text')
-      .attr("class", "UsePIPsLabel")
-      .attr("x", TotalBarWidth/1.5)
-      .attr("y",TotalBarHeight*-.1)
-      .text("Use PIPs Breakdown")
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "2.5vw")
-      .style('fill', '#5065a1');
+    // svg6.append('text')
+    //   .attr("class", "UseActionsLabel")
+    //   .attr("x", TotalBarWidth/-1.5)
+    //   .attr("y",TotalBarHeight*-.1)
+    //   .text("Use Actions Breakdown")
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "Bryant Pro, sans-serif")
+    //   .attr("font-weight", "Bold")
+    //   .attr("font-size", "2.5vw")
+    //   .style('fill', '#58bbc0');
+    //
+    // svg6.append('text')
+    //   .attr("class", "UsePIPsLabel")
+    //   .attr("x", TotalBarWidth/1.5)
+    //   .attr("y",TotalBarHeight*-.1)
+    //   .text("Use PIPs Breakdown")
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "Bryant Pro, sans-serif")
+    //   .attr("font-weight", "Bold")
+    //   .attr("font-size", "2.5vw")
+    //   .style('fill', '#5065a1');
 
     UseBreakdown = d3.select('.svg6')
       .attr('width', width/2)
@@ -1356,7 +1369,7 @@ d3.json('data.json', (error, data) => {
       .append('g');
 
     const useTreemap = d3.treemap()
-      .size([maxRadius*1.3, maxRadius*1.300001])
+      .size([maxRadius*1.6, maxRadius*1.600001])
       .paddingOuter(3)
       .paddingInner(3)
       .round(true);
@@ -1379,7 +1392,7 @@ d3.json('data.json', (error, data) => {
 
     var useActivityColor = d3.scaleOrdinal().domain(useActivityActionCategories)
       .range([
-      "#76c4b7",
+      "grey",
       "#e9bc56",
       "#b1d280",
       "#49a26d",
@@ -1417,7 +1430,7 @@ d3.json('data.json', (error, data) => {
     useActivityCell.append("title")
       .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
 
-    UseBreakdown.attr('transform', 'translate('+ ((width/-2) + (width/30) + 0) + ',' + height/20 + ')');
+    UseBreakdown.attr('transform', 'translate('+ ((width/-2) + (width/30) + 0) + ',' + height/-20 + ')');
 
     PIPsBreakdown = d3.select('.svg6')
       .attr('width', width/2)
@@ -1451,28 +1464,37 @@ d3.json('data.json', (error, data) => {
     usePIPsCell.append("title")
       .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
 
-    PIPsBreakdown.attr('transform', 'translate('+ ((width/2) - (width/30) - UseTreemapSize) + ',' + height/20 + ')');
+    PIPsBreakdown.attr('transform', 'translate('+ ((width/2) - (width/30) - UseTreemapSize) + ',' + height/-20 + ')');
 
     function handleUseMouseOver(d, i) {
       d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-        .style("opacity", .5);
+        .style("stroke", "black")
+        .style("stroke-width", "2px");
       d3.selectAll(".UseActionsLabel")
-        .text(formatNumber(d.actions) + " Actions Taken")
-        .style("fill", useActivityColor(d.category));
+        .text(formatNumber(d.actions));
       d3.selectAll(".UsePIPsLabel")
-        .text(formatNumber(d.used) + " Points Earned")
-        .style("fill", useActivityColor(d.category));
+        .text(formatNumber(d.used));
+      d3.selectAll(".UsePIPsCategory")
+        .text(d.category + " PIPS USED")
+        .style("text-transform", "capitalize");
+      d3.selectAll(".UseActionsCategory")
+        .text(d.category + " ACTIONS")
+        .style("text-transform", "capitalize");
     }
 
     function handleUseMouseOut(d, i) {
       d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-        .style("opacity", 1);
+        .style("stroke-width", "0px");
       d3.selectAll(".UsePIPsLabel")
-        .text("Use PIPs Breakdown")
-        .style('fill', '#4ba26c');
+        .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
-        .text("Use Actions Breakdown")
-        .style('fill', '#71bf93');
+        .text(formatNumber(UseActionsTotal));
+      d3.selectAll(".UseActionsCategory")
+        .text("TOTAL ACTIONS")
+        .style("text-transform", "capitalize");
+      d3.selectAll(".UsePIPsCategory")
+        .text("TOTAL PIPS USED")
+        .style("text-transform", "capitalize");
     }
 
     UseLegend = d3.select('.svg6')
@@ -1529,7 +1551,7 @@ d3.json('data.json', (error, data) => {
 
       .text(d => d.category + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "PIPs: " + formatNumber(d.used) );
 
-    newUseLegend.attr('transform', 'translate(' + 0 + ',' + ( height/20)  + ')');
+    newUseLegend.attr('transform', 'translate(' + 0 + ',' + ( height/-20)  + ')');
 
   }
 
@@ -1540,7 +1562,7 @@ d3.json('data.json', (error, data) => {
 
 
       var EnvironmentBarSections = environmentData.children.length;
-      var EnvironmentTotalBarWidth = (width/EnvironmentBarSections) - (width/22.5);
+      var EnvironmentTotalBarWidth = (width/EnvironmentBarSections) - (width/180);
       var EnvironmentTotalBarHeight = Math.round(height*.2);
       var EnvironmentTotalBarY = height*-.23;
       var EnvironmentTotalBarTextY1 = Math.round(TotalBarHeight*.8);
@@ -1575,19 +1597,19 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#efa73a');
 
     svg7.append('text')
-      .attr('x',width*.48)
-      .attr('y', height*.49)
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "900")
-      .attr("font-size", "2vh")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
       .style('fill', 'grey')
       .text(pageCounter);
 
 
     var EnvironmentTotalBarScaler = d3.scaleLinear()
-      .domain([1,EnvironmentBarSections])
-      .range([width/45, (width/2)-width/45]);
+      .domain([0,EnvironmentBarSections])
+      .range([width/-2 + width/45,  width/2 - width/22.5]);
 
 
     var EnvironmentTotalBarColor = d3.scaleLinear()
@@ -1639,7 +1661,7 @@ d3.json('data.json', (error, data) => {
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "900")
-      .attr("font-size", "8vmin")
+      .attr("font-size", 20/EnvironmentBarSections + "vmin")
       .style('fill', 'white');
 
 
@@ -1783,14 +1805,14 @@ d3.json('data.json', (error, data) => {
         .style('fill', '#efa73a');
 
       svg8.append('text')
-        .attr('x',width*.48)
-        .attr('y', height*.49)
-        .style("text-anchor", "middle")
-        .attr("font-family", "Bryant Pro, sans-serif")
-        .attr("font-weight", "900")
-        .attr("font-size", "2vh")
-        .style('fill', 'grey')
-        .text(pageCounter);
+      .attr('x', pageNumX)
+      .attr('y', pageNumY)
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", pageNumWeight)
+      .attr("font-size", pageNumSize)
+      .style('fill', 'grey')
+      .text(pageCounter);
 
       if (investmentEducationData != null ){
 
@@ -1809,67 +1831,67 @@ d3.json('data.json', (error, data) => {
           .attr('height', height/2)
           .append('g');
 
-        var EducationTotalBarWidth = width/2 - width/30;
+
+
+        var EducationTotalBarSections = investmentEducationData.children.length
+        var EducationTotalBarWidth = (width/EducationTotalBarSections) - (width/22.5);
         var EducationTotalBarHeight = height/4;
-        var EducationTotalBarY = 0;
+        var EducationTotalBarY = height*-.2;
         var EducationTotalBarTextY1 = EducationTotalBarHeight*.75;
         var EducationTotalBarTextY2 = EducationTotalBarHeight*.5;
 
-        EducationTotalBar.append('rect')
-          .attr("x", width/-2 + width/30)
+        var EducationTotalBarScaler = d3.scaleLinear()
+          .domain([1,EducationTotalBarSections])
+          .range([width/45, (width/2)-width/45]);
+
+
+        var EducationTotalBarColor = d3.scaleLinear()
+          .domain([1,EducationTotalBarSections])
+          .range([d3.rgb("#5065a1"), d3.rgb('#3b2b68')]);
+
+
+        const educationTotalBar = EducationTotalBar.selectAll('g.educationTotalBar')
+            .data(investmentEducationData.children);
+        EducationTotalBar.exit().remove();
+
+        const newEducationTotalBar = educationTotalBar.enter()
+          .append('g').attr('class', 'educationTotalBar');
+
+        newEducationTotalBar.append('rect')
+          .attr("x", function(d, i){return EducationTotalBarScaler(i)})
           .attr("y", EducationTotalBarY)
           .attr("width", EducationTotalBarWidth)
           .attr("height", EducationTotalBarHeight)
-          .style('fill', "#5065a1");
+          .style('fill',  function(d,i) {return EducationTotalBarColor(i)})
+          .attr('class', function (d) { return stripPunctSpace(d.name)});
 
-        EducationTotalBar.append('text')
-          .attr("x",  width/-2 + width/30 + EducationTotalBarWidth/2 )
-          .attr("y", EducationTotalBarTextY2)
-          .text("$" + formatNumber(investmentEducationData.children[0].value))
-          .style("text-anchor", "middle")
-          .attr("font-family", "museo-sans-rounded, sans-serif")
-          .attr("font-weight", "900")
-          .attr("font-size", "8vmin")
-          .style('fill', 'white');
-
-        EducationTotalBar.append('text')
-          .attr("x",  width/-2 + width/30 + EducationTotalBarWidth/2 )
-          .attr("y", EducationTotalBarTextY1)
-          .text(investmentEducationData.children[0].name)
+        newEducationTotalBar.append('text')
+          .attr("x", function(d, i){return EducationTotalBarScaler(i) + EducationTotalBarWidth/2})
+          .attr("y", function(d, i) {
+            return EducationTotalBarY + EducationTotalBarHeight*.8;
+          })
+          .attr("dy", ".7vmin")
+          .text(d => {return d.name})
           .style("text-anchor", "middle")
           .attr("font-family", "museo-sans-rounded, sans-serif")
           .attr("font-weight", "300")
           .attr("font-size", "2.5vw")
           .style('fill', 'white');
 
-        EducationTotalBar.append('rect')
-          .attr("x", 0)
-          .attr("y", EducationTotalBarY)
-          .attr("width", EducationTotalBarWidth)
-          .attr("height", EducationTotalBarHeight)
-          .style('fill', "#3b2b68");
-
-        EducationTotalBar.append('text')
-          .attr("x",  0 + EducationTotalBarWidth/2 )
-          .attr("y", EducationTotalBarTextY2)
-          .text("$" + formatNumber(investmentEducationData.children[1].value))
+        newEducationTotalBar.append('text')
+          .attr("x", function(d, i){return EducationTotalBarScaler(i) + EducationTotalBarWidth/2})
+          .attr("y", function(d, i) {
+            return EducationTotalBarY + EducationTotalBarHeight /2;
+          })
+          .attr("dy", ".7vmin")
+          .text(d => {if (d.name == "Donations to PIPs Education Fund"){return "$"+formatNumber(d.value);} else {return formatNumber(d.value)}})
           .style("text-anchor", "middle")
           .attr("font-family", "museo-sans-rounded, sans-serif")
           .attr("font-weight", "900")
           .attr("font-size", "8vmin")
           .style('fill', 'white');
 
-        EducationTotalBar.append('text')
-          .attr("x",  0 + EducationTotalBarWidth/2 )
-          .attr("y", EducationTotalBarTextY1)
-          .text(investmentEducationData.children[1].name)
-          .style("text-anchor", "middle")
-          .attr("font-family", "museo-sans-rounded, sans-serif")
-          .attr("font-weight", "300")
-          .attr("font-size", "2.5vw")
-          .style('fill', 'white');
-
-        EducationTotalBar.attr('transform', 'translate(' +0 + ',' + height*-.2 + ')');
+        EducationTotalBar.attr('transform', 'translate(' + (width*-.03) + ',' + 0 + ')');
       }
 
       if (localEconomyData != null ){
@@ -1976,12 +1998,12 @@ d3.json('data.json', (error, data) => {
         .style('fill', '#efa73a');
 
       svg9.append('text')
-        .attr('x',width*.48)
-        .attr('y', height*.49)
+        .attr('x', pageNumX)
+        .attr('y', pageNumY)
         .style("text-anchor", "middle")
         .attr("font-family", "Bryant Pro, sans-serif")
-        .attr("font-weight", "900")
-        .attr("font-size", "2vh")
+        .attr("font-weight", pageNumWeight)
+        .attr("font-size", pageNumSize)
         .style('fill', 'grey')
         .text(pageCounter);
 
