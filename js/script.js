@@ -556,16 +556,7 @@ d3.json('data.json', (error, data) => {
       .text(pageCounter);
 
 
-    function totalUsersMouseOver(d, i) {
 
-      d3.selectAll(".totalUsersLabel").transition()
-        .text(function (){return parseDate(new Date(d.data.key)) + " Total Number of Users: " + formatNumber(d[1])})
-    }
-
-    function totalUsersMouseOut(d, i) {
-      d3.selectAll(".totalUsersLabel").transition()
-        .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date)) +  " Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
-    }
 
 
     // Extract Data from object children
@@ -624,6 +615,10 @@ d3.json('data.json', (error, data) => {
       .domain(d3.extent(userTotalDataVerbose, function(d) { return d.date; }))
       .range([ 0, stackedWidth]);
 
+    // var xMarker = d3.scaleTime()
+    //   .domain(d3.extent(userTotalDataVerbose, function(d) { return xMarker(new Date(d.data.key)) }))
+    //   .range([ 0, stackedWidth]);
+
     UserTotal.append("g")
       .attr("transform", "translate(0," + stackedHeight + ")")
       .attr("class", "axis")
@@ -648,6 +643,27 @@ d3.json('data.json', (error, data) => {
     function make_y_gridlines() {
         return d3.axisLeft(y)
             .ticks(10)
+    }
+
+
+    function totalUsersMouseOver(d, i) {
+
+      d3.selectAll(".totalUsersLabel").transition()
+        .text(function (){return parseDate(new Date(d.data.key)) + " Total Number of Users: " + formatNumber(d[1])})
+        // console.log(xMarker(d.data))
+      UserTotal.append("rect")
+        .attr("class", "hoverMarker")
+        .attr("x", x(new Date(d.data.key)))
+        .attr("y", 0)
+        .attr("width", "2px")
+        .attr("height", stackedHeight)
+        .style("fill", "balck");
+    }
+
+    function totalUsersMouseOut(d, i) {
+      d3.selectAll(".totalUsersLabel").transition()
+        .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date)) +  " Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+      d3.selectAll(".hoverMarker").remove()
     }
 
     // add the Y gridlines
