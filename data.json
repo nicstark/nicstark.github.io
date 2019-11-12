@@ -1,7 +1,7 @@
 {"institution": "CU Boulder",
   "date": "08/01/2018 - 04/01/2019",
   "categories":[
-    {"category": "TOTAL USERS", "children": [
+    {"category": "Total Users", "children": [
       {"date":"2018/08/01", "categories": [{"category": "Students", "value": 310}]},
       {"date":"2018/09/01", "categories": [{"category": "Students", "value": 900}]},
       {"date":"2018/10/01", "categories": [{"category": "Students", "value": 1200}]},
@@ -13,172 +13,172 @@
       {"date":"2019/04/01", "categories": [{"category": "Students", "value": 3000}]},
       {"date":"2019/05/01", "categories": [{"category": "Students", "value": 3060}]}
     ]},
-    {"category": "EARN ACTIVITY", "children": [
+    {"category": "Earn Activity", "children": [
       {
-       "category": "LEARNING",
+       "category": "Learning",
        "actions": 10244,
        "earned" : 102440
       },
       {
-       "category": "PIPS",
+       "category": "PIPs",
        "actions": 18210,
        "earned" : 102440
       },
       {
-      "category": "FOOD CHOICES",
+      "category": "Food Choices",
       "actions": 16805,
       "earned" : 102440
       },
       {
-      "category": "ENERGY",
+      "category": "Energy",
       "actions": 1865,
       "earned" : 102440
       },
       {
-       "category": "COMMUNITY",
+       "category": "Community",
        "actions": 323,
        "earned" : 102440
       },
       {
-      "category": "WASTE REDUCTION",
+      "category": "Waste Reduction",
       "actions": 49088,
       "earned" : 102440
       },
       {
-       "category": "HEALTH AND WELLNESS",
+       "category": "Health & Wellness",
        "actions": 37,
        "earned" : 102440
       },
       {
-       "category": "TRANSPORT",
+       "category": "Transport",
        "children": [
          {
-          "category": "TRANSPORT - PUBLIC TRANSIT",
+          "category": "Transport - Public Transit",
           "actions": 3981,
           "earned" : 102440
          },
          {
-          "category": "TRANSPORT - BIKING",
+          "category": "Transport - Biking",
           "actions": 1599,
           "earned" : 102440
          },
          {
-          "category": "TRANSPORT - RIDE SHARING",
+          "category": "Transport - Ride Sharing",
           "actions": 2045,
           "earned" : 102440
          },
          {
-          "category": "TRANSPORT - BIKE SHARING",
+          "category": "Transport - Bike Sharing",
           "actions": 1956,
           "earned" : 102440
          },
          {
-          "category": "TRANSPORT - EV",
+          "category": "Transport - EV",
           "actions": 1284,
           "earned" : 102440
          },
          {
-          "category": "TRANSPORT - CAR SHARING",
+          "category": "Transport - Car Sharing",
           "actions": 984,
           "earned" : 102440
          }
          ]
       },
       {
-       "category": "SHOP",
+       "category": "Shop",
        "children": [
          {
-          "category": "SHOP - CLOTHING & GEAR",
+          "category": "Shop - Clothing & Gear",
           "actions": 3214,
           "earned" : 102440
          },
          {
-          "category": "SHOP - FOOD & DRINK",
+          "category": "Shop - Food & Drink",
           "actions": 1384,
           "earned" : 102440
          },
          {
-          "category": "SHOP - HOME & OFFICE",
+          "category": "Shop - Home & Office",
           "actions": 1121,
           "earned" : 102440
          },
          {
-          "category": "SHOP - PERSONAL CARE",
+          "category": "Shop - Personal Care",
           "actions": 1345,
           "earned" : 102440
          },
          {
-          "category": "SHOP - BOOKS, MUSIC, ETC",
+          "category": "Shop - Books, Music, Etc.",
           "actions": 1235,
           "earned" : 102440
          },
          {
-          "category": "SHOP - ENERGY",
+          "category": "Shop - Energy",
           "actions": 987,
           "earned" : 102440
          },
          {
-          "category": "SHOP - GADGETS",
+          "category": "Shop - Gadgets",
           "actions": 599,
           "earned" : 102440
          }
        ]
       },
       {
-       "category": "SUSTAINABILITY",
+       "category": "Sustainability",
        "actions": 17,
        "earned" : 102440
       },
       {
-       "category": "SHARING",
+       "category": "Sharing",
        "actions": 46,
        "earned" : 102440
       }
      ]},
-    {"category": "ENVIRONMENT", "children": [
+    {"category": "Environment", "children": [
       {"name": "lbs Carbon Saved", "value": 131014},
 
       {"name": "Tree Equivalents", "value": 2730}
       ]},
-    {"category": "ENVIRONMENT BREAKDOWN", "children": [
-      {"category": "BIKING", "actions": 41056, "saved": 53161},
-      {"category": "RIDING THE BUS", "actions": 25608, "saved": 30737},
-      {"category": "CARPOOLING", "actions": 3694, "saved": 12528},
-      {"category": "WATER BOTTLE REFILLING", "actions": 68631, "saved": 12528},
-      {"category": "RECYCLING", "actions": 42055, "saved": 15022}
+    {"category": "Environment Breakdown", "children": [
+      {"category": "Biking", "actions": 41056, "saved": 53161},
+      {"category": "Riding the Bus", "actions": 25608, "saved": 30737},
+      {"category": "Carpooling", "actions": 3694, "saved": 12528},
+      {"category": "Water Bottle Refilling", "actions": 68631, "saved": 12528},
+      {"category": "Recycling", "actions": 42055, "saved": 15022}
       ]},
-    {"category": "INVESTMENT IN EDUCATION", "children": [
+    {"category": "Investment in Education", "children": [
       {"name": "Commitments to PIPs for School", "value": 709},
       {"name": "Donations to PIPs Education Fund", "value": 20068}
       ]},
-    {"category": "LOCAL ECONOMY", "children": [
+    {"category": "Local Economy", "children": [
       {"name": "Value of PIPs Redeemed Locally", "value": 11506},
       {"name": "Spending on Food Locally", "value": 9047}
       ]},
-    {"category": "COMMUNITY & LEARNING", "children": [
+    {"category": "Community & Learning", "children": [
       {"name": "Participating in Volunteer Activity", "value": 27},
       {"name": "Participating in Campus Events", "value": 193},
       {"name": "Participating in Applied Learning Events", "value": 93}
       ]},
-    {"category": "HEALTH & WELLNESS", "children": [
+    {"category": "Health & Wellness", "children": [
       {"name": "Participating in Health/Wellness Class or Program", "value": 40}
       ]},
-    {"category": "ALL USE ACTIVITY", "children": [
-      {"category": "GIFT YOUR PIPS", "actions": 17956, "used": 210297},
-      {"category": "DONATE", "actions": 17956, "used": 212097},
-      {"category": "PIPS FOR SCHOOL", "actions": 17956, "used": 212907},
-      {"category": "SHOP", "children": [
-      {"category": "SHOP - HEALTH & WELLNESS", "actions": 2752, "used": 148048},
-      {"category": "SHOP - FOOD & DRINK", "actions": 42205, "used": 86107},
-      {"category": "SHOP - CLOTHING & GEAR", "actions": 30259, "used": 108009},
-      {"category": "SHOP - HOME & OFFICE", "actions": 30259, "used": 108090},
-      {"category": "SHOP - GADGETS & GAMES", "actions": 30259, "used": 108090},
-      {"category": "SHOP - SMART ENERGY", "actions": 30259, "used": 108009},
-      {"category": "SHOP - BOOKS, MUSIC, ETC", "actions": 30259, "used": 108090},
-      {"category": "SHOP - SERVICES", "actions": 30259, "used": 10809},
-      {"category": "SHOP - PERSONAL CARE", "actions": 30259, "used": 108009},
-      {"category": "SHOP - MOMS & KIDS", "actions": 30259, "used": 108009},
-      {"category": "SHOP - TRAVEL & ADVENTURE", "actions": 30259, "used": 100809}
+    {"category": "All Use Activity", "children": [
+      {"category": "Gift Your PIPs", "actions": 17956, "used": 210297},
+      {"category": "Donate", "actions": 17956, "used": 212097},
+      {"category": "PIPs for School", "actions": 17956, "used": 212907},
+      {"category": "Shop", "children": [
+      {"category": "Shop - Health & Wellness", "actions": 2752, "used": 148048},
+      {"category": "Shop - Food & Drink", "actions": 42205, "used": 86107},
+      {"category": "Shop - Clothing & Gear", "actions": 30259, "used": 108009},
+      {"category": "Shop - Home & Office", "actions": 30259, "used": 108090},
+      {"category": "Shop - Gadgets & Games", "actions": 30259, "used": 108090},
+      {"category": "Shop - Smart Energy", "actions": 30259, "used": 108009},
+      {"category": "Shop - Books, Music, Etc.", "actions": 30259, "used": 108090},
+      {"category": "Shop - Services", "actions": 30259, "used": 10809},
+      {"category": "Shop - Personal Care", "actions": 30259, "used": 108009},
+      {"category": "Shop - Moms & Kids", "actions": 30259, "used": 108009},
+      {"category": "Shop - Travel & Adventure", "actions": 30259, "used": 100809}
       ]}
       ]}
   ]

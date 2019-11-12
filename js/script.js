@@ -843,23 +843,27 @@ d3.json('data.json', (error, data) => {
     function handleMouseOver(d, i) {
       d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
         .style("opacity", .5);
+      d3.selectAll(".ActionsTakenFigure")
+        .text(formatNumber(d.actions));
+      d3.selectAll(".PointsEarnedFigure")
+        .text(formatNumber(d.earned));
       d3.selectAll(".ActionsTakenLabel")
-        .text(formatNumber(d.actions) + " Actions Taken")
-        .style("fill", ActionsTakenColor(d.category));
+        .text(d.category + " Actions Taken");
       d3.selectAll(".PointsEarnedLabel")
-        .text(formatNumber(d.earned) + " Points Earned")
-        .style("fill", ActionsTakenColor(d.category));
+        .text(d.category + " Points Earned");
     }
 
     function handleMouseOut(d, i) {
       d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
         .style("opacity", 1);
-      d3.selectAll(".PointsEarnedLabel")
-        .text("Points Earned Breakdown")
-        .style('fill', '#4ba26c');
+      d3.selectAll(".ActionsTakenFigure")
+        .text(formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next)))
+      d3.selectAll(".PointsEarnedFigure")
+        .text(formatNumber(ParentCategories.map(item => item.earned).reduce((prev, next) => prev + next)))
       d3.selectAll(".ActionsTakenLabel")
-        .text("Actions Taken Breakdown")
-        .style('fill', '#71bf93');
+        .text("Total Actions Taken");
+      d3.selectAll(".PointsEarnedLabel")
+        .text("Total Points Earned");
     }
 
 
@@ -1046,6 +1050,7 @@ d3.json('data.json', (error, data) => {
     TotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("class", "ActionsTakenLabel")
       .text("Total Actions Taken")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1056,6 +1061,7 @@ d3.json('data.json', (error, data) => {
     TotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2  )
       .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("class", "ActionsTakenFigure")
       .text(formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next)))
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1067,6 +1073,7 @@ d3.json('data.json', (error, data) => {
     TotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("class", "PointsEarnedLabel")
       .text("Total PIPs Earned")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1077,6 +1084,7 @@ d3.json('data.json', (error, data) => {
     TotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("class", "PointsEarnedFigure")
       .text(formatNumber(ParentCategories.map(item => item.earned).reduce((prev, next) => prev + next)))
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1312,7 +1320,7 @@ d3.json('data.json', (error, data) => {
     svg6.append('text')
       .attr("x", width/-2 + width/30)
       .attr("y", height/-3)
-      .text("ALL USE ACTIVITY")
+      .text("USE ACTIVITY")
       .style("text-anchor", "start")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -1501,21 +1509,21 @@ d3.json('data.json', (error, data) => {
     svg6.append('text')
       .attr("x", TotalBarWidth/-1.5)
       .attr("y", height/2.1)
-      .text("Use Actions Breakdown")
+      .text("Breakdown By Actions Taken")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "1.5vw")
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
       .style('fill', '#58bbc0');
 
     svg6.append('text')
       .attr("x", TotalBarWidth/1.5)
       .attr("y",height/2.1)
-      .text("Use PIPs Breakdown")
+      .text("Breakdown By PIPs Used")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "1.5vw")
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
       .style('fill', '#5065a1');
 
     UseBreakdown = d3.select('.svg6')
