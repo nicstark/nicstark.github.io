@@ -195,11 +195,20 @@ d3.json('data.json', (error, data) => {
 
   thanks()
 
+  // d3.selectAll(".page")
+  //   .append("path")
+  //   .attr("d", borderLine(pageBorderTop))
+  //   .style("stroke-width", "1px")
+  //   .style("stroke", "322f2b");
+
   d3.selectAll(".page")
-    .append("path")
-    .attr("d", borderLine(pageBorderTop))
-    .style("stroke-width", "1px")
-    .style("stroke", "322f2b");
+    .append("rect")
+    .attr("x", width/-2)
+    .attr("y", (height/-2) +1)
+    .attr("width", width)
+    .attr("height", "1px")
+    .style("opacity", .5)
+    .style("fill", "322f2b");
 
   d3.selectAll(".page").append("svg:image")
     .attr('width', "10%")
@@ -533,6 +542,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "3em")
       .style('fill', '#d35634');
 
+
     svg3.append('text')
       .attr("x", width/-10)
       .attr("y", height/-3)
@@ -650,7 +660,7 @@ d3.json('data.json', (error, data) => {
 
       d3.selectAll(".totalUsersLabel").transition()
         .text(function (){return parseDate(new Date(d.data.key)) + " Total Number of Users: " + formatNumber(d[1])})
-        // console.log(xMarker(d.data))
+
       UserTotal.append("rect")
         .attr("class", "hoverMarker")
         .attr("x", x(new Date(d.data.key)))
@@ -683,9 +693,6 @@ d3.json('data.json', (error, data) => {
       "#e8806c",
       "#FFF"]);
 
-    var tooltip = d3.select('#page3').append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
     // Show the areas
 
     UserTotal.selectAll("mylayers")
@@ -940,7 +947,6 @@ d3.json('data.json', (error, data) => {
       .attr("font-weight", "Bold")
       .attr("font-size", "4vmin")
       .style('fill', '#71bf93');
-
     const EarnedSlice = Earned.selectAll('g.EarnedSlice')
       .data(partition(PointsEarnedData).descendants());
     EarnedSlice.exit().remove();
@@ -1492,6 +1498,26 @@ d3.json('data.json', (error, data) => {
     //   .attr("font-size", "2.5vw")
     //   .style('fill', '#5065a1');
 
+    svg6.append('text')
+      .attr("x", TotalBarWidth/-1.5)
+      .attr("y", height/2.1)
+      .text("Use Actions Breakdown")
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "Bold")
+      .attr("font-size", "1.5vw")
+      .style('fill', '#58bbc0');
+
+    svg6.append('text')
+      .attr("x", TotalBarWidth/1.5)
+      .attr("y",height/2.1)
+      .text("Use PIPs Breakdown")
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "Bold")
+      .attr("font-size", "1.5vw")
+      .style('fill', '#5065a1');
+
     UseBreakdown = d3.select('.svg6')
       .attr('width', width/2)
       .attr('height', height/2)
@@ -1563,7 +1589,7 @@ d3.json('data.json', (error, data) => {
     useActivityCell.append("title")
       .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
 
-    UseBreakdown.attr('transform', 'translate('+ ((width/-2) + (width/30) + 0) + ',' + height/-20 + ')');
+    UseBreakdown.attr('transform', 'translate('+ ((width/-2) + (width/30) + 0) + ',' + height/-15 + ')');
 
     PIPsBreakdown = d3.select('.svg6')
       .attr('width', width/2)
@@ -1602,7 +1628,7 @@ d3.json('data.json', (error, data) => {
     usePIPsCell.append("title")
       .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
 
-    PIPsBreakdown.attr('transform', 'translate('+ ((width/2) - (width/30) - UseTreemapSize) + ',' + height/-20 + ')');
+    PIPsBreakdown.attr('transform', 'translate('+ ((width/2) - (width/30) - UseTreemapSize) + ',' + height/-15 + ')');
 
     UseLegend = d3.select('.svg6')
       .attr('width', width/2)
@@ -1658,7 +1684,7 @@ d3.json('data.json', (error, data) => {
 
       .text(d => d.category + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "PIPs: " + formatNumber(d.used) );
 
-    newUseLegend.attr('transform', 'translate(' + 0 + ',' + ( height/-20)  + ')');
+    newUseLegend.attr('transform', 'translate(' + 0 + ',' + ( height/-15)  + ')');
 
   }
 
