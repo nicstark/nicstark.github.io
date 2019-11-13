@@ -912,7 +912,7 @@ d3.json('data.json', (error, data) => {
     EarnActivity.append('text')
       .attr("x", TotalBarWidth/-1.5)
       .attr("y", height/2.1)
-      .text("Breakdown of Actions Taken")
+      .text("Breakdown by Earn Actions")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -942,7 +942,7 @@ d3.json('data.json', (error, data) => {
     EarnActivity.append('text')
       .attr("x", TotalBarWidth/1.5)
       .attr("y", height/2.1)
-      .text("Breakdown of Points Earned")
+      .text("Breakdown by Points Earned")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -1307,6 +1307,7 @@ d3.json('data.json', (error, data) => {
       .style('fill', 'grey')
       .text(pageCounter);
 
+
     UseTotalBar = d3.select('.svg6')
       .attr('width', width/2)
       .attr('height', height/2)
@@ -1343,13 +1344,13 @@ d3.json('data.json', (error, data) => {
     var UsePIPsTotal = UseParentCategories.map(item => item.used).reduce((prev, next) => prev + next);
     UseParentCategories.unshift({category: "ALL USE ACTIVITY", actions: UseActionsTotal, used: UsePIPsTotal, depth: 0});
 
-
+    var originalColor
+    var highlightColor
 
     function handleUseMouseOver(d, i) {
-      // d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
       d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
         .style("stroke", "black")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "2px")
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(d.actions));
       d3.selectAll(".UsePIPsLabel")
@@ -1363,8 +1364,9 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleUseMouseOut(d, i) {
+      d3.selectAll("#brightness").attr("brightness", 0)
       d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
-        .style("stroke-width", "0px");
+        .style("stroke-width", "0px")
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
@@ -1386,11 +1388,9 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(d.data.used));
       d3.selectAll(".UsePIPsCategory")
-        .text(function() {return (d.data.category).toLowerCase() + " Points Used"})
-        .style("text-transform", "capitalize");
+        .text(function() {return (d.data.category) + " Points Used"});
       d3.selectAll(".UseActionsCategory")
-        .text(function() {return (d.data.category).toLowerCase() + " Actions Taken"})
-        .style("text-transform", "capitalize");
+        .text(function() {return (d.data.category) + " Actions Taken"});
     }
 
     function handleUseTreeMouseOut(d, i) {
@@ -1401,11 +1401,10 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(UseActionsTotal));
       d3.selectAll(".UseActionsCategory")
-        .text("Total Actions Taken")
-        .style("text-transform", "capitalize");
+        .text("Total Actions Taken");
       d3.selectAll(".UsePIPsCategory")
-        .text("Total Points Used")
-        .style("text-transform", "capitalize");
+        .text("Total Points Used");
+
     }
 
     UseTotalBar.append('text')
@@ -1424,7 +1423,7 @@ d3.json('data.json', (error, data) => {
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
       .attr("class", "UseActionsCategory")
-      .text("Total Actions Taken")
+      .text("Total Use Actions")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
@@ -1478,7 +1477,7 @@ d3.json('data.json', (error, data) => {
     svg6.append('text')
       .attr("x", TotalBarWidth/-1.5)
       .attr("y", height/2.1)
-      .text("Breakdown By Actions Taken")
+      .text("Breakdown by Use Actions")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -1488,7 +1487,7 @@ d3.json('data.json', (error, data) => {
     svg6.append('text')
       .attr("x", TotalBarWidth/1.5)
       .attr("y",height/2.1)
-      .text("Breakdown By Points Used")
+      .text("Breakdown by Points Used")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
@@ -1815,6 +1814,32 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".TotallbsCarbonSavedLabel")
         .text("Total lbs Carbon Saved");
     }
+    function handleEnvironmentBreakdownMouseOver(d, i) {
+      console.log(d.data.category)
+      d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
+        .style("opacity", .5);
+      d3.selectAll(".TotalCarbonReductionActionsFigure")
+        .text(formatNumber(d.data.actions));
+      d3.selectAll(".TotallbsCarbonSavedFigure")
+        .text(formatNumber(d.data.saved));
+      d3.selectAll(".TotalCarbonReductionActionsLabel")
+        .text(d.data.category + " Actions Taken");
+      d3.selectAll(".TotallbsCarbonSavedLabel")
+        .text(d.data.category + " lbs Carbon Saved");
+    }
+
+    function handleEnvironmentBreakdownMouseOut(d, i) {
+      d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
+        .style("opacity", 1);
+      d3.selectAll(".TotalCarbonReductionActionsFigure")
+        .text(formatNumber(EnvironmentTotalActions));
+      d3.selectAll(".TotallbsCarbonSavedFigure")
+        .text(formatNumber(EnvironmentTotalSaved));
+      d3.selectAll(".TotalCarbonReductionActionsLabel")
+        .text("Total Actions Taken");
+      d3.selectAll(".TotallbsCarbonSavedLabel")
+        .text("Total lbs Carbon Saved");
+    }
 
 
     const EnvironmentBreakdown = d3.select('.svg7')
@@ -1856,6 +1881,8 @@ d3.json('data.json', (error, data) => {
       .style("fill", function(d, i) { return environmentBreakdownColor(i); })
       .style("stroke", "white")
       .style("stroke-width", "1px")
+      .on("mouseover", handleEnvironmentBreakdownMouseOver)
+      .on("mouseout", handleEnvironmentBreakdownMouseOut)
       .append("title")
       .data(environmentData.children)
       .text(function(d){return d.category + '\n' + 'Actions: ' + formatNumber(d.actions) })
@@ -1871,6 +1898,8 @@ d3.json('data.json', (error, data) => {
       .style("fill", function(d, i) { return environmentBreakdownColor(i); })
       .style("stroke", "white")
       .style("stroke-width", "1px")
+      .on("mouseover", handleEnvironmentBreakdownMouseOver)
+      .on("mouseout", handleEnvironmentBreakdownMouseOut)
       .append("title")
       .data(environmentData.children)
       .text(function(d){return d.category + '\n' + 'Saved: ' + formatNumber(d.saved) })
