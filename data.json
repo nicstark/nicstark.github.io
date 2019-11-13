@@ -136,14 +136,9 @@
       }
      ]},
     {"category": "Environment", "children": [
-      {"name": "lbs Carbon Saved", "value": 131014},
-
-      {"name": "Tree Equivalents", "value": 2730}
-      ]},
-    {"category": "Environment Breakdown", "children": [
       {"category": "Biking", "actions": 41056, "saved": 53161},
-      {"category": "Riding the Bus", "actions": 25608, "saved": 30737},
-      {"category": "Carpooling", "actions": 3694, "saved": 12528},
+      {"category": "Riding the Bus", "actions": 25608, "saved": 30373},
+      {"category": "Carpooling", "actions": 3694, "saved": 19930},
       {"category": "Water Bottle Refilling", "actions": 68631, "saved": 12528},
       {"category": "Recycling", "actions": 42055, "saved": 15022}
       ]},

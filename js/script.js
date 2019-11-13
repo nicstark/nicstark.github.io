@@ -5,7 +5,7 @@ var ParentCategories = [];
 
 const width = window.innerWidth,
   height = window.innerHeight,
-  maxRadius = (width / 5) ;
+  maxRadius = (width / 4.5) ;
 
 const formatNumber = d3.format(',d');
 var parseDate = d3.timeFormat("%B %Y");
@@ -52,7 +52,7 @@ const middleArcLine = d => {
 };
 
 var environmentArc = d3.arc()
-  .outerRadius(maxRadius*.5)
+  .outerRadius(maxRadius*.65)
   .innerRadius(0);
 
 var actionsPie = d3.pie()
@@ -109,50 +109,46 @@ d3.json('data.json', (error, data) => {
   var pageCounter = 1;
 
   for (var i = 0; i < data.categories.length; i++) {
-    if (data.categories[i].category == "USER BREAKDOWN"){
+    if (data.categories[i].category.toUpperCase() == "USER BREAKDOWN"){
       var userBreakdownProto = data.children[i].children[0];
       var userBreakdownData = d3.hierarchy(userBreakdownProto).sum(function(d) { return d.value; });
     }
 
-    else if (data.categories[i].category == "TOTAL USERS"){
+    else if (data.categories[i].category.toUpperCase() == "TOTAL USERS"){
       var userTotalData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "EARN ACTIVITY"){
+    else if (data.categories[i].category.toUpperCase() == "EARN ACTIVITY"){
       var earnActivityData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "ACTIONS TAKEN OVER TIME"){
+    else if (data.categories[i].category.toUpperCase() == "ACTIONS TAKEN OVER TIME"){
       var actionsOverTimeData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "ALL USE ACTIVITY"){
+    else if (data.categories[i].category.toUpperCase() == "ALL USE ACTIVITY"){
       var useActivityData = data.categories[i]
       var useActivityActionsData = d3.hierarchy(useActivityData).sum(function(d) { return d.actions; });
       var useActivityPIPsData = d3.hierarchy(useActivityData).sum(function(d) { return d.used; });
     }
 
-    else if (data.categories[i].category == "ENVIRONMENT"){
+    else if (data.categories[i].category.toUpperCase() == "ENVIRONMENT"){
       var environmentData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "ENVIRONMENT BREAKDOWN"){
-      var environmentBreakdownData = data.categories[i]
-    }
-
-    else if (data.categories[i].category == "INVESTMENT IN EDUCATION"){
+    else if (data.categories[i].category.toUpperCase() == "INVESTMENT IN EDUCATION"){
       var investmentEducationData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "LOCAL ECONOMY"){
+    else if (data.categories[i].category.toUpperCase() == "LOCAL ECONOMY"){
       var localEconomyData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "COMMUNITY & LEARNING"){
+    else if (data.categories[i].category.toUpperCase() == "COMMUNITY & LEARNING"){
       var communityLearningData = data.categories[i]
     }
 
-    else if (data.categories[i].category == "HEALTH & WELLNESS"){
+    else if (data.categories[i].category.toUpperCase() == "HEALTH & WELLNESS"){
       var healthWellnessData = data.categories[i]
     }
 
@@ -161,14 +157,16 @@ d3.json('data.json', (error, data) => {
   }
 
     var environmentBreakdownColor = d3.scaleOrdinal()
-      .domain(actionsPie(environmentBreakdownData.children))
+      .domain(actionsPie(environmentData.children))
       .range([
         "#FFF",
         "#e26442",
         "#e9bc57",
         "#4d5494",
         "#75c4b7",
-        "#4ba26c"
+        "grey",
+        "#e8806c",
+        "#c04f8a"
       ])
 
   if (userBreakdownData != null){
@@ -183,8 +181,6 @@ d3.json('data.json', (error, data) => {
     try {useActivity(); pageCounter +=1;} catch (err){console.log(err)}}
   if (environmentData != null){
     try {environment(); pageCounter +=1;} catch (err){console.log(err)}}
-  if (environmentBreakdownData != null){
-    try {environmentBreakdown();} catch (err){console.log(err)}}
   if (investmentEducationData != null || localEconomyData != null){
     try {page8(); pageCounter +=1;} catch (err){console.log(err)}}
   if (communityLearningData != null || healthWellnessData != null){
@@ -261,29 +257,6 @@ d3.json('data.json', (error, data) => {
       .style("opacity", 1);
   }
 
-  function handleEnvironmentMouseOver(d, i) {
-    d3.selectAll("." + stripPunctSpace(d.category)).transition()
-      .style("opacity", .5);
-    d3.selectAll(".EnvironmentActionsLabel")
-      .text(formatNumber(d.actions) + " Actions Taken")
-      // .data(environmentArc)
-      .style("fill", environmentBreakdownColor(i));
-    d3.selectAll(".EnvironmentSavedLabel")
-      .text(formatNumber(d.saved) + " lbs Carbon Saved")
-      // .attr("d", environmentArc)
-      .style("fill", environmentBreakdownColor(i));
-  }
-
-  function handleEnvironmentMouseOut(d, i) {
-    d3.selectAll("." + stripPunctSpace(d.category)).transition()
-      .style("opacity", 1);
-      d3.selectAll(".EnvironmentActionsLabel")
-      .text("Actions Taken Breakdown")
-      .style('fill', '#71bf93');
-    d3.selectAll(".EnvironmentSavedLabel")
-      .text("Carbon Saved Breakdown")
-      .style('fill', '#4ba26c');
-  }
 
 
 
@@ -544,9 +517,9 @@ d3.json('data.json', (error, data) => {
 
 
     svg3.append('text')
-      .attr("x", width/-10)
-      .attr("y", height/-3)
-      .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date))  + "Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+      .attr("x", width/-6)
+      .attr("y", height/-3.5)
+      .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date))  + " Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
       .attr("class", "totalUsersLabel")
       .style("text-anchor", "start")
       .attr("font-family", "Bryant Pro, sans-serif")
@@ -809,7 +782,7 @@ d3.json('data.json', (error, data) => {
     //   .style("alignment-baseline", "middle")
     //   .style("font-size", "1.5vw");
 
-    UserTotal.attr('transform', 'translate(' + width*-.4 + ',' + height*-.3 + ')');
+    UserTotal.attr('transform', 'translate(' + width*-.4 + ',' + height*-.25 + ')');
   }
 
   //-------------------------------- 4 - Earn Activity
@@ -841,7 +814,7 @@ d3.json('data.json', (error, data) => {
 
 
     function handleMouseOver(d, i) {
-      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
+      d3.selectAll("." + stripPunctSpace(d.category)).transition()
         .style("opacity", .5);
       d3.selectAll(".ActionsTakenFigure")
         .text(formatNumber(d.actions));
@@ -854,7 +827,7 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleMouseOut(d, i) {
-      d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
+      d3.selectAll("." + stripPunctSpace(d.category)).transition()
         .style("opacity", 1);
       d3.selectAll(".ActionsTakenFigure")
         .text(formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next)))
@@ -865,9 +838,6 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".PointsEarnedLabel")
         .text("Total Points Earned");
     }
-
-
-
 
     const svg4 = d3.select('#page4').append('svg')
       .attr('class', "page svg4")
@@ -905,13 +875,10 @@ d3.json('data.json', (error, data) => {
       .attr('height', height/2)
       .append('g');
 
-
     const EarnActivity = d3.select('.svg4')
       .attr('width', width)
       .attr('height', height)
       .append('g');
-
-
 
     EarnActivity.append('text')
       .attr("x", width/-2 + width/30)
@@ -938,19 +905,22 @@ d3.json('data.json', (error, data) => {
     newActionsSlice.append('path')
       .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
       .attr("display", function (d) {return d.depth ? null : "none"; })
-      .attr('class', function (d) {return d.data.category.replace(/\s+/g, '');})
-      .attr('d', arc);
+      .attr('class', function (d) {return stripPunctSpace(d.data.category);})
+      .attr('d', arc)
+      .style("cursor", "default");
 
     EarnActivity.append('text')
-      .attr("class", "ActionsTakenLabel")
-      .attr("x", TotalBarWidth/-2)
-      .attr("y",0)
-      .text("Actions Taken Breakdown")
+      .attr("x", TotalBarWidth/-1.5)
+      .attr("y", height/2.1)
+      .text("Breakdown of Actions Taken")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "4vmin")
-      .style('fill', '#71bf93');
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
+      .style('fill', '#grey');
+
+
+
     const EarnedSlice = Earned.selectAll('g.EarnedSlice')
       .data(partition(PointsEarnedData).descendants());
     EarnedSlice.exit().remove();
@@ -966,19 +936,18 @@ d3.json('data.json', (error, data) => {
       .attr('class', 'main-arc')
       .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
       .attr("display", function (d) { return d.depth ? null : "none"; })
-      .attr('class', function (d) { return d.data.category.replace(/\s+/g, '');})
+      .attr('class', function (d) { return stripPunctSpace(d.data.category);})
       .attr('d', arc);
 
     EarnActivity.append('text')
-      .attr("class", "PointsEarnedLabel")
-      .attr("x", TotalBarWidth/2)
-      .attr("y", 0)
-      .text("Points Earned Breakdown")
+      .attr("x", TotalBarWidth/1.5)
+      .attr("y", height/2.1)
+      .text("Breakdown of Points Earned")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "4vmin")
-      .style('fill', '#4ba26c');
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
+      .style('fill', '#grey');
 
 
     for (var i = 0; i < ActionsTakenData.data.children.length; i++) {
@@ -1009,17 +978,17 @@ d3.json('data.json', (error, data) => {
       .attr("width", width/4)
       .attr("height", barHeight)
       .style('fill',  d => {return ActionsTakenColor(d.category)})
-      .attr('class', function (d) {return d.category.replace(/\s+/g, '');})
+      .attr('class', function (d) {return stripPunctSpace(d.category);})
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut);
 
     newLegend.append('text')
       .attr("x", 0)
       .attr("y", function(d, i) {
-        return barHeight /2 + (i * barHeight);
+        return barHeight /1.6 + (i * barHeight);
       })
       // .attr("dy", "0.7vmin")
-      .text(d => {return d.category})
+      .text(d => {return d.category.toUpperCase()})
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
@@ -1092,9 +1061,9 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "8vmin")
       .style('fill', 'white');
 
-    newLegend.attr('transform', 'translate(' + 0 + ',' + (maxRadius*.8 - legendHeight/2)  + ')');
-    ActionsTaken.attr('transform', 'translate(' + (TotalBarWidth*-1 + maxRadius*.7 ) + ',' + maxRadius*.8 + ')');
-    Earned.attr('transform', 'translate('  + (TotalBarWidth*1 - maxRadius*.7 ) + ',' + maxRadius*.8 + ')');
+    newLegend.attr('transform', 'translate(' + 0 + ',' + (maxRadius*.5 - legendHeight/2)  + ')');
+    ActionsTaken.attr('transform', 'translate(' + (TotalBarWidth*-1 + maxRadius*.7 ) + ',' + maxRadius*.5 + ')');
+    Earned.attr('transform', 'translate('  + (TotalBarWidth*1 - maxRadius*.7 ) + ',' + maxRadius*.5 + ')');
   }
 
   //----------------------- 5 Earn Activity 2 Actions Over time
@@ -1259,10 +1228,11 @@ d3.json('data.json', (error, data) => {
       .data(actionsOverTimeStackedData)
       .enter()
       .append("path")
-      .attr("class", function(d) {return actionsOverTimeStackCategories[d.key].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s+/g, '') })
+      // .attr("class", function(d) {return actionsOverTimeStackCategories[d.key].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s+/g, '') })
+      .attr("class", function(d) {return stripPunctSpace(actionsOverTimeStackCategories[d.key])})
       .style("fill", function(d) { name = actionsOverTimeStackCategories[d.key] ; if (name.includes(' - ')){return actionsOverTimeColor(name.split(' - ')[0])} else {return actionsOverTimeColor(name);} })
       .attr("d", d3.area()
-        .x(function(d, i) { return actionsOverTimex(new Date(d.data.key)); })
+        .x(function(d, i) { return actionsOverTimex(new Date(d.data.key))})
         .y0(function(d) { return actionsOverTimey(d[0]); })
         .y1(function(d) { return actionsOverTimey(d[1]); })
       )
@@ -1363,7 +1333,7 @@ d3.json('data.json', (error, data) => {
       if (useActivityData.children[i].children){
         var UseParentActions = useActivityData.children[i].children.map(item => item.actions).reduce((prev, next) => prev + next)
         var UseParentPIPs = useActivityData.children[i].children.map(item => item.used).reduce((prev, next) => prev + next)
-        UseParentCategories.push({category:useActivityData.children[i].category, actions: UseParentActions, used: UseParentPIPs})
+        UseParentCategories.push({category:useActivityData.children[i].category.toUpperCase(), actions: UseParentActions, used: UseParentPIPs})
       }
       else{UseParentCategories.push(useActivityData.children[i])
       }
@@ -1377,7 +1347,7 @@ d3.json('data.json', (error, data) => {
 
     function handleUseMouseOver(d, i) {
       // d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-      d3.selectAll("." + stripPunctSpace(d.category)).transition()
+      d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
         .style("stroke", "black")
         .style("stroke-width", "2px");
       d3.selectAll(".UseActionsLabel")
@@ -1385,23 +1355,22 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(d.used));
       d3.selectAll(".UsePIPsCategory")
-        .text(function() {return (d.category).toLowerCase() + " Points Used"})
-        .style("text-transform", "capitalize");
+        .text(function() {if (d.category == "ALL USE ACTIVITY") {return "Total Points Used"} else {return (d.category) + " Points Used"}});
+        // .style("text-transform", "capitalize");
       d3.selectAll(".UseActionsCategory")
-        .text(function() {return (d.category).toLowerCase() + " Actions"})
-        .style("text-transform", "capitalize");
+        .text(function() {if (d.category == "ALL USE ACTIVITY") {return "Total Actions Taken"} else {return (d.category) + " Actions Taken"}});
+        // .style("text-transform", "capitalize");
     }
 
     function handleUseMouseOut(d, i) {
-      // d3.selectAll("." + d.category.replace(/\s+/g, '')).transition()
-      d3.selectAll("." + stripPunctSpace(d.category)).transition()
+      d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
         .style("stroke-width", "0px");
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(UseActionsTotal));
       d3.selectAll(".UseActionsCategory")
-        .text("Total Actions")
+        .text("Total Actions Taken")
         .style("text-transform", "capitalize");
       d3.selectAll(".UsePIPsCategory")
         .text("Total Points Used")
@@ -1409,7 +1378,7 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleUseTreeMouseover(d, i) {
-      d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
+      d3.selectAll("." + stripPunctSpace(d.data.category).toUpperCase()).transition()
         .style("stroke", "black")
         .style("stroke-width", "2px");
       d3.selectAll(".UseActionsLabel")
@@ -1420,19 +1389,19 @@ d3.json('data.json', (error, data) => {
         .text(function() {return (d.data.category).toLowerCase() + " Points Used"})
         .style("text-transform", "capitalize");
       d3.selectAll(".UseActionsCategory")
-        .text(function() {return (d.data.category).toLowerCase() + " Actions"})
+        .text(function() {return (d.data.category).toLowerCase() + " Actions Taken"})
         .style("text-transform", "capitalize");
     }
 
     function handleUseTreeMouseOut(d, i) {
-      d3.selectAll("."+ stripPunctSpace(d.data.category)).transition()
+      d3.selectAll("."+ stripPunctSpace(d.data.category).toUpperCase()).transition()
         .style("stroke-width", "0px");
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(UseActionsTotal));
       d3.selectAll(".UseActionsCategory")
-        .text("Total Actions")
+        .text("Total Actions Taken")
         .style("text-transform", "capitalize");
       d3.selectAll(".UsePIPsCategory")
         .text("Total Points Used")
@@ -1455,11 +1424,11 @@ d3.json('data.json', (error, data) => {
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
       .attr("y", (height/-10) - TotalBarHeight/4)
       .attr("class", "UseActionsCategory")
-      .text("Total Actions")
+      .text("Total Actions Taken")
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
-      .attr("font-size", "4vmin")
+      .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
     UseTotalBar.append('text')
@@ -1481,7 +1450,7 @@ d3.json('data.json', (error, data) => {
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
-      .attr("font-size", "4vmin")
+      .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
     // svg6.append('text')
@@ -1514,17 +1483,17 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#58bbc0');
+      .style('fill', '#grey');
 
     svg6.append('text')
       .attr("x", TotalBarWidth/1.5)
       .attr("y",height/2.1)
-      .text("Breakdown By PIPs Used")
+      .text("Breakdown By Points Used")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#5065a1');
+      .style('fill', '#grey');
 
     UseBreakdown = d3.select('.svg6')
       .attr('width', width/2)
@@ -1532,7 +1501,7 @@ d3.json('data.json', (error, data) => {
       .append('g');
 
     const useTreemap = d3.treemap()
-      .size([maxRadius*1.6, maxRadius*1.600001])
+      .size([maxRadius*1.45, maxRadius*1.4500001])
       .paddingOuter(3)
       .paddingInner(3)
       .round(true);
@@ -1546,11 +1515,11 @@ d3.json('data.json', (error, data) => {
       if(useActivityActionsData.data.children[i].hasOwnProperty("categories"))
       {
 
-      useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0] + 1)
-      useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0] + 2)
+      useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0].toUpperCase() + 1)
+      useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0].toUpperCase() + 2)
       }
       else {
-        useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0] + 1)}
+        useActivityActionCategories.push(useActivityActionsData.data.children[i].category.split(" ")[0].toUpperCase() + 1)}
       }
 
     var useActivityColor = d3.scaleOrdinal().domain(useActivityActionCategories)
@@ -1583,16 +1552,16 @@ d3.json('data.json', (error, data) => {
 
 
     useActivityCell.append("rect")
-      .attr("class", function(d) {return "ALLUSEACTIONS" + " "+ "useActivity " + d.data.category.split(" ")[0] + " " + stripPunctSpace(d.data.category); })
+      .attr("class", function(d) {return "ALLUSEACTIONS" + " "+ "useActivity " + d.data.category.split(" ")[0].toUpperCase() + " " + stripPunctSpace(d.data.category).toUpperCase(); })
       .attr("width", function(d, i) {if (i == 0) {UseTreemapSize = d.x1 - d.x0};  return d.x1 - d.x0; })
       .attr("height", function(d) { return d.y1 - d.y0; })
       .style("fill", function(d,i) {
-       return useActivityColor(d.data.category.split(" ")[0] + d.depth); });
+       return useActivityColor(d.data.category.split(" ")[0].toUpperCase() + d.depth); });
 
     useActivityCell.append("clipPath")
-      .attr("id", function(d) { return "clip-" + d.data.category; })
+      .attr("id", function(d) { return "clip-" + d.data.category.toUpperCase(); })
       .append("use")
-      .attr("xlink:href", function(d) { return "#rect-" + d.data.category + ""; });
+      .attr("xlink:href", function(d) { return "#rect-" + d.data.category.toUpperCase() + ""; });
 
     useActivityCell.append("title")
       .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
@@ -1618,23 +1587,23 @@ d3.json('data.json', (error, data) => {
       .each(function(d) { d.node = this; });
 
     usePIPsCell.append("rect")
-      .attr("class", function(d) { return "ALLUSEACTIONS" + " " + "usePIPs " + d.data.category.split(" ")[0] + " " + stripPunctSpace(d.data.category); })
+      .attr("class", function(d) { return "ALLUSEACTIONS" + " " + "usePIPs " + d.data.category.split(" ")[0].toUpperCase() + " " + stripPunctSpace(d.data.category).toUpperCase(); })
       .attr("width", function(d, i) {if (i == 0) {UseTreemapSize = d.x1 - d.x0};  return d.x1 - d.x0; })
       .attr("height", function(d) { return d.y1 - d.y0; })
       .style("fill", function(d,i) {
         // return useActivityColor(d.data.name.split(" ")[0] + d.depth); });
-        return useActivityColor(d.data.category.split(" ")[0] + d.depth); });
+        return useActivityColor(d.data.category.split(" ")[0].toUpperCase() + d.depth); });
 
 
 
 
     usePIPsCell.append("clipPath")
-      .attr("id", function(d) { return "clip-" + d.data.category; })
+      .attr("id", function(d) { return "clip-" + d.data.category.toUpperCase(); })
       .append("use")
-      .attr("xlink:href", function(d) { return "#rect-" + d.data.category + ""; });
+      .attr("xlink:href", function(d) { return "#rect-" + d.data.category.toUpperCase() + ""; });
 
     usePIPsCell.append("title")
-      .text(function(d) { return d.data.category + "\n" + formatNumber(d.value); });
+      .text(function(d) { return d.data.category.toUpperCase() + "\n" + formatNumber(d.value); });
 
     PIPsBreakdown.attr('transform', 'translate('+ ((width/2) - (width/30) - UseTreemapSize) + ',' + height/-15 + ')');
 
@@ -1664,12 +1633,12 @@ d3.json('data.json', (error, data) => {
       .attr("height", useLegendBarHeight)
       .style('fill',  d => {
         // return useActivityColor(d.name)
-        if (d.category.split(" ")[0] == "ALL"){return useActivityColor("ALL0")}
+        if (d.category.split(" ")[0].toUpperCase() == "ALL"){return useActivityColor("ALL0")}
         else{
-        return useActivityColor(d.category.split(" ")[0] + 1);
+        return useActivityColor(d.category.split(" ")[0].toUpperCase() + 1);
       }
       })
-      .attr('class', function (d) { return stripPunctSpace(d.category)})
+      .attr('class', function (d) { return stripPunctSpace(d.category).toUpperCase()})
       .on("mouseover", handleUseMouseOver)
       .on("mouseout", handleUseMouseOut);
 
@@ -1679,7 +1648,7 @@ d3.json('data.json', (error, data) => {
         return useLegendBarHeight /2 + (i * useLegendBarHeight);
       })
       // .attr("dy", ".7vmin")
-      .text(d => {return d.category})
+      .text(d => {return d.category.toUpperCase()})
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
@@ -1701,8 +1670,12 @@ d3.json('data.json', (error, data) => {
 
   function environment(){
 
+      const EnvironmentTotalActions =  environmentData.children.map(item => item.actions).reduce((prev, next) => prev + next);
+      const EnvironmentTotalSaved =  environmentData.children.map(item => item.saved).reduce((prev, next) => prev + next);
+      const TreeEquivalents = Math.round(EnvironmentTotalSaved/48);
 
-      var EnvironmentBarSections = environmentData.children.length;
+      var EnvironmentBarSections = 3
+      // var EnvironmentBarSections = environmentData.children.length;
       var EnvironmentTotalBarWidth = (width/EnvironmentBarSections) - (width/180);
       var EnvironmentTotalBarHeight = Math.round(height*.2);
       var EnvironmentTotalBarY = height*-.23;
@@ -1763,13 +1736,15 @@ d3.json('data.json', (error, data) => {
       .attr('height', height/2)
       .append('g');
 
+    environmentTotalBarData = [{"name": "Total Carbon Reduction Actions", "value": EnvironmentTotalActions},{"name" : "Tree Equivalents", "value": TreeEquivalents}, {"name" : "Total lbs Carbon Saved", "value" : EnvironmentTotalSaved}]
 
     const environmentTotalBar = EnvironmentTotalBar.selectAll('g.environmentTotalBar')
-        .data(environmentData.children);
+        .data(environmentTotalBarData);
     EnvironmentTotalBar.exit().remove();
 
     const newEnvironmentTotalBar = environmentTotalBar.enter()
       .append('g').attr('class', 'environmentTotalBar');
+
 
     newEnvironmentTotalBar.append('rect')
       .attr("x", function(d, i){return EnvironmentTotalBarScaler(i)})
@@ -1780,16 +1755,17 @@ d3.json('data.json', (error, data) => {
       .attr('class', function (d) { return stripPunctSpace(d.name)});
 
     newEnvironmentTotalBar.append('text')
-      .attr("x", function(d, i){return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2})
+      .attr("x", function(d, i){if (i==0) {return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2.08} else {return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2}})
       .attr("y", function(d, i) {
-        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.8;
+        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.7;
       })
       .attr("dy", ".7vmin")
+      .attr("class", function(d) {return stripPunctSpace(d.name) +"Label"})
       .text(d => {return d.name})
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
-      .attr("font-size", "2.5vw")
+      .attr("font-size", "1.8vw")
       .style('fill', 'white');
 
     newEnvironmentTotalBar.append('text')
@@ -1798,6 +1774,7 @@ d3.json('data.json', (error, data) => {
         return EnvironmentTotalBarY + EnvironmentTotalBarHeight /2;
       })
       .attr("dy", ".7vmin")
+      .attr("class", function(d) {return stripPunctSpace(d.name) +"Figure"})
       .text(d => {return formatNumber(d.value)})
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
@@ -1807,39 +1784,38 @@ d3.json('data.json', (error, data) => {
 
 
 
-
-    svg7.append('text')
-      .attr("class", "EnvironmentActionsLabel")
-      .attr("x", TotalBarWidth/-1.5)
-      .attr("y",EnvironmentTotalBarHeight/3)
-      .text("Actions Taken Breakdown")
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "2.5vw")
-      .style('fill', '#71bf93');
-
-    svg7.append('text')
-      .attr("class", "EnvironmentSavedLabel")
-      .attr("x", TotalBarWidth/1.5)
-      .attr("y",EnvironmentTotalBarHeight/3)
-      .text("Carbon Saved Breakdown")
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "Bold")
-      .attr("font-size", "2.5vw")
-      .style('fill', '#4ba26c');
-
-
-  }
-
-  function environmentBreakdown(){
-
-    var EnvironmentLegendBarWidth = (width - (width/45))/3;
+    var EnvironmentLegendBarWidth = width/4;
     var EnvironmentTotalBarHeight = Math.round(height*.2);
     var EnvironmentTotalBarY = 0;
     var EnvironmentTotalBarTextY1 = Math.round(TotalBarHeight*.8);
     var EnvironmentTotalBarTextY2 = Math.round(TotalBarHeight*.5);
+
+    function handleEnvironmentMouseOver(d, i) {
+      d3.selectAll("." + stripPunctSpace(d.category)).transition()
+        .style("opacity", .5);
+      d3.selectAll(".TotalCarbonReductionActionsFigure")
+        .text(formatNumber(d.actions));
+      d3.selectAll(".TotallbsCarbonSavedFigure")
+        .text(formatNumber(d.saved));
+      d3.selectAll(".TotalCarbonReductionActionsLabel")
+        .text(d.category + " Actions Taken");
+      d3.selectAll(".TotallbsCarbonSavedLabel")
+        .text(d.category + " lbs Carbon Saved");
+    }
+
+    function handleEnvironmentMouseOut(d, i) {
+      d3.selectAll("." + stripPunctSpace(d.category)).transition()
+        .style("opacity", 1);
+      d3.selectAll(".TotalCarbonReductionActionsFigure")
+        .text(formatNumber(EnvironmentTotalActions));
+      d3.selectAll(".TotallbsCarbonSavedFigure")
+        .text(formatNumber(EnvironmentTotalSaved));
+      d3.selectAll(".TotalCarbonReductionActionsLabel")
+        .text("Total Actions Taken");
+      d3.selectAll(".TotallbsCarbonSavedLabel")
+        .text("Total lbs Carbon Saved");
+    }
+
 
     const EnvironmentBreakdown = d3.select('.svg7')
       .attr('width', width)
@@ -1847,20 +1823,45 @@ d3.json('data.json', (error, data) => {
       .append('g');
 
     var environmentActionsBreakdownPie = EnvironmentBreakdown.selectAll(".environmentActionsArc")
-      .data(actionsPie(environmentBreakdownData.children))
+      .data(actionsPie(environmentData.children))
       .enter().append("g")
       .attr("class", "environmentActionsArc");
 
+
+    environmentActionsBreakdownPie.append('text')
+      // .attr("class", "EnvironmentActionsLabel")
+      .attr("x",0 )
+      .attr("y",EnvironmentTotalBarHeight*1.28)
+      .text("Actions Taken Breakdown")
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
+      .style('fill', '#grey');
+
+    environmentActionsBreakdownPie.append('text')
+      // .attr("class", "EnvironmentSavedLabel")
+      .attr("x", TotalBarWidth*1.35)
+      .attr("y",EnvironmentTotalBarHeight*1.28)
+      .text("Carbon Saved Breakdown")
+      .style("text-anchor", "middle")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "500")
+      .attr("font-size", "1vw")
+      .style('fill', '#grey');
+
     environmentActionsBreakdownPie.append("path")
       .attr("d", environmentArc)
-      .attr("class", function(d) {return stripPunctSpace(d.data.category) })
+      .attr("class", function(d) {return stripPunctSpace(d.data.category)})
       .style("fill", function(d, i) { return environmentBreakdownColor(i); })
+      .style("stroke", "white")
+      .style("stroke-width", "1px")
       .append("title")
-      .data(environmentBreakdownData.children)
+      .data(environmentData.children)
       .text(function(d){return d.category + '\n' + 'Actions: ' + formatNumber(d.actions) })
 
     var environmentSavedBreakdownPie = EnvironmentBreakdown.selectAll(".environmentSavedArc")
-      .data(savedPie(environmentBreakdownData.children))
+      .data(savedPie(environmentData.children))
       .enter().append("g")
       .attr("class", "environmentSavedArc");
 
@@ -1868,8 +1869,10 @@ d3.json('data.json', (error, data) => {
       .attr("d", environmentArc)
       .attr("class", function(d) {return stripPunctSpace(d.data.category)})
       .style("fill", function(d, i) { return environmentBreakdownColor(i); })
+      .style("stroke", "white")
+      .style("stroke-width", "1px")
       .append("title")
-      .data(environmentBreakdownData.children)
+      .data(environmentData.children)
       .text(function(d){return d.category + '\n' + 'Saved: ' + formatNumber(d.saved) })
 
 
@@ -1879,21 +1882,21 @@ d3.json('data.json', (error, data) => {
       .append('g');
 
     const environmentBreakdownLegend = EnvironmentBreakdownLegend.selectAll('g.environmentBreakdownLegend')
-        .data(environmentBreakdownData.children);
+        .data(environmentData.children);
     EnvironmentBreakdownLegend.exit().remove();
 
     const newEnvironmentBreakdownLegend = environmentBreakdownLegend.enter()
       .append('g').attr('class', 'environmentBreakdownLegend');
 
-    var environmentBreakdownLegendHeight = maxRadius*1;
-    var environmentBreakdownLegendBarHeight = environmentBreakdownLegendHeight/environmentBreakdownData.children.length;
+    var environmentBreakdownLegendHeight = maxRadius*1.25
+    var environmentBreakdownLegendBarHeight = environmentBreakdownLegendHeight/environmentData.children.length;
 
     newEnvironmentBreakdownLegend.append('rect')
       .attr("x", EnvironmentLegendBarWidth*-.5)
       .attr("y", function(d, i) {
        		return (i * environmentBreakdownLegendBarHeight);
        })
-      .attr("width", EnvironmentLegendBarWidth)
+      .attr("width", width/4)
       .attr("height", environmentBreakdownLegendBarHeight)
       .style('fill',  function(d,i) {return environmentBreakdownColor(i)})
       .attr('class', function (d) { return stripPunctSpace(d.category)})
@@ -1906,7 +1909,7 @@ d3.json('data.json', (error, data) => {
         return environmentBreakdownLegendBarHeight /2 + (i * environmentBreakdownLegendBarHeight);
       })
       .attr("dy", ".7vmin")
-      .text(d => {return d.category})
+      .text(d => {return d.category.toUpperCase()})
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
@@ -1919,9 +1922,9 @@ d3.json('data.json', (error, data) => {
 
       .text(d => d.category + '\n' + "Actions: " + formatNumber(d.actions) + '\n' + "Saved: " + formatNumber(d.saved) );
 
-    environmentSavedBreakdownPie.attr('transform', 'translate('  + (TotalBarWidth*1 - maxRadius*.7 ) + ',' + maxRadius*.9 + ')');
-    environmentActionsBreakdownPie.attr('transform', 'translate(' + (TotalBarWidth*-1 + maxRadius*.7 ) + ',' + maxRadius*.9 + ')');
-    newEnvironmentBreakdownLegend.attr('transform', 'translate(' + 0 + ',' + (maxRadius*.9 - environmentBreakdownLegendHeight/2)  + ')');
+    environmentSavedBreakdownPie.attr('transform', 'translate('  + (TotalBarWidth*1 - maxRadius*.7 ) + ',' + maxRadius*.63 + ')');
+    environmentActionsBreakdownPie.attr('transform', 'translate(' + (TotalBarWidth*-1 + maxRadius*.7 ) + ',' + maxRadius*.63 + ')');
+    newEnvironmentBreakdownLegend.attr('transform', 'translate(' + 0 + ',' + (maxRadius*.63- environmentBreakdownLegendHeight/2)  + ')');
 
   }
 
@@ -2380,6 +2383,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "3vw")
       .style('fill', 'black')
       .text('support@pipsrewards.com')
+      .style("cursor", "pointer")
       .on("click", function() { window.open("mailto: support@pipsrewards.com" ); });
   }
 
