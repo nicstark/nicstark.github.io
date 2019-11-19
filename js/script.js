@@ -1053,7 +1053,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
 
 
@@ -1086,7 +1086,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
 
     for (var i = 0; i < ActionsTakenData.data.children.length; i++) {
@@ -1163,7 +1163,7 @@ d3.json('data.json', (error, data) => {
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
-      .attr("font-size", "4vmin")
+      .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
     TotalBar.append('text')
@@ -1186,7 +1186,7 @@ d3.json('data.json', (error, data) => {
       .style("text-anchor", "middle")
       .attr("font-family", "museo-sans-rounded, sans-serif")
       .attr("font-weight", "300")
-      .attr("font-size", "4vmin")
+      .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
     TotalBar.append('text')
@@ -1240,16 +1240,7 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#71bf93');
 
     PageNumberGenerator(svg5)
-    //
-    // svg5.append('text')
-    //   .attr('x', pageNumX)
-    //   .attr('y', pageNumY)
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "Bryant Pro, sans-serif")
-    //   .attr("font-weight", pageNumWeight)
-    //   .attr("font-size", pageNumSize)
-    //   .style('fill', 'grey')
-    //   .text(pageCounter);
+
 
     function checkIfValuesExist(object) {
       if (object.hasOwnProperty("actions") && object.hasOwnProperty("name"))
@@ -1439,17 +1430,7 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#58bbc0');
 
     PageNumberGenerator(svg6)
-    //
-    // svg6.append('text')
-    //   .attr('x', pageNumX)
-    //   .attr('y', pageNumY)
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "Bryant Pro, sans-serif")
-    //   .attr("font-weight", pageNumWeight)
-    //   .attr("font-size", pageNumSize)
-    //   .style('fill', 'grey')
-    //   .text(pageCounter);
-    //
+
 
     UseTotalBar = d3.select('.svg6')
       .attr('width', width/2)
@@ -1500,10 +1481,8 @@ d3.json('data.json', (error, data) => {
         .text(formatNumber(d.used));
       d3.selectAll(".UsePIPsCategory")
         .text(function() {if (d.category == "ALL USE ACTIVITY") {return "Total Points Used"} else {return (d.category) + " Points Used"}});
-        // .style("text-transform", "capitalize");
       d3.selectAll(".UseActionsCategory")
         .text(function() {if (d.category == "ALL USE ACTIVITY") {return "Total Actions Taken"} else {return (d.category) + " Actions Taken"}});
-        // .style("text-transform", "capitalize");
     }
 
     function handleUseMouseOut(d, i) {
@@ -1595,27 +1574,6 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "2.5vw")
       .style('fill', 'white');
 
-    // svg6.append('text')
-    //   .attr("class", "UseActionsLabel")
-    //   .attr("x", TotalBarWidth/-1.5)
-    //   .attr("y",TotalBarHeight*-.1)
-    //   .text("Use Actions Breakdown")
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "Bryant Pro, sans-serif")
-    //   .attr("font-weight", "Bold")
-    //   .attr("font-size", "2.5vw")
-    //   .style('fill', '#58bbc0');
-    //
-    // svg6.append('text')
-    //   .attr("class", "UsePIPsLabel")
-    //   .attr("x", TotalBarWidth/1.5)
-    //   .attr("y",TotalBarHeight*-.1)
-    //   .text("Use PIPs Breakdown")
-    //   .style("text-anchor", "middle")
-    //   .attr("font-family", "Bryant Pro, sans-serif")
-    //   .attr("font-weight", "Bold")
-    //   .attr("font-size", "2.5vw")
-    //   .style('fill', '#5065a1');
 
     svg6.append('text')
       .attr("x", TotalBarWidth/-1.5)
@@ -1625,7 +1583,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
     svg6.append('text')
       .attr("x", TotalBarWidth/1.5)
@@ -1635,7 +1593,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
     UseBreakdown = d3.select('.svg6')
       .attr('width', width/2)
@@ -1996,26 +1954,24 @@ d3.json('data.json', (error, data) => {
 
 
     environmentActionsBreakdownPie.append('text')
-      // .attr("class", "EnvironmentActionsLabel")
       .attr("x",0 )
       .attr("y",EnvironmentTotalBarHeight*1.28)
       .text("Actions Taken Breakdown")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "500")
+      .attr("font-weight", "400")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
     environmentActionsBreakdownPie.append('text')
-      // .attr("class", "EnvironmentSavedLabel")
       .attr("x", TotalBarWidth*1.35)
       .attr("y",EnvironmentTotalBarHeight*1.28)
       .text("Carbon Saved Breakdown")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", "500")
+      .attr("font-weight", "400")
       .attr("font-size", "1vw")
-      .style('fill', '#grey');
+      .style('fill', 'black');
 
     environmentActionsBreakdownPie.append("path")
       .attr("d", environmentArc)
@@ -2121,15 +2077,6 @@ d3.json('data.json', (error, data) => {
 
       PageNumberGenerator(svg8)
 
-      // svg8.append('text')
-      // .attr('x', pageNumX)
-      // .attr('y', pageNumY)
-      // .style("text-anchor", "middle")
-      // .attr("font-family", "Bryant Pro, sans-serif")
-      // .attr("font-weight", pageNumWeight)
-      // .attr("font-size", pageNumSize)
-      // .style('fill', 'grey')
-      // .text(pageCounter);
 
       if (investmentEducationData != null ){
 
@@ -2154,8 +2101,8 @@ d3.json('data.json', (error, data) => {
         var EducationTotalBarWidth = (width/EducationTotalBarSections) - (width/22.5);
         var EducationTotalBarHeight = height/4;
         var EducationTotalBarY = height*-.2;
-        var EducationTotalBarTextY1 = EducationTotalBarHeight*.75;
-        var EducationTotalBarTextY2 = EducationTotalBarHeight*.5;
+        var EducationTotalBarTextY1 = EducationTotalBarHeight*.25;
+        var EducationTotalBarTextY2 = EducationTotalBarHeight*.75;
 
         var EducationTotalBarScaler = d3.scaleLinear()
           .domain([1,EducationTotalBarSections])
@@ -2185,7 +2132,7 @@ d3.json('data.json', (error, data) => {
         newEducationTotalBar.append('text')
           .attr("x", function(d, i){return EducationTotalBarScaler(i) + EducationTotalBarWidth/2})
           .attr("y", function(d, i) {
-            return EducationTotalBarY + EducationTotalBarHeight*.8;
+            return EducationTotalBarY + EducationTotalBarHeight/3.2;
           })
           .attr("dy", ".7vmin")
           .text(d => {return d.name})
@@ -2198,7 +2145,7 @@ d3.json('data.json', (error, data) => {
         newEducationTotalBar.append('text')
           .attr("x", function(d, i){return EducationTotalBarScaler(i) + EducationTotalBarWidth/2})
           .attr("y", function(d, i) {
-            return EducationTotalBarY + EducationTotalBarHeight /2;
+            return EducationTotalBarY + EducationTotalBarHeight/1.4;
           })
           .attr("dy", ".7vmin")
           .text(d => {if (d.name == "Donations to PIPs Education Fund"){return "$"+formatNumber(d.value);} else {return formatNumber(d.value)}})
@@ -2231,8 +2178,8 @@ d3.json('data.json', (error, data) => {
         var LocalEconomyTotalBarWidth = width/2 - width/30;
         var LocalEconomyTotalBarHeight = height/4;
         var LocalEconomyTotalBarY = 0;
-        var LocalEconomyTotalBarTextY1 = LocalEconomyTotalBarHeight*.75;
-        var LocalEconomyTotalBarTextY2 = LocalEconomyTotalBarHeight*.5;
+        var LocalEconomyTotalBarTextY1 = LocalEconomyTotalBarHeight*.35;
+        var LocalEconomyTotalBarTextY2 = LocalEconomyTotalBarHeight*.75;
 
         LocalEconomyTotalBar.append('rect')
           .attr("x", width/-2 + width/30)
@@ -2315,16 +2262,7 @@ d3.json('data.json', (error, data) => {
         .style('fill', '#efa73a');
 
       PageNumberGenerator(svg9)
-      //
-      // svg9.append('text')
-      //   .attr('x', pageNumX)
-      //   .attr('y', pageNumY)
-      //   .style("text-anchor", "middle")
-      //   .attr("font-family", "Bryant Pro, sans-serif")
-      //   .attr("font-weight", pageNumWeight)
-      //   .attr("font-size", pageNumSize)
-      //   .style('fill', 'grey')
-      //   .text(pageCounter);
+
 
         if (communityLearningData != null){
 
@@ -2343,9 +2281,9 @@ d3.json('data.json', (error, data) => {
           var CommunityTotalBarX = width/-2 + width/30 + CommunityTotalBarWidth*.2;
           var CommunityTotalBarY = 0;
           var CommunityTotalBarTextX = width/-2 + width/30 + CommunityTotalBarWidth*.5;
-          var CommunityTotalBarTextY0 = CommunityTotalBarHeight*.4;
-          var CommunityTotalBarTextY1 = CommunityTotalBarHeight*.6;
-          var CommunityTotalBarTextY2 = CommunityTotalBarHeight*.75;
+          var CommunityTotalBarTextY0 = CommunityTotalBarHeight*.75;
+          var CommunityTotalBarTextY1 = CommunityTotalBarHeight*.3;
+          var CommunityTotalBarTextY2 = CommunityTotalBarHeight*.45;
 
           CommunityTotalBar = d3.select('.svg9')
             .attr('width', width/2)
@@ -2496,25 +2434,26 @@ d3.json('data.json', (error, data) => {
         .attr("height", HealthTotalBarHeight)
         .style('fill', "#4ba2ac");
 
-      HealthTotalBar.append('text')
-        .attr("x",  width/-3 + width/30  )
-        .attr("dx", width/-60)
-        .attr("y", HealthTotalBarTextY)
-        .text(formatNumber(healthWellnessData.children[0].value))
-        .style("text-anchor", "end")
-        .attr("font-family", "museo-sans-rounded, sans-serif")
-        .attr("font-weight", "900")
-        .attr("font-size", "8vmin")
-        .style('fill', 'white');
 
       HealthTotalBar.append('text')
-        .attr("x",  width/-3 + width/30  )
+        .attr("x",  width/3.5 - width/30  )
         .attr("y", HealthTotalBarTextY)
         .text(healthWellnessData.children[0].name)
-        .style("text-anchor", "start")
+        .style("text-anchor", "end")
         .attr("font-family", "museo-sans-rounded, sans-serif")
         .attr("font-weight", "300")
         .attr("font-size", "3vw")
+        .style('fill', 'white');
+
+      HealthTotalBar.append('text')
+        .attr("x",  width/3 - width/30  )
+        .attr("dx", width/-60)
+        .attr("y", HealthTotalBarTextY)
+        .text(formatNumber(healthWellnessData.children[0].value))
+        .style("text-anchor", "start")
+        .attr("font-family", "museo-sans-rounded, sans-serif")
+        .attr("font-weight", "900")
+        .attr("font-size", "8vmin")
         .style('fill', 'white');
 
       HealthTotalBar.attr('transform', 'translate(' +0 + ',' + height*.3 + ')');
