@@ -802,7 +802,7 @@ d3.json('data.json', (error, data) => {
     //   .text(function(d) {
     //     return parseDate(new Date(d.data.key)) + '\n' + "Total Number of Users: " + formatNumber(d[1])
     //   });
-
+    //
     // UserTotal.selectAll("mylayers")
     //   .data(stackedData)
     //   .enter()
@@ -814,34 +814,37 @@ d3.json('data.json', (error, data) => {
     //   })
     //   .attr("d", function(d) {return line(d)})
 
-    // var stackedLegenedScale = d3.scaleLinear()
-    //   .domain([0, stackedData.length + 1])
-    //   .range([width*-.4, width*.4])
-    //
-    // var size = Math.min(width,height)/30
+    var stackedLegenedScale = d3.scaleLinear()
+      .domain([0, stackedData.length + 1])
+      .range([width*-.5, width*.35])
 
-    // svg3.selectAll("mydots")
-    //   .data(stackedData)
-    //   .enter()
-    //   .append("rect")
-    //   .attr("x", function(d,i){ return  stackedLegenedScale(i +1)+ size*i +1})
-    //   .attr("y", height*.4) // 100 is where the first dot appears. 25 is the distance between dots
-    //   .attr("width", size)
-    //   .attr("height", size)
-    //   .style("fill", function(d) { name = userGroupNames[d.key] ; return stackedColor(name) })
-    //   .style("stroke", "black")
-    //   .style("stroke-width", function(d) { name = userGroupNames[d.key] ; if (stackedColor(name) == "#FFF"){return "2px"} else {return "0px";} });
+    var size = Math.min(width,height)/30
 
-    // svg3.selectAll("mylabels")
-    //   .data(stackedData)
-    //   .enter()
-    //   .append("text")
-    //   .attr("x", function(d,i){ return  stackedLegenedScale(i +1)+ (size/2) + size*i +1})
-    //   .attr("y", height*.47)
-    //   .text(function(d){return userGroupNames[d.key]})
-    //   .attr("text-anchor", "middle")
-    //   .style("alignment-baseline", "middle")
-    //   .style("font-size", "1.5vw");
+    svg3.selectAll("mydots")
+      .data(stackedData)
+      .enter()
+      .append("rect")
+      .attr("x", function(d,i){ return  stackedLegenedScale(i + 1) + size*i + 1})
+      .attr("y", height*.45) // 100 is where the first dot appears. 25 is the distance between dots
+      .attr("width", size)
+      .attr("height", size)
+      .style("fill", function(d) { name = userGroupNames[d.key] ; return stackedColor(name) })
+      .style("stroke", "black")
+      .style("stroke-width", function(d) { name = userGroupNames[d.key] ; if (stackedColor(name) == "#FFF"){return "2px"} else {return "0px";} });
+
+    svg3.selectAll("mylabels")
+      .data(stackedData)
+      .enter()
+      .append("text")
+      .attr("x", function(d,i){ return  stackedLegenedScale(i + 1) + (size) + size*i +10})
+      .attr("y", height*.47)
+      .text(function(d){return userGroupNames[d.key]})
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "400")
+      .attr("font-size", "2vw")
+      .attr("text-anchor", "start")
+      .style("alignment-baseline", "middle")
+      .style("font-size", "1.5vw");
 
     // svg3.append('rect')
     //   .attr("x", function(d,i){ return  stackedLegenedScale(0 )})
@@ -1033,7 +1036,7 @@ d3.json('data.json', (error, data) => {
       .text(d => d.data.category + '\n' + formatNumber(d.value));
 
     newActionsSlice.append('path')
-      .style('fill',  function(d) {if (d.depth > 1) {d = d.parent; return ActionsTakenColor(d.data.category);} else {return ActionsTakenColor(d.data.category)}})
+      .style('fill',  function(d) {if (d.depth > 1) {return ActionsTakenColor(d.parent.data.category);} else {return ActionsTakenColor(d.data.category)}})
       .style('fill-opacity', function(d) {if (d.depth > 1) {return 0} else {return 1}})
       .attr("display", function (d) {return d.depth ? null : "none"; })
       .attr('class', function (d) {return stripPunctSpace(d.data.category);})
@@ -1067,8 +1070,8 @@ d3.json('data.json', (error, data) => {
 
     newEarnedSlice.append('path')
       .attr('class', 'main-arc')
-      .style('fill',  d => {if (d.depth>1){return "none"} else {while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category);}})
-      // .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
+      // .style('fill',  d => {if (d.depth>1){return "none"} else {while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category);}})
+      .style('fill',  function(d) {if (d.depth > 1) {return ActionsTakenColor(d.parent.data.category);} else {return ActionsTakenColor(d.data.category)}})
       .attr("display", function (d) { return d.depth ? null : "none"; })
       .attr('class', function (d) { return stripPunctSpace(d.data.category);})
       .attr('d', arc)
