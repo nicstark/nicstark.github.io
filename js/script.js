@@ -3,9 +3,16 @@ var ParentCategories = [];
 
 
 
-const width = window.innerWidth,
-  height = window.innerHeight,
-  maxRadius = (width / 4.5) ;
+const
+// width = window.innerWidth,
+  width = document.body.clientWidth,
+  height = window.innerHeight;
+
+var maxRadius;
+
+if (width>height)
+  {maxRadius = (height / 2.8)}
+else{maxRadius = width/4.5} ;
 
 const formatNumber = d3.format(',d');
 var parseDate = d3.timeFormat("%B %Y");
@@ -16,6 +23,10 @@ function stripPunctSpace(string){
 
 function hasChild(obj){
   return !!Object.keys(obj).length;
+}
+
+function hasChildren(obj){
+  return obj.hasOwnProperty('children')
 }
 
 const x = d3.scaleLinear()
@@ -70,15 +81,16 @@ const treemap = d3.treemap()
   .round(true);
 
 
-var stackedWidth = width*.8;
+var stackedWidth = width*.855;
 var stackedHeight = height*.65;
 
 var TotalBarWidth = width/2 - width/30;
 var TotalBarHeight = height/5;
 
-const pageNumX = width*.47;
+const pageNumX = width*.48;
 const pageNumY = height*.495;
 const pageNumWeight = 400;
+const pageNumColor = "grey"
 const pageNumSize = "2vh";
 
 
@@ -203,37 +215,56 @@ d3.json('data.json', (error, data) => {
     .attr("y", (height/-2) +1)
     .attr("width", width)
     .attr("height", "1px")
-    .style("opacity", .5)
+    .style("opacity", .1)
     .style("fill", "322f2b");
 
   d3.selectAll(".page").append("svg:image")
     .attr('width', "10%")
     .attr('height', "10%")
-    .attr('x', function(){return width*.5 - width/7 })
-    .attr('y', function(){return height*-.45})
+    .attr('x', function(){return  width/-2 + width/30 })
+    .attr('y', function(){return height*-.481})
     .attr("xlink:href", "LOGO.svg");
 
+  d3.selectAll(".page").append("rect")
+    .attr('x', function(){return width/-2.6 + width/30})
+    .attr('y', function(){return height*-.455})
+    .attr("height", width/30)
+    .attr("width", "1px")
+    .style('fill', 'grey');
+
   d3.selectAll(".page").append("text")
-    .attr('x', function(){return width*-.5 + width/30})
-    .attr('y', function(){return height*-.43})
+    .attr('x', function(){return width/-2.7 + width/30})
+    .attr('y', function(){return height*-.435})
     .style("text-anchor", "left")
     .style("vertical-align", "text-bottom")
     .attr("font-family", "Bryant Pro, sans-serif")
     .attr("font-weight", "500")
     .attr("font-size", "2vh")
-    .style('fill', '#322f2b')
+    .style('fill', 'grey')
     .text('Performance Dashboard/Report — ' + partner);
 
   d3.selectAll(".page").append("text")
-    .attr('x', function(){return width*-.5 + width/30})
-    .attr('y', function(){return height*-.40})
+    .attr('x', function(){return width/-2.7 + width/30})
+    .attr('y', function(){return height*-.41})
     .style("text-anchor", "left")
     .style("vertical-align", "text-bottom")
     .attr("font-family", "Bryant Pro, sans-serif")
     .attr("font-weight", "500")
-    .attr("font-size", "2vh")
-    .style('fill', '#322f2b')
+    .attr("font-size", "1.8vh")
+    .style('fill', 'grey')
     .text(date);
+
+    function PageNumberGenerator(svgNumber){
+          svgNumber.append('text')
+            .attr('x', pageNumX)
+            .attr('y', pageNumY)
+            .style("text-anchor", "end")
+            .attr("font-family", "Bryant Pro, sans-serif")
+            .attr("font-weight", pageNumWeight)
+            .attr("font-size", pageNumSize)
+            .style('fill', pageNumColor)
+            .text(pageCounter);
+    }
 
 
 
@@ -500,6 +531,7 @@ d3.json('data.json', (error, data) => {
       .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
     const UserTotal = d3.select('.svg3')
+      .attr("class", "UserTotal")
       .attr('width', width)
       .attr('height', height)
       .append('g');
@@ -516,30 +548,74 @@ d3.json('data.json', (error, data) => {
       .style('fill', '#d35634');
 
 
-    svg3.append('text')
-      .attr("x", width/-6)
-      .attr("y", height/-3.5)
-      .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date))  + " Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+    const UserTotalFigures = d3.select('.UserTotal')
+      .attr("class", "UserTotalFigures")
+      .attr('width', width)
+      .attr('height', height)
+      .append('g');
+
+
+    UserTotalFigures.append('text')
+      .attr("x", 0)
+      .attr("y", 0)
+      .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date))})
+      .attr("class", "totalUsersDate")
+      .style("text-anchor", "end")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "500")
+      .attr("font-size", "2vw")
+      .style('fill', '#000');
+
+    UserTotalFigures.append('text')
+      .attr("x", "15%")
+      .attr("y", 0)
+      .text(" Total Number of Users: ")
+      .style("text-anchor", "end")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "400")
+      .attr("font-size", "1.3vw")
+      .style('fill', '#000');
+
+
+    UserTotalFigures.append('text')
+      .attr("x", "15.5%")
+      .attr("y", 0)
+      .text(function (){return formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
       .attr("class", "totalUsersLabel")
       .style("text-anchor", "start")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
-      .attr("font-size", "3em")
-      .style('fill', '#d35634');
+      .attr("font-size", "2vw")
+      .style('fill', '#000');
 
 
-    svg3.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
+    UserTotalFigures.append('text')
+      .attr("x", "30%")
+      .attr("y", 0)
+      .text(" New Users: ")
+      .style("text-anchor", "end")
       .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
+      .attr("font-weight", "400")
+      .attr("font-size", "1.3vw")
+      .style('fill', '#000');
+
+
+    UserTotalFigures.append('text')
+      .attr("x", "30.5%")
+      .attr("y", 0)
+      .text(function (){return formatNumber(userTotalData.children[userTotalData.children.length-1].categories[1].value)})
+      .attr("class", "newUsersLabel")
+      .style("text-anchor", "start")
+      .attr("font-family", "Bryant Pro, sans-serif")
+      .attr("font-weight", "500")
+      .attr("font-size", "2vw")
+      .style('fill', '#000');
+
+    UserTotalFigures.attr('transform', 'translate(' + width/-10 + ',' + height/-3.5 + ')');
 
 
 
+      PageNumberGenerator(svg3)
 
 
     // Extract Data from object children
@@ -598,9 +674,6 @@ d3.json('data.json', (error, data) => {
       .domain(d3.extent(userTotalDataVerbose, function(d) { return d.date; }))
       .range([ 0, stackedWidth]);
 
-    // var xMarker = d3.scaleTime()
-    //   .domain(d3.extent(userTotalDataVerbose, function(d) { return xMarker(new Date(d.data.key)) }))
-    //   .range([ 0, stackedWidth]);
 
     UserTotal.append("g")
       .attr("transform", "translate(0," + stackedHeight + ")")
@@ -630,9 +703,12 @@ d3.json('data.json', (error, data) => {
 
 
     function totalUsersMouseOver(d, i) {
-
       d3.selectAll(".totalUsersLabel").transition()
-        .text(function (){return parseDate(new Date(d.data.key)) + " Total Number of Users: " + formatNumber(d[1])})
+        .text(function (){return formatNumber(d[1] + d.data.values[1].value)})
+      d3.selectAll(".newUsersLabel").transition()
+        .text(function (){return formatNumber(d.data.values[1].value)})
+      d3.selectAll(".totalUsersDate").transition()
+        .text(function (){return parseDate(new Date(d.data.key))})
 
       UserTotal.append("rect")
         .attr("class", "hoverMarker")
@@ -645,7 +721,11 @@ d3.json('data.json', (error, data) => {
 
     function totalUsersMouseOut(d, i) {
       d3.selectAll(".totalUsersLabel").transition()
-        .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date)) +  " Total Number of Users: " + formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+        .text(function (){return formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+      // d3.selectAll(".NewUsersLabel").transition()
+      //   .text(function (){return formatNumber(userTotalData.children[userTotalData.children.length-1].categories[0].value)})
+      d3.selectAll(".totalUsersDate").transition()
+        .text(function (){return parseDate(new Date(userTotalData.children[userTotalData.children.length-1].date))})
       d3.selectAll(".hoverMarker").remove()
     }
 
@@ -661,7 +741,7 @@ d3.json('data.json', (error, data) => {
     var stackedColor = d3.scaleOrdinal()
       .domain(userGroupNames)
       .range([
-      "#a43034",
+      // "#a43034",
       "#d35634",
       "#e8806c",
       "#FFF"]);
@@ -782,7 +862,7 @@ d3.json('data.json', (error, data) => {
     //   .style("alignment-baseline", "middle")
     //   .style("font-size", "1.5vw");
 
-    UserTotal.attr('transform', 'translate(' + width*-.4 + ',' + height*-.25 + ')');
+    UserTotal.attr('transform', 'translate(' + width*-.425 + ',' + height*-.25 + ')');
   }
 
   //-------------------------------- 4 - Earn Activity
@@ -814,8 +894,13 @@ d3.json('data.json', (error, data) => {
 
 
     function handleMouseOver(d, i) {
+      let target = d3.select(d3.event.target);
+      let fill = d3.color(target.style("fill"));
       d3.selectAll("." + stripPunctSpace(d.category)).transition()
-        .style("opacity", .5);
+        .style("fill-opacity", 1)
+        .style("fill", fill.brighter())
+      // d3.selectAll("." + stripPunctSpace(d.category)).transition()
+      //   .style("opacity", .5);
       d3.selectAll(".ActionsTakenFigure")
         .text(formatNumber(d.actions));
       d3.selectAll(".PointsEarnedFigure")
@@ -828,9 +913,61 @@ d3.json('data.json', (error, data) => {
 
     function handleMouseOut(d, i) {
       d3.selectAll("." + stripPunctSpace(d.category)).transition()
-        .style("opacity", 1);
+        .style('fill-opacity',  function(d) {  if (d.depth > 1) {return 0}})
+        .style('fill', ActionsTakenColor(d.category));
       d3.selectAll(".ActionsTakenFigure")
         .text(formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next)))
+      d3.selectAll(".PointsEarnedFigure")
+        .text(formatNumber(ParentCategories.map(item => item.earned).reduce((prev, next) => prev + next)))
+      d3.selectAll(".ActionsTakenLabel")
+        .text("Total Actions Taken");
+      d3.selectAll(".PointsEarnedLabel")
+        .text("Total Points Earned");
+    }
+
+    function EarnBreakdownSunburstColorFiller (d){
+      if (d.category) {
+        return ActionsTakenColor(d.category);}
+      else if (d.depth > 1) {
+        return ActionsTakenColor(d.parent.data.category)}
+      else {
+        return ActionsTakenColor(d.data.category)}
+    }
+
+    function handleEarnBreakdownMouseOver(d, i) {
+      let target = d3.select(d3.event.target);
+      let fill = d3.color(target.style("fill"));
+      d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
+        .style("fill-opacity", 1)
+        .style("fill", fill.brighter())
+      d3.selectAll(".ActionsTakenFigure")
+        .text( function() {if (hasChildren(d)) {return formatNumber(d.children.map(item => item.data.actions).reduce((prev, next) => prev + next))}
+        else {return formatNumber(d.data.actions)}});
+      d3.selectAll(".PointsEarnedFigure")
+        .text( function() {if (hasChildren(d)) {return formatNumber(d.children.map(item => item.data.earned).reduce((prev, next) => prev + next))}
+        else {return formatNumber(d.data.earned)}});
+      d3.selectAll(".ActionsTakenLabel")
+        .text(d.data.category + " Actions Taken");
+      d3.selectAll(".PointsEarnedLabel")
+        .text(d.data.category + " Points Earned");
+    }
+
+    function handleEarnBreakdownMouseOut(d, i) {
+
+      d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
+        .style('fill-opacity',  function(d) {  if (d.depth > 1) {return 0}})
+        .style('fill',  function(d) { if (d.depth > 1)
+          {
+            return ActionsTakenColor(d.parent.data.category)
+          } else {
+            if (d.data)
+              {return ActionsTakenColor(d.data.category)}
+            else
+              {return ActionsTakenColor(d.category)}
+          }
+        })
+      d3.selectAll(".ActionsTakenFigure")
+        .text(function (d) { return formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next))})
       d3.selectAll(".PointsEarnedFigure")
         .text(formatNumber(ParentCategories.map(item => item.earned).reduce((prev, next) => prev + next)))
       d3.selectAll(".ActionsTakenLabel")
@@ -845,15 +982,8 @@ d3.json('data.json', (error, data) => {
       .style('height', '100vh')
       .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
-    svg4.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
+    PageNumberGenerator(svg4)
+
 
     const ActionsTaken = d3.select('.svg4')
       .attr('width', width)
@@ -888,7 +1018,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "500")
       .attr("font-size", "3vmin")
-      .style('fill', '#71bf93');
+      .style('fill', '#646464');
 
     const ActionsSlice = ActionsTaken.selectAll('g.ActionsSlice')
       .data(partition(ActionsTakenData).descendants());
@@ -903,11 +1033,14 @@ d3.json('data.json', (error, data) => {
       .text(d => d.data.category + '\n' + formatNumber(d.value));
 
     newActionsSlice.append('path')
-      .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
+      .style('fill',  function(d) {if (d.depth > 1) {d = d.parent; return ActionsTakenColor(d.data.category);} else {return ActionsTakenColor(d.data.category)}})
+      .style('fill-opacity', function(d) {if (d.depth > 1) {return 0} else {return 1}})
       .attr("display", function (d) {return d.depth ? null : "none"; })
       .attr('class', function (d) {return stripPunctSpace(d.data.category);})
       .attr('d', arc)
-      .style("cursor", "default");
+      .style("cursor", "default")
+      .on("mouseover", handleEarnBreakdownMouseOver)
+      .on("mouseout", handleEarnBreakdownMouseOut);
 
     EarnActivity.append('text')
       .attr("x", TotalBarWidth/-1.5)
@@ -934,10 +1067,13 @@ d3.json('data.json', (error, data) => {
 
     newEarnedSlice.append('path')
       .attr('class', 'main-arc')
-      .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
+      .style('fill',  d => {if (d.depth>1){return "none"} else {while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category);}})
+      // .style('fill',  d => { while (d.depth > 1) d = d.parent; return ActionsTakenColor(d.data.category); })
       .attr("display", function (d) { return d.depth ? null : "none"; })
       .attr('class', function (d) { return stripPunctSpace(d.data.category);})
-      .attr('d', arc);
+      .attr('d', arc)
+      .on("mouseover", handleEarnBreakdownMouseOver)
+      .on("mouseout", handleEarnBreakdownMouseOut);
 
     EarnActivity.append('text')
       .attr("x", TotalBarWidth/1.5)
@@ -1007,18 +1143,18 @@ d3.json('data.json', (error, data) => {
       .attr("y", (height/-10) * 3)
       .attr("width", TotalBarWidth)
       .attr("height", TotalBarHeight)
-      .style('fill', "#71bf93");
+      .style('fill', "grey");
 
     TotalBar.append('rect')
       .attr("x", 0)
       .attr("y", (height/-10) * 3)
       .attr("width", TotalBarWidth)
       .attr("height", TotalBarHeight)
-      .style('fill', "#4ba26c");
+      .style('fill', "#646464");
 
     TotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("y", (height/-5.5) - TotalBarHeight/4)
       .attr("class", "ActionsTakenLabel")
       .text("Total Actions Taken")
       .style("text-anchor", "middle")
@@ -1029,7 +1165,7 @@ d3.json('data.json', (error, data) => {
 
     TotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2  )
-      .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("y", (height/-20) - TotalBarHeight/2)
       .attr("class", "ActionsTakenFigure")
       .text(formatNumber(ParentCategories.map(item => item.actions).reduce((prev, next) => prev + next)))
       .style("text-anchor", "middle")
@@ -1041,7 +1177,7 @@ d3.json('data.json', (error, data) => {
 
     TotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("y", (height/-5.5) - TotalBarHeight/4)
       .attr("class", "PointsEarnedLabel")
       .text("Total PIPs Earned")
       .style("text-anchor", "middle")
@@ -1052,7 +1188,7 @@ d3.json('data.json', (error, data) => {
 
     TotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("y", (height/-20) - TotalBarHeight/2)
       .attr("class", "PointsEarnedFigure")
       .text(formatNumber(ParentCategories.map(item => item.earned).reduce((prev, next) => prev + next)))
       .style("text-anchor", "middle")
@@ -1100,15 +1236,17 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "3vmin")
       .style('fill', '#71bf93');
 
-    svg5.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
+    PageNumberGenerator(svg5)
+    //
+    // svg5.append('text')
+    //   .attr('x', pageNumX)
+    //   .attr('y', pageNumY)
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "Bryant Pro, sans-serif")
+    //   .attr("font-weight", pageNumWeight)
+    //   .attr("font-size", pageNumSize)
+    //   .style('fill', 'grey')
+    //   .text(pageCounter);
 
     function checkIfValuesExist(object) {
       if (object.hasOwnProperty("actions") && object.hasOwnProperty("name"))
@@ -1297,16 +1435,18 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "3vmin")
       .style('fill', '#58bbc0');
 
-    svg6.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
-
+    PageNumberGenerator(svg6)
+    //
+    // svg6.append('text')
+    //   .attr('x', pageNumX)
+    //   .attr('y', pageNumY)
+    //   .style("text-anchor", "middle")
+    //   .attr("font-family", "Bryant Pro, sans-serif")
+    //   .attr("font-weight", pageNumWeight)
+    //   .attr("font-size", pageNumSize)
+    //   .style('fill', 'grey')
+    //   .text(pageCounter);
+    //
 
     UseTotalBar = d3.select('.svg6')
       .attr('width', width/2)
@@ -1409,7 +1549,7 @@ d3.json('data.json', (error, data) => {
 
     UseTotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2  )
-      .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("y", (height/-10) - TotalBarHeight/4)
       .attr("class","UseActionsLabel")
       .text(formatNumber(UseActionsTotal))
       .style("text-anchor", "middle")
@@ -1421,7 +1561,7 @@ d3.json('data.json', (error, data) => {
 
     UseTotalBar.append('text')
       .attr("x",  width/-2 + width/30 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("y", (height/-10) - TotalBarHeight/1.5)
       .attr("class", "UseActionsCategory")
       .text("Total Use Actions")
       .style("text-anchor", "middle")
@@ -1432,7 +1572,7 @@ d3.json('data.json', (error, data) => {
 
     UseTotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/2)
+      .attr("y", (height/-10) - TotalBarHeight/4)
       .text(formatNumber(UsePIPsTotal))
       .attr("class","UsePIPsLabel")
       .style("text-anchor", "middle")
@@ -1443,7 +1583,7 @@ d3.json('data.json', (error, data) => {
 
     UseTotalBar.append('text')
       .attr("x",  0 + TotalBarWidth/2 )
-      .attr("y", (height/-10) - TotalBarHeight/4)
+      .attr("y", (height/-10) - TotalBarHeight/1.5)
       .attr("class", "UsePIPsCategory")
       .text("Total PIPs Used")
       .style("text-anchor", "middle")
@@ -1709,20 +1849,12 @@ d3.json('data.json', (error, data) => {
       .attr("font-size", "2.5vmin")
       .style('fill', '#efa73a');
 
-    svg7.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
+    PageNumberGenerator(svg7);
 
 
     var EnvironmentTotalBarScaler = d3.scaleLinear()
       .domain([0,EnvironmentBarSections])
-      .range([width/-2 + width/45,  width/2 - width/22.5]);
+      .range([width/-2 + width/30,  width/2 - width/30]);
 
 
     var EnvironmentTotalBarColor = d3.scaleLinear()
@@ -1756,7 +1888,7 @@ d3.json('data.json', (error, data) => {
     newEnvironmentTotalBar.append('text')
       .attr("x", function(d, i){if (i==0) {return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2.08} else {return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2}})
       .attr("y", function(d, i) {
-        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.7;
+        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.3;
       })
       .attr("dy", ".7vmin")
       .attr("class", function(d) {return stripPunctSpace(d.name) +"Label"})
@@ -1770,7 +1902,7 @@ d3.json('data.json', (error, data) => {
     newEnvironmentTotalBar.append('text')
       .attr("x", function(d, i){return EnvironmentTotalBarScaler(i) + EnvironmentTotalBarWidth/2})
       .attr("y", function(d, i) {
-        return EnvironmentTotalBarY + EnvironmentTotalBarHeight /2;
+        return EnvironmentTotalBarY + EnvironmentTotalBarHeight*.7;
       })
       .attr("dy", ".7vmin")
       .attr("class", function(d) {return stripPunctSpace(d.name) +"Figure"})
@@ -1799,7 +1931,9 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".TotalCarbonReductionActionsLabel")
         .text(d.category + " Actions Taken");
       d3.selectAll(".TotallbsCarbonSavedLabel")
-        .text(d.category + " lbs Carbon Saved");
+        .text("lbs Carbon Saved " + d.category);
+      d3.selectAll(".TreeEquivalentsFigure")
+        .text(formatNumber(Math.round(d.saved/48)));
     }
 
     function handleEnvironmentMouseOut(d, i) {
@@ -1813,9 +1947,10 @@ d3.json('data.json', (error, data) => {
         .text("Total Actions Taken");
       d3.selectAll(".TotallbsCarbonSavedLabel")
         .text("Total lbs Carbon Saved");
+      d3.selectAll(".TreeEquivalentsFigure")
+        .text(formatNumber(TreeEquivalents));
     }
     function handleEnvironmentBreakdownMouseOver(d, i) {
-      console.log(d.data.category)
       d3.selectAll("." + stripPunctSpace(d.data.category)).transition()
         .style("opacity", .5);
       d3.selectAll(".TotalCarbonReductionActionsFigure")
@@ -1825,7 +1960,9 @@ d3.json('data.json', (error, data) => {
       d3.selectAll(".TotalCarbonReductionActionsLabel")
         .text(d.data.category + " Actions Taken");
       d3.selectAll(".TotallbsCarbonSavedLabel")
-        .text(d.data.category + " lbs Carbon Saved");
+        .text("lbs Carbon Saved " + d.data.category);
+      d3.selectAll(".TreeEquivalentsFigure")
+        .text(formatNumber(Math.round(d.data.saved/48)));
     }
 
     function handleEnvironmentBreakdownMouseOut(d, i) {
@@ -1839,6 +1976,8 @@ d3.json('data.json', (error, data) => {
         .text("Total Actions Taken");
       d3.selectAll(".TotallbsCarbonSavedLabel")
         .text("Total lbs Carbon Saved");
+      d3.selectAll(".TreeEquivalentsFigure")
+        .text(formatNumber(TreeEquivalents));
     }
 
 
@@ -1977,15 +2116,17 @@ d3.json('data.json', (error, data) => {
         .attr("font-size", "3vmin")
         .style('fill', '#efa73a');
 
-      svg8.append('text')
-      .attr('x', pageNumX)
-      .attr('y', pageNumY)
-      .style("text-anchor", "middle")
-      .attr("font-family", "Bryant Pro, sans-serif")
-      .attr("font-weight", pageNumWeight)
-      .attr("font-size", pageNumSize)
-      .style('fill', 'grey')
-      .text(pageCounter);
+      PageNumberGenerator(svg8)
+
+      // svg8.append('text')
+      // .attr('x', pageNumX)
+      // .attr('y', pageNumY)
+      // .style("text-anchor", "middle")
+      // .attr("font-family", "Bryant Pro, sans-serif")
+      // .attr("font-weight", pageNumWeight)
+      // .attr("font-size", pageNumSize)
+      // .style('fill', 'grey')
+      // .text(pageCounter);
 
       if (investmentEducationData != null ){
 
@@ -2170,15 +2311,17 @@ d3.json('data.json', (error, data) => {
         .attr("font-size", "3vmin")
         .style('fill', '#efa73a');
 
-      svg9.append('text')
-        .attr('x', pageNumX)
-        .attr('y', pageNumY)
-        .style("text-anchor", "middle")
-        .attr("font-family", "Bryant Pro, sans-serif")
-        .attr("font-weight", pageNumWeight)
-        .attr("font-size", pageNumSize)
-        .style('fill', 'grey')
-        .text(pageCounter);
+      PageNumberGenerator(svg9)
+      //
+      // svg9.append('text')
+      //   .attr('x', pageNumX)
+      //   .attr('y', pageNumY)
+      //   .style("text-anchor", "middle")
+      //   .attr("font-family", "Bryant Pro, sans-serif")
+      //   .attr("font-weight", pageNumWeight)
+      //   .attr("font-size", pageNumSize)
+      //   .style('fill', 'grey')
+      //   .text(pageCounter);
 
         if (communityLearningData != null){
 
@@ -2400,16 +2543,16 @@ d3.json('data.json', (error, data) => {
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Regular")
-      .attr("font-size", "3vw")
+      .attr("font-size", "1.6vw")
       .style('fill', 'black')
       .text('For Questions or More Info Please Contact:');
 
     svg10.append('text')
-      .attr('y', "12%")
+      .attr('y', "10%")
       .style("text-anchor", "middle")
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "100")
-      .attr("font-size", "3vw")
+      .attr("font-size", "2.6vw")
       .style('fill', 'black')
       .text('support@pipsrewards.com')
       .style("cursor", "pointer")
