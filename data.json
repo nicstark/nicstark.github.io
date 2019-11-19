@@ -2,16 +2,16 @@
   "date": "08/01/2018 - 04/01/2019",
   "categories":[
     {"category": "Total Users", "children": [
-      {"date":"2018/08/01", "categories": [{"category": "Students", "value": 310}]},
-      {"date":"2018/09/01", "categories": [{"category": "Students", "value": 900}]},
-      {"date":"2018/10/01", "categories": [{"category": "Students", "value": 1200}]},
-      {"date":"2018/11/01", "categories": [{"category": "Students", "value": 1600}]},
-      {"date":"2018/12/01", "categories": [{"category": "Students", "value": 2000}]},
-      {"date":"2019/01/01", "categories": [{"category": "Students", "value": 2300}]},
-      {"date":"2019/02/01", "categories": [{"category": "Students", "value": 2800}]},
-      {"date":"2019/03/01", "categories": [{"category": "Students", "value": 2850}]},
-      {"date":"2019/04/01", "categories": [{"category": "Students", "value": 3000}]},
-      {"date":"2019/05/01", "categories": [{"category": "Students", "value": 3060}]}
+      {"date":"2018/08/01", "categories": [{"category": "Users", "value": 0},{"category": "New Users", "value": 1310}]},
+      {"date":"2018/09/01", "categories": [{"category": "Users", "value": 1310},{"category": "New Users", "value": 310}]},
+      {"date":"2018/10/01", "categories": [{"category": "Users", "value": 1620},{"category": "New Users", "value": 410}]},
+      {"date":"2018/11/01", "categories": [{"category": "Users", "value": 2030},{"category": "New Users", "value": 110}]},
+      {"date":"2018/12/01", "categories": [{"category": "Users", "value": 2140},{"category": "New Users", "value": 10}]},
+      {"date":"2019/01/01", "categories": [{"category": "Users", "value": 2150},{"category": "New Users", "value": 90}]},
+      {"date":"2019/02/01", "categories": [{"category": "Users", "value": 2240},{"category": "New Users", "value": 110}]},
+      {"date":"2019/03/01", "categories": [{"category": "Users", "value": 2350},{"category": "New Users", "value": 210}]},
+      {"date":"2019/04/01", "categories": [{"category": "Users", "value": 2560},{"category": "New Users", "value": 405}]},
+      {"date":"2019/05/01", "categories": [{"category": "Users", "value": 2965},{"category": "New Users", "value": 310}]}
     ]},
     {"category": "Earn Activity", "children": [
       {
