@@ -1472,9 +1472,10 @@ d3.json('data.json', (error, data) => {
     var highlightColor
 
     function handleUseMouseOver(d, i) {
+      let target = d3.select(d3.event.target);
+      let fill = d3.color(target.style("fill"));
       d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
-        .style("stroke", "black")
-        .style("stroke-width", "2px")
+        .style("fill", fill.brighter())
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(d.actions));
       d3.selectAll(".UsePIPsLabel")
@@ -1486,9 +1487,16 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleUseMouseOut(d, i) {
-      d3.selectAll("#brightness").attr("brightness", 0)
       d3.selectAll("." + stripPunctSpace(d.category).toUpperCase()).transition()
-        .style("stroke-width", "0px")
+        .style("fill", function(d,i){
+          if (d.hasOwnProperty('data')) {
+            return useActivityColor(d.data.category.split(" ")[0].toUpperCase() + d.depth)}
+          else{
+              if (d.category.split(" ")[0].toUpperCase() == "ALL"){
+                return useActivityColor("ALL0")
+              } else {
+                return useActivityColor(d.category.split(" ")[0].toUpperCase() + "1")
+              }}})
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
@@ -1502,9 +1510,10 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleUseTreeMouseover(d, i) {
+      let target = d3.select(d3.event.target);
+      let fill = d3.color(target.style("fill"));
       d3.selectAll("." + stripPunctSpace(d.data.category).toUpperCase()).transition()
-        .style("stroke", "black")
-        .style("stroke-width", "2px");
+        .style("fill", fill.brighter())
       d3.selectAll(".UseActionsLabel")
         .text(formatNumber(d.data.actions));
       d3.selectAll(".UsePIPsLabel")
@@ -1516,8 +1525,16 @@ d3.json('data.json', (error, data) => {
     }
 
     function handleUseTreeMouseOut(d, i) {
-      d3.selectAll("."+ stripPunctSpace(d.data.category).toUpperCase()).transition()
-        .style("stroke-width", "0px");
+      d3.selectAll("." + stripPunctSpace(d.data.category).toUpperCase()).transition()
+        .style("fill", function(d,i){
+          if (d.hasOwnProperty('data')) {
+            return useActivityColor(d.data.category.split(" ")[0].toUpperCase() + d.depth)}
+          else{
+              if (d.category.split(" ")[0].toUpperCase() == "ALL"){
+                return useActivityColor("ALL0")
+              } else {
+                return useActivityColor(d.category.split(" ")[0].toUpperCase() + "1")
+              }}})
       d3.selectAll(".UsePIPsLabel")
         .text(formatNumber(UsePIPsTotal))
       d3.selectAll(".UseActionsLabel")
@@ -1633,9 +1650,6 @@ d3.json('data.json', (error, data) => {
       "#c04f8a"
       ]);
 
-
-
-
     var useActivityCell = UseBreakdown
       .selectAll(".node")
       .data(useActivityActionsData.descendants())
@@ -1694,9 +1708,6 @@ d3.json('data.json', (error, data) => {
         // return useActivityColor(d.data.name.split(" ")[0] + d.depth); });
         return useActivityColor(d.data.category.split(" ")[0].toUpperCase() + d.depth); });
 
-
-
-
     usePIPsCell.append("clipPath")
       .attr("id", function(d) { return "clip-" + d.data.category.toUpperCase(); })
       .append("use")
@@ -1753,6 +1764,7 @@ d3.json('data.json', (error, data) => {
       .attr("font-family", "Bryant Pro, sans-serif")
       .attr("font-weight", "Bold")
       .attr("font-size", "1.5vmin")
+      .attr("pointer-events", "none")
       .style('fill', 'white')
       .on("mouseover", handleUseMouseOver)
       .on("mouseout", handleUseMouseOut);
