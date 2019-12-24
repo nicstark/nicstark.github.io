@@ -1,34 +1,37 @@
 
 let scale = .0001;
-let birthTextMargin = 10000*scale;
-let margin2 = 10000*scale;
+let birthTextHeight = 3000*scale;
+let widthMargin = 100000*scale;
+// widthMargin = 0*scale;
+let birthTextMargin = -9.5;
+let heightMargin = 100000*scale;
 let deathTextMargin = 20000*scale;
+let nameTextMargin = 40000*scale;
 let birthTextSize = 10000*scale;
 let deathTextSize = 8*scale;
 let nameTextSize = 8*scale;
 let strokeWidth = scale*1000;
-let iconSize = scale*10000;
-
-function preload() {
-    tableVar = loadTable('fh.csv', 'csv', 'header');
-}
+let iconSize = scale*4000;
 
 let lives = []
+let livesObj = {}
 
 let backgroundColor1 = 195;
 let backgroundColor2 = 215;
 let backgroundColor3 = 245;
 
-
-
-
-
 let widthInt;
-
 
 let width;
 let height;
 
+let historyDuration;
+let yearStart;
+let yearEnd;
+let yearSpan;
+function preload() {
+    tableVar = loadTable('fh.csv', 'csv', 'header');
+}
 
 function immutableMove(arr, from, to) {
   return arr.reduce((prev, current, idx, self) => {
@@ -80,9 +83,10 @@ function predraw() {
       currentPerson = {"name" : rows[i].obj['Name 1']}
       // currentPerson.birthBackup = rows[i].obj["Date 1"];
       currentPerson.birth = moment(rows[i].obj["Date 1"]);
-      try{currentPerson.parent1 = rows[j].obj["Name 2"];}
+      // console.log(rows[j].obj["Name 2"]);
+      try{currentPerson.parent1 = rows[i].obj["Name 2"];}
         catch {}
-      try{currentPerson.parent2 = rows[j].obj["Name 3"];}
+      try{currentPerson.parent2 = rows[i].obj["Name 3"];}
         catch {}
 
       for (var j = 0; j < rows.length; j++) {
@@ -99,42 +103,15 @@ function predraw() {
           currentPerson.marriageDate = moment(rows[j].obj["Date 1"])
           currentPerson.marriageTo = rows[j].obj["Name 1"];
         }
-
-
-
-        // if (rows[j].obj["Name 2"] == currentPerson.name && rows[j].obj["Event"] == "Born"){
-        //   currentPerson.parent1 = rows[j].obj["Name 2"];
-        //   currentPerson.parent2 =rows[j].obj["Name 3"];
-        // }
-
-
         else {continue};
       };
 
-
-
-
-      // livesParse(j).children =
-
       let nameString = currentPerson["name"].toString();
       lives.push({[nameString] : currentPerson});
-
-
       }
     else continue;
 
   }
-
-  for (var i = 0; i < lives.length; i++) {
-    for (var j = 0; j < lives.length; j++) {
-          // livesParse(i).children =
-        }
-      lives[i]
-      }
-
-  // console.log(Object.keys(lives[0])[0]);
-  // console.log(lives[0][Object.keys(lives[0])[0]].birth);
-  // console.log(livesParse(0).birth)
 
   let marriageSort;
 
@@ -146,64 +123,62 @@ function predraw() {
         if (Math.abs(j - i) != 1 ){
           lives = immutableMove(lives, j, i+1)
         }
-        // square(widthInt * i, height/2, 200)
-        // console.log("found marriage")
       }
     }
   }
 
-  for (var i = 0; i < lives.length; i++) {
-    lives[i]
-  }
 
   let startDateAbs = Math.abs(moment(livesParse(0).birth));
-  // let startDate = 0;
   let endDate = moment() + startDateAbs;
-  let historyDuration = endDate + startDateAbs/2;
+
+  historyDuration = endDate;
+
+  yearSpan = Math.round(endDate/(1000*60*60*24*365))
+
 
   for (var i = 0; i < lives.length; i++) {
     if (livesParse(i).birth.length > 4){
       livesParse(i).birth = livesParse(i).birth.slice(-4)
     }
 
-    widthInt = (((width)/lives.length))/4;
-    let heightInt = height/4 ;
+    heightInt = ((height/lives.length))*.2;
+    let widthInt = width/5 ;
+
     livesParse(i).birthDateAbs = moment(livesParse(i).birth) + startDateAbs;
 
     // let fixDeathDate;
-    function deathCheck() {
-      if (livesParse(i).death){
-        // console.log(lives[i].death)
-        livesParse(i).deathDateAbs = moment(livesParse(i).death) + startDateAbs;
-        livesParse(i).deathYear = moment(livesParse(i).death).format("YYYY");
+    if (livesParse(i).death){
+      // console.log(lives[i].death)
+      livesParse(i).deathDateAbs = moment(livesParse(i).death) + startDateAbs;
+      livesParse(i).deathYear = moment(livesParse(i).death).format("YYYY");
 
 
-      }
-      else {
-        // livesParse(i).death = moment();
+    }
+    else {
+      // livesParse(i).death = moment();
 
-        livesParse(i).deathDateAbs = moment() + startDateAbs;
-        livesParse(i).deathYear = moment().year();
-      }
+      livesParse(i).deathDateAbs = moment() + startDateAbs;
+      livesParse(i).deathYear = moment().year();
     }
 
-    deathCheck()
 
-    livesParse(i).birthPos = (livesParse(i).birthDateAbs / historyDuration) * heightInt +  margin2;
-    livesParse(i).deathPos = (livesParse(i).deathDateAbs / historyDuration) * heightInt +  margin2;
-    // (livesParse(i).deathDateAbs / historyDuration) * heightInt +  margin2;
+    // deathCheck()
+
+    livesParse(i).birthPos = (livesParse(i).birthDateAbs / historyDuration) * widthInt;
+    livesParse(i).deathPos = (livesParse(i).deathDateAbs / historyDuration) * widthInt;
+    // (livesParse(i).deathDateAbs / historyDuration) * heightInt +  widthMargin;
 
     let marriagePos
     let marriageDateAbs
 
     if (livesParse(i).marriageDate) {
       livesParse(i).marriageDateAbs = moment(livesParse(i).marriageDate) + startDateAbs;
-      livesParse(i).marriagePos = (livesParse(i).marriageDateAbs / historyDuration) * heightInt + margin2;
+      livesParse(i).marriagePos = (livesParse(i).marriageDateAbs / historyDuration) * widthInt;
     }
 
     livesParse(i).birthYear = moment(livesParse(i).birth["_i"]).format("YYYY").toString()
 
-    try{
+    try {
       if (livesParse(i).marriageDate && livesParse(i-1).marriageTo == livesParse(i).name){
         // console.log()
         if (livesParse(i).deathPos > livesParse(i-1).deathPos){
@@ -215,73 +190,173 @@ function predraw() {
           livesParse(i-1).marriageEnd = livesParse(i).deathPos;
         }
       }
-
     }
+
     catch{}
-    finally{}
-
-      // quad(widthInt * i +  margin2, livesParse(i).marriagePos, widthInt * (i + 1) +  margin2, livesParse(i).marriagePos, widthInt * (i + 1) +  margin2, marriageEnd, widthInt * i +  margin2, marriageEnd)
-
   }
-  console.log("predraw ran")
+  // FIND CHILDREN
+  for (var i = 0; i < lives.length; i++) {
+    if (livesParse(i).parent1){
+      for (var j = 0; j < lives.length; j++) {
+        if (livesParse(j).name == livesParse(i).parent1){
+          if (!livesParse(j).offspring){
+          livesParse(j).offspring = [];
+          }
+          livesParse(j).offspring.push(lives[i])
+        }
+      }
+    }
+    if (livesParse(i).parent2){
+      for (var j = 0; j < lives.length; j++) {
+        if (livesParse(j).name == livesParse(i).parent2){
+          if (!livesParse(j).offspring){
+          livesParse(j).offspring = [];
+          }
+          livesParse(j).offspring.push(lives[i])
+        }
+      }
+    }
+  }
+
+  // SORT CHILDREN
+
+  for (var i = 0; i < lives.length; i++) {
+    if (livesParse(i).offspring) {
+      try{
+      livesParse(i).offspring.sort((a, b) => (a[Object.keys(a)[0]].birth > b[Object.keys(b)[0]].birth) ? 1 : -1)
+      }
+      catch(error){console.log(error)}
+    }
+  }
+  //
+  // // FIND TOP CHILD COUNT
+  // let topChlidCount = 0;
+  // for (var i = 0; i < lives.length; i++) {
+  //   if (livesParse(i).offspring) {
+  //     if (livesParse(i).offspring.length > topChlidCount) {
+  //       topChlidCount = livesParse(i).offspring.length
+  //     }
+  //   }
+  // }
+
+  // topChlidCount = 100
+  //
+  // // ADD INDEX
+  // for (var i = 0; i < lives.length; i++) {
+  //   livesParse(i).index = i * topChlidCount
+  // }
+  //
+  // //FIX INDEX FOR OFFSPRING
+  // for (var i = 0; i < lives.length; i++) {
+  //   if (livesParse(i).offspring){
+  //     // console.log(livesParse(i).offspring.length)
+  //     for (var j = 0; j < livesParse(i).offspring.length; j++) {
+  //       // console.log()
+  //       for (var k = 0; k < lives.length; k++) {
+  //         if (Object.keys(livesParse(i).offspring[j])[0] == livesParse(k).name) {
+  //           livesParse(k).index = livesParse(i).index + j + 1
+  //         }
+  //       }
+  //       // console.log(Object.keys(livesParse(i).offspring[j])[0])
+  //       // livesParse(i).offspring[j].index = livesParse(i).index + 1 + j
+  //     }
+  //   }
+  // }
+
+  // lives = lives.sort((a, b) => (a[Object.keys(a)[0]].index > b[Object.keys(b)[0]].index) ? 1 : -1)
+
 }
 
 function draw(){
     background(backgroundColor1,backgroundColor2,backgroundColor3)
+
+    predraw()
+    fill(255)
+    strokeWeight(0)
+    for (var i = 0; i < yearSpan; i++) {
+      if (i % 2) {fill('rgba(250,250,250, 0)') }
+      else {fill('rgba(255,255,255,.1)');}
+      quad(
+        (width/5/yearSpan) * i + widthMargin, 0,
+        (width/5/yearSpan) * i + widthMargin, height,
+        (width/5/yearSpan) * (i + 1) + widthMargin, height,
+        (width/5/yearSpan) * (i + 1) + widthMargin , 0
+      )
+    }
+
     fill(255)
     stroke(0)
     textSize(birthTextSize)
-    pg = createGraphics(width, height, SVG);
-    // pg.background(backgroundColor1,backgroundColor2,backgroundColor3);
-    pg.rotate(HALF_PI)
-
-    predraw()
-    for (var i = 0; i < lives.length; i++) {
-
     strokeWeight(strokeWidth);
-    pg.textSize(nameTextSize)
 
     //RENDER LINES
-
-    //BIRTH + DEATH
-    if (livesParse(i).birthDateAbs && livesParse(i).deathDateAbs){
-      line(widthInt * i +  margin2, livesParse(i).birthPos, widthInt * i +  margin2, livesParse(i).deathPos)
+    for (var i = 0; i < lives.length; i++) {
+        line(
+          livesParse(i).birthPos + widthMargin, heightInt * i + heightMargin,
+          livesParse(i).deathPos + widthMargin, heightInt * i +  heightMargin
+        )
     }
 
-    //BIRTH ONLY
-    else if (livesParse(i).birthDateAbs) {line(widthInt * i +  margin2, livesParse(i).birthPos, widthInt * i +  margin2, heightInt)}
-
-    //DEATH ONLY
-    else {
-      line(widthInt * i +  margin2, margin2, widthInt * i +  margin2, livesParse(i).deathPos)}
-
-      //BIRTH TEXT
-      strokeWeight(0)
-      fill(0)
-      textAlign(CENTER)
-      text(livesParse(i).birthYear, widthInt * i + margin2, livesParse(i).birthPos -  birthTextMargin) ;
-      strokeWeight(strokeWidth)
-      fill(255)
+    //RENDER MARRIAGES
+    for (var i = 0; i < lives.length; i++) {
       if (livesParse(i).marriageDate && livesParse(i+1).marriageTo == livesParse(i).name){
-         quad(widthInt * i +  margin2, livesParse(i).marriagePos, widthInt * (i + 1) +  margin2, livesParse(i).marriagePos, widthInt * (i + 1) +  margin2, livesParse(i).marriageEnd, widthInt * i +  margin2, livesParse(i).marriageEnd)
+         quad(
+           livesParse(i).marriagePos + widthMargin, heightInt * i +  heightMargin,
+           livesParse(i).marriagePos + widthMargin, heightInt * (i + 1) +  heightMargin,
+           livesParse(i).marriageEnd + widthMargin, heightInt * (i + 1) +  heightMargin,
+           livesParse(i).marriageEnd + widthMargin, heightInt * i +  heightMargin
+         )
       }
+    }
 
-      //DEATH TEXT + ICON
 
-      if (livesParse(i).death == undefined) {
-        // triangle(widthInt * i +  margin2 - iconSize/2, deathPos, widthInt * i +  margin2 + iconSize/2, deathPos, widthInt * i +50, deathPos + iconSize )
-      }
-      else {
-        square(widthInt * i +  margin2 - iconSize/2, livesParse(i).deathPos - iconSize/2, iconSize);
+    for (var i = 0; i < lives.length; i++) {
+
+        //BIRTH TEXT
         strokeWeight(0)
         fill(0)
-        text(livesParse(i).deathYear, widthInt * i + margin2, livesParse(i).deathPos + deathTextMargin)
+        textAlign(RIGHT)
+        text(livesParse(i).name, livesParse(i).birthPos -  birthTextMargin , heightInt * i + birthTextHeight + heightMargin) ;
         strokeWeight(strokeWidth)
         fill(255)
-      };
-    circle(widthInt * i +  margin2, livesParse(i).birthPos , iconSize)
+
+
+        // DEATH TEXT + ICON + NAME
+
+        if (livesParse(i).death == undefined) {
+          strokeWeight(0)
+          fill(0)
+          // textAlign(LEFT)
+          // text(livesParse(i).name, (widthInt * i) + widthMargin, livesParse(i).deathPos + deathTextMargin)
+          strokeWeight(strokeWidth)
+          fill(255)
+          textAlign(CENTER)
+
+          // triangle(widthInt * i +  widthMargin - iconSize/2, deathPos, widthInt * i +  widthMargin + iconSize/2, deathPos, widthInt * i +50, deathPos + iconSize )
+        }
+        else {
+          square(livesParse(i).deathPos - iconSize/2 + widthMargin , heightInt * i +  heightMargin - iconSize/2,  iconSize);
+          strokeWeight(0)
+          fill(0)
+          // text(livesParse(i).deathYear, widthInt * i + widthMargin, livesParse(i).deathPos + deathTextMargin)
+          // textAlign(LEFT)
+          // text(livesParse(i).name, widthInt * i + widthMargin, livesParse(i).deathPos + nameTextMargin)
+          strokeWeight(strokeWidth)
+          fill(255)
+          textAlign(CENTER)
+
+        };
+      if (livesParse(i).offspring) {
+        for (var j = 0; j < livesParse(i).offspring.length; j++) {
+          for (var k = 0; k < lives.length; k++) {
+            if (Object.keys(livesParse(i).offspring[j])[0] == livesParse(k).name) {
+              line(livesParse(k).birthPos + widthMargin, heightInt * i + heightMargin, livesParse(k).birthPos + widthMargin, heightInt * k + heightMargin)
+            }
+          }
+        }
+      }
+      circle(livesParse(i).birthPos + widthMargin, heightInt * i +  heightMargin, iconSize)
     };
-  image(pg, 0,0 )
 
 
   save()

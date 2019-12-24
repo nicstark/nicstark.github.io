@@ -7,13 +7,13 @@ Julia Tomaszkiewicz,,,,1894,,,,Born,"Had one brother who died in his teens and f
 Joseph Malinowski,Sister of Steven Stachurski,Malinowski,,1900,1930,"Boston, MA",,Born,
 Pauline Malinowski,Sister of Steven Stachurski,Malinowski,,1900,1930,"Boston, MA",,Born,
 Steven Malinowski,Sister of Steven Stachurski,Malinowski,,1900,1930,"Boston, MA",,Born,
-Michael Mostwikowski Jr.,Eleanora Tyska,Michael Mostwikowski,,1904,,"Baltimore, MD",,Born,
+Michael Mostwikowski Jr,Eleanora Tyska,Michael Mostwikowski,,1904,,"Baltimore, MD",,Born,
 Mary Mostwikowski,Eleanora Tyska,Michael Mostwikowski,,1910,,"Baltimore, MD",,Born,
 Edward Mostwikowski,Eleanora Tyska,Michael Mostwikowski,,1911,1920,"Baltimore, MD",,Born,
 Eleanor Mostwikowski,Eleanora Tyska,Michael Mostwikowski,,1911,1920,"Baltimore, MD",,Born,Cerebral Palsy
 Edwin Stachurski,Julia Tomaszkiewicz,Steven Stachurski,,1912,,,,Born,
 Marian Stachurski,Julia Tomaszkiewicz,Steven Stachurski,,1914,,,,Born,
-Steven Stachurski Jr.,Julia Tomaszkiewicz,Steven Stachurski,,1915,,,,Born,
+Steven Stachurski Jr,Julia Tomaszkiewicz,Steven Stachurski,,1915,,,,Born,
 Dorthy Doda,Pauline  Tomaszkiewicz,Walter Doda,,1916,1950,,,Born,
 Matilda Stachurski,Julia Tomaszkiewicz,Steven Stachurski,,1916,,,,Born,
 Harry Koffenberg,Stella Mostwikowski,Harry Koffenberger,,1920,1940,,,Born,
@@ -23,9 +23,9 @@ Denise Stachurski,Mary Mach,Joseph Stachurski,,1924,1934,,,Born,
 Glenn Stachurski,Marian Stachurski,Mary Bratkowski,,1930,1940,,,Born,
 Jerry Weber,Mary Mostwikowski,John Weber,,1930,1939,,,Born,
 Kathy Weber,Mary Mostwikowski,John Weber,,1930,1939,,,Born,
-Kenneth Stachurski,Marian Stachurski,Mary Bratkowski,,1930,1940,,,Born,
-Richard Stachurski,Marian Stachurski,Mary Bratkowski,,1930,1940,,,Born,
-Wayne Stachurski,Marian Stachurski,Mary Bratkowski,,1930,1940,,,Born,
+Kenneth Stachurski,Mary Bratkowski,Marian Stachurski,,1930,1940,,,Born,
+Richard Stachurski,Mary Bratkowski,Marian Stachurski,,1930,1940,,,Born,
+Wayne Stachurski,Mary Bratkowski,Marian Stachurski,,1930,1940,,,Born,
 Joyce Smith,Matilda Stachurski,Warren Smith,,1932,1950,,,Born,
 Marilyn Smith,Matilda Stachurski,Warren Smith,,1932,1950,,,Born,
 Beverly Miskiewicz,Anne Mostwikowski,Edward Miskiewicz,,1934,1944,"Baltimore, MD",,Born,
@@ -47,12 +47,12 @@ Helen Stachurski,Julia Tomaszkiewicz,Steven Stachurski,,10/18/1917,,,,Born,Twin 
 Joseph Stachurski,Julia Tomaszkiewicz,Steven Stachurski,,10/18/1917,,,"Baltimore, MD",Born,Twin of Helen
 Anne Mostwikowski,Eleanora Tyska,Michael Mostwikowski,,9/21/1920,,"Baltimore, MD",,Born,
 Casimir Mostwikowski,Eleanora Tyska,Michael Mostwikowski,,11/1/1923,,"Baltimore, MD",,Born,Became a banker.
-Martin Stark Jr.,Helen Mostwikowski,Martin Stark,,3/31/1937,,"Baltimore, MD",,Born,
-Dennis Stark,Helen Mostwikowski,Martin Stark,,5/16/1942,,"Baltimore, MD",,Born,
+Martin Stark Jr,Helen Mostwikowski,Martin Stachurski,,3/31/1937,,"Baltimore, MD",,Born,
+Dennis Stark,Helen Mostwikowski,Martin Stachurski,,5/16/1942,,"Baltimore, MD",,Born,
 Mark Miskiewicz,Anne Mostwikowski,Edward Joseph Miskiewicz,,10/13/1959,,"Baltimore, MD",,Born,
 Steven Stachurski,,,,01/26/1885,1887,"Plock, Mazowieckie, Poland",,Born,Small Town near Krakow
-Nicolas Stark,,,,10/21/1989,,"New York, NY",,Born,Lennox Hill Hospital
-Madeline Stark,,,,1/15/1991,,"New York, NY",,Born,NYU Hospital
+Nicolas Stark,Simone Maechler,Dennis Stark,,10/21/1989,,"New York, NY",,Born,Lennox Hill Hospital
+Madeline Stark,Simone Maechler,Dennis Stark,,1/15/1991,,"New York, NY",,Born,NYU Hospital
 Frank Mostwikowski,,,,1906,,"Baltimore, MD",,Died,
 Walter Mostwikowski,,,,1907,,"Baltimore, MD",,Died,
 Virginia Mostwikowski,,,,1908,1908,"Baltimore, MD",,Died,
@@ -60,7 +60,7 @@ James Mostwikowski,,,,1910,1911,"Baltimore, MD",,Died,
 Helen Stachurski,,,,1918,1920,,,Died,Infancy
 John Tomaszkiewicz,,,,1921,,,,Died,Rheumatic heart disease
 Edwin Stachurski,,,,1928,,,,Died,Age 16 - Burst appendix
-Michael Mostwikowski Jr.,,,,1929,,"Baltimore, MD",,Died,"His father often walked to the family grave site at St Stanislaus
+Michael Mostwikowski Jr,,,,1929,,"Baltimore, MD",,Died,"His father often walked to the family grave site at St Stanislaus
 Cemetery to visit his name sake."
 Michael Mostwikowski Sr.,,,,1930,,"Baltimore, MD",,Died,Pneurnonia. He was about 55 ymrs of age.
 Rose Tomaszkiewicz,,,,1949,,,,Died,Long life complicated with arthritis
@@ -102,7 +102,7 @@ Mary Our Queen in downtown Baltimore."
 Warren Smith,Matilda Stachurski,,,1932,1950,,,Married,
 Edward Joseph Miskiewicz,Anne Mostwikowski,,,1934,1944,"Baltimore, MD",,Married,Edward was a boat builder
 Joseph Stachurski,Mary Mach,,,1934,1944,,,Married,
-Steven Stachurski Jr.,Mary Ann Stevens (nee Szczepanski),,,1935,1949,,,Married,
+Steven Stachurski Jr,Mary Ann Stevens (nee Szczepanski),,,1935,1949,,,Married,
 Casimir Mostwikowski,Virginia Mae Ruby,,,1950,,"Baltimore, MD",,Married,
 Steven Stachurski,Julia Tomaszkiewicz,,,2/2/1911,,,,Married,Steven was in his early twentys and Julia 16 at their marriage.
 Eleanora Tyska,,,,1892,1904,Ellis Island,"Baltimore, MD",Moved,Already lliving in Blatimore before the 1904 fire which destroyed much of the inner city.
@@ -121,7 +121,7 @@ school once a week to spend the evening here while lVlartin and Helen uorked lat
 continued to rruork and shortly after he retired, died in 1959 of an acute heart attack. He was
 in his early seventies. TrrrrcMe years after Pop died, Julia sold the house and moved back to
 the old Ann Street home udrich the family had rented during their fling with the ""sticks""."
-Steven Stachurski Jr.,Mary Ann Stevens (nee Szczepanski),,,1950,1956,"423 South Ann Street Baltimore, MD",3919 Belview Avenue,Moved,"ln the 1950's the Stachurski's moved to the ""sticks"" as they called the area before
+Steven Stachurski Jr,Mary Ann Stevens (nee Szczepanski),,,1950,1956,"423 South Ann Street Baltimore, MD",3919 Belview Avenue,Moved,"ln the 1950's the Stachurski's moved to the ""sticks"" as they called the area before
 the rnovejust a few blocks from Martin and Helen. lt rruas a typical victorian house at 3919
 Belview Avenue and Joe and his rnore handy friends set about to remodel it into a tuo
 family home. Steve moved into the second floor with his new bride Mary Ann. Joe still
@@ -132,7 +132,7 @@ school once a week to spend the evening here while lVlartin and Helen uorked lat
 continued to rruork and shortly after he retired, died in 1959 of an acute heart attack. He was
 in his early seventies. TrrrrcMe years after Pop died, Julia sold the house and moved back to
 the old Ann Street home udrich the family had rented during their fling with the ""sticks""."
-Steven Stachurski Jr.,Mary Ann Stevens (nee Szczepanski),,,1950,1956,3919 Belview Avenue,"Ocean City, MD",Moved,"Steve and Mary Ann moved to Ocean Gity in 1956 wlrere they bought a
+Steven Stachurski Jr,Mary Ann Stevens (nee Szczepanski),,,1950,1956,3919 Belview Avenue,"Ocean City, MD",Moved,"Steve and Mary Ann moved to Ocean Gity in 1956 wlrere they bought a
 business."
 Elanor Mostwikowski,,,,1960,,"Baltimore, MD","Baltimore, MD",Moved,"Moved in with Stella, Mary and Anna"
 Martin Stachurski,Helen Mostwikowski,,,1964,,"5504 Groveland
@@ -147,7 +147,7 @@ Julia Tomaszkiewicz,,,,1971,,3919 Belview Avenue,"423 South Ann Street Baltimore
 the old Ann Street home udrich the family had rented during their fling with the ""sticks"". Julie
 lived there for several more years next to the Carrie family before moving in with Matilda."
 Martin Stachurski,Helen Mostwikowski,,,9/1/1937,,Elliot Avenue near St. Joseph Monastery.,"5504 Groveland
-Avenue.",Moved,"Just six months after Martin Jr. (Chappie) uas
+Avenue.",Moved,"Just six months after Martin Jr (Chappie) uas
 bom on March 31, 1937 they movd to the country on an acre lot at 5504 Groveland Avenue. The house was a big victorian with cedar shingles, a covered porch on two sides
 of the house and three stories. Later there was an addition on the back which let the second and third floors be converted into rentral apartments. The original house opened into
 a reception room with a piano, numerous chairs and steps to the upstairs. Off to the right
@@ -213,7 +213,7 @@ Michael Mostwikowski,Eleanora Tyska,,,1930,1950,"2905 Dillon Street. Baltimore, 
 Older Mostwikowski Children,,,,1930,1939,"Baltimore, MD",,Note,Leave School to Work
 Richard Stachurski,,,,1930,1950,,,Note,Attended Holy Rosary Church School
 Wayne Stachurski,,,,1930,1950,,,Note,Attended Holy Rosary Church School
-Martin Stachurski,Dennis Stark,Martin Stark Jr.,,1937,,"5504 Groveland
+Martin Stachurski,Dennis Stark,Martin Stark Jr,,1937,,"5504 Groveland
 Avenue.",,Note,"Walks through the woods in all sorts of weather, with dogs in the lead vrere the standard Sunday fare for the males of the family."
 Martin Stachurski,Helen Mostwikowski,,,1937,,"5504 Groveland
 Avenue.",,Note,"Meals at the Starks \ rere usuallyfirst rate. Martin and Helen had gone through some
@@ -226,7 +226,7 @@ the return of the folks. Tuesdays were the night for chops; Wednesday being a da
 usually a casserole or some special meal which could take a little longer to prepare;
 Thursday rnras steak night; Friday was fish night as nvas the tradition in Catholic households
 then; and Saturday vras ethnic night with Polish or Chinese dishes being the mainstay."
-Martin Stachurski,Helen Mostwikowski,Dennis Stark,Martin Stark Jr. ,1937,1960,"5504 Groveland
+Martin Stachurski,Helen Mostwikowski,Dennis Stark,Martin Stark Jr ,1937,1960,"5504 Groveland
 Avenue.",,Note,"The Starks had lots of friends in the area. The Youngs, McParlands, Parkes and
 other neighbors often got together for a barbecue or evening drinks. The families of Martin
 and Helen often visited on holidays like the fourth of July, withthe site being rotated often.
@@ -281,7 +281,7 @@ Sun Papers dfice about a mile from the shop in an pffort to get qpme raqlking in
 and to yse thecheapest parking lot in downtown."
 Eleanora Mostwikowski,,,,1940,1960,,,Note,Develops Diabetes
 Mark Stachurski,,,,1940,1950,,,Note,Attended Holy Rosary Church School
-Martin Stark Jr.,,,,1942,1954,,,Note,"Since Chappie \rvas a full five years older than
+Martin Stark Jr,,,,1942,1954,,,Note,"Since Chappie \rvas a full five years older than
 Dennis the role of baby sitter often fell on the former."
 Dennis Stark,,,,1943,1950,"5504 Groveland
 Avenue.",,Note,"For a few years after Helen went back to u,ork, Dennis who rnnas born five years after
@@ -294,13 +294,13 @@ wlren accepted but it enabled Helen to get back to trcrk with out a full time ho
 He was not much of a student until #ter the fourth year when one of the nuns suggested
 that he do extra rrvork at home over the summer after that he had several teachers who
 encouraged him to catch up and he did."
-Dennis Stark,Martin Stark Jr. ,,,1948,,"5504 Groveland
+Dennis Stark,Martin Stark Jr ,,,1948,,"5504 Groveland
 Avenue.",,Note,"Since the
 Starks had the second television in the neighborhood and since the boys urcre in charge of
 the house all of Saturday the day rruas often spent watching kids shovrrs with lots of the
 neighborhood kids often until it nras too late to get the chores done before the folks
 returned from raork."
-Martin Stark Jr.,,,,1948,,"5504 Groveland
+Martin Stark Jr,,,,1948,,"5504 Groveland
 Avenue.",,Note,"Martin Junior from the time he was in the seventh grade uanted to be a priest. The folks
 lyere opposed to his decision so early in life but the vocation persisted through grade
 school , high school and into college where at the end of his second year, he officially tvent
@@ -310,7 +310,7 @@ received rolls in his high school dramatics club. He vuas more studious than Den
 faced with the same chores, and neighborhood activities. The Saturday house cleaning
 was a special ritualfor the boys. Their duties included scrubbing the kitchen and bathroom
 floors , dusting and vacuuming the entire house plus other special assignments."
-Dennis Stark,Martin Stark Jr.,,,1950,,,,Note,"Because of their difference in ages, the boys shared few friends."
+Dennis Stark,Martin Stark Jr,,,1950,,,,Note,"Because of their difference in ages, the boys shared few friends."
 Dennis Stark,,,,1950,,"5504 Groveland
 Avenue.",,Note,"Dennis made friends
 and enemies off and on with a number of local kids. Ken Adams lived across the street and
