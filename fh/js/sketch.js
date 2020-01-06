@@ -5,7 +5,7 @@ let widthMargin = 100000*scale;
 // widthMargin = 0*scale;
 let birthTextMargin = -9.5;
 let heightMargin = 100000*scale;
-let deathTextMargin = 20000*scale;
+let deathTextMargin = 5000*scale;
 let nameTextMargin = 40000*scale;
 let birthTextSize = 10000*scale;
 let deathTextSize = 8*scale;
@@ -272,30 +272,31 @@ function draw(){
 
     predraw()
     fill(255)
-    strokeWeight(0)
+    // strokeWeight(0)
+    noStroke()
+    //RENDER GRID
     for (var i = 0; i < yearSpan; i++) {
+      noStroke()
       if (i % 2) {fill('rgba(250,250,250, 0)') }
-      else {fill('rgba(255,255,255,.1)');}
+      else if (i % 10) {fill('rgba(255,255,255,.2)')}
+      else {fill('rgba(255,255,255,.4)');}
       quad(
         (width/5/yearSpan) * i + widthMargin, 0,
         (width/5/yearSpan) * i + widthMargin, height,
         (width/5/yearSpan) * (i + 1) + widthMargin, height,
         (width/5/yearSpan) * (i + 1) + widthMargin , 0
       )
+      // if(i % 10){strokeWeight(strokeWidth); noStroke()} else{stroke(100)}
+      noStroke();
     }
+
+
 
     fill(255)
     stroke(0)
     textSize(birthTextSize)
     strokeWeight(strokeWidth);
 
-    //RENDER LINES
-    for (var i = 0; i < lives.length; i++) {
-        line(
-          livesParse(i).birthPos + widthMargin, heightInt * i + heightMargin,
-          livesParse(i).deathPos + widthMargin, heightInt * i +  heightMargin
-        )
-    }
 
     //RENDER MARRIAGES
     for (var i = 0; i < lives.length; i++) {
@@ -309,6 +310,19 @@ function draw(){
       }
     }
 
+    //RENDER LINES
+    for (var i = 0; i < lives.length; i++) {
+      if(i % 2){livesParse(i).color = 100} else {livesParse(i).color = 0}
+      stroke(livesParse(i).color)
+        line(
+          livesParse(i).birthPos + widthMargin, heightInt * i + heightMargin,
+          livesParse(i).deathPos + widthMargin, heightInt * i +  heightMargin
+        )
+      stroke(0)
+    }
+
+
+
 
     for (var i = 0; i < lives.length; i++) {
 
@@ -316,8 +330,11 @@ function draw(){
         strokeWeight(0)
         fill(0)
         textAlign(RIGHT)
-        text(livesParse(i).name, livesParse(i).birthPos -  birthTextMargin , heightInt * i + birthTextHeight + heightMargin) ;
+        stroke(livesParse(i).color)
+        fill(livesParse(i).color)
+        text(livesParse(i).name + " " + livesParse(i).birthYear , livesParse(i).birthPos -  birthTextMargin , heightInt * i + birthTextHeight + heightMargin) ;
         strokeWeight(strokeWidth)
+        stroke(0)
         fill(255)
 
 
@@ -335,13 +352,17 @@ function draw(){
           // triangle(widthInt * i +  widthMargin - iconSize/2, deathPos, widthInt * i +  widthMargin + iconSize/2, deathPos, widthInt * i +50, deathPos + iconSize )
         }
         else {
+          stroke(livesParse(i).color)
           square(livesParse(i).deathPos - iconSize/2 + widthMargin , heightInt * i +  heightMargin - iconSize/2,  iconSize);
           strokeWeight(0)
           fill(0)
-          // text(livesParse(i).deathYear, widthInt * i + widthMargin, livesParse(i).deathPos + deathTextMargin)
+          textAlign(LEFT)
+          stroke(livesParse(i).color)
+          text(livesParse(i).deathYear,  livesParse(i).deathPos + widthMargin + deathTextMargin, heightInt * i + heightMargin + birthTextHeight)
           // textAlign(LEFT)
           // text(livesParse(i).name, widthInt * i + widthMargin, livesParse(i).deathPos + nameTextMargin)
           strokeWeight(strokeWidth)
+          stroke(0)
           fill(255)
           textAlign(CENTER)
 
@@ -350,12 +371,22 @@ function draw(){
         for (var j = 0; j < livesParse(i).offspring.length; j++) {
           for (var k = 0; k < lives.length; k++) {
             if (Object.keys(livesParse(i).offspring[j])[0] == livesParse(k).name) {
-              line(livesParse(k).birthPos + widthMargin, heightInt * i + heightMargin, livesParse(k).birthPos + widthMargin, heightInt * k + heightMargin)
+              stroke(livesParse(k).color)
+              fill(livesParse(i).color)
+              line(
+                livesParse(k).birthPos + widthMargin, heightInt * i + heightMargin,
+                livesParse(k).birthPos + widthMargin, heightInt * k + heightMargin
+              )
+              stroke(0)
+
             }
           }
         }
       }
+      stroke(livesParse(i).color)
+      fill(255)
       circle(livesParse(i).birthPos + widthMargin, heightInt * i +  heightMargin, iconSize)
+      stroke(0)
     };
 
 
