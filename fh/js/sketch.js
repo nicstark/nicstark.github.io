@@ -184,10 +184,14 @@ function predraw() {
         if (livesParse(i).deathPos > livesParse(i-1).deathPos){
           livesParse(i).marriageEnd = livesParse(i-1).deathPos
           livesParse(i-1).marriageEnd = livesParse(i-1).deathPos
+          console.log(livesParse(i).name, livesParse(i).deathYear)
+
         }
         else {
           livesParse(i).marriageEnd = livesParse(i).deathPos;
           livesParse(i-1).marriageEnd = livesParse(i).deathPos;
+          console.log(livesParse(i).name, livesParse(i).deathYear)
+
         }
       }
     }
@@ -389,7 +393,7 @@ function draw(){
       stroke(0)
     };
 
-
-  save()
+    // console.log()
+  // save()
 
 }

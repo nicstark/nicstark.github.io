@@ -1,7 +1,7 @@
 
 var ParentCategories = [];
 
-
+console.log("hello")
 
 const
 // width = window.innerWidth,
@@ -531,7 +531,7 @@ d3.json('data.json', (error, data) => {
       .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
     const UserTotal = d3.select('.svg3')
-      .attr("class", "UserTotal")
+      .attr("class", "UserTotal page")
       .attr('width', width)
       .attr('height', height)
       .append('g');
@@ -549,7 +549,7 @@ d3.json('data.json', (error, data) => {
 
 
     const UserTotalFigures = d3.select('.UserTotal')
-      .attr("class", "UserTotalFigures")
+      .attr("class", "UserTotalFigures page")
       .attr('width', width)
       .attr('height', height)
       .append('g');
