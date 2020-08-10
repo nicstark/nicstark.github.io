@@ -126,8 +126,7 @@ d3.json("LSC_TOPO.json", function(error, LSC) {
         .data(topo).enter()
         .append("path")
         .style("fill", "none")
-        .style("stroke", function(d, i) {if (d.properties.ContourElevation == '1900') {return "blue"};
-            return interp(cScale(d.properties.ContourElevation));
+        .style("stroke", function(d, i) {return interp(cScale(d.properties.ContourElevation));
         })
         .attr("d", path)
         .on("mouseover", function(d){var s = d3.select(this); s.style('stroke', 'red'), s.style('stroke-width', '5px'); tooltip.text("Elevation: " + format(d.properties.ContourElevation) + " Feet"); return tooltip.style("visibility", "visible");}) // just a little example of what's available in terms of interaction
