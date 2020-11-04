@@ -24,14 +24,11 @@
         noWrap: true
       }).addTo(map);
 
-      var polygon = L.polygon([
-          [0.0,0.0],
-          [10.0, 0.0],
-          [10.0, 10.0],
-          [0.0, 10.0]
-      ]).addTo(map);
+      var rect = L.rectangle([
+          [-19,-30.5],[-24,4]
+      ], {fillOpacity: 0, color: "#000"}).addTo(map);
 
-      polygon.addEventListener("click", function(){
+      rect.addEventListener("click", function(){
         map.flyTo([60, 60], 4, {
         animate: true,
         duration: 1.5
